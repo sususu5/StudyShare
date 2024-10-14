@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-
+import { getData } from './dataStore';
 /**
  * This function returns a random token
  * @returns {string} token

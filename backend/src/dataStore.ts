@@ -4,6 +4,7 @@ export interface User {
   userId: number;
   token: string[];
   username: string;
+  avatar: string; // thumbnail url
   password: string;
   usedPassword: string[];
 }
@@ -17,6 +18,7 @@ export interface Note {
   noteId: number;
   userId: number;
   name: string;
+  courseCode: string;
   timeCreated: number;
   timeLastEdited: number;
   description: string;
