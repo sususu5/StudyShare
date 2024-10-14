@@ -55,15 +55,31 @@ function App() {
   return (
     <div className="app">
       <nav className="navbar">
-        <h1>StudyNotes Share</h1>
+        <h1>StudyShare</h1>
+        
+        
+        <h2>Home</h2>
+        <h2>Browse Courses</h2>
         {user ? (
-          <>
-            <span>Welcome, {user.name}</span>
-            <button onClick={handleLogout}>Logout</button>
+        <>
+          <h2>My Notes</h2>
           </>
         ) : (
-          <button onClick={handleLogin}>Login</button>
+          <></>
         )}
+        
+        
+        <div className="login">
+          {user ? (
+            <>
+              <span>Welcome, {user.name}</span>
+              <button onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <button onClick={handleLogin}>Login</button>
+          )}
+        </div>
+        
       </nav>
 
       <div className="main-content">
