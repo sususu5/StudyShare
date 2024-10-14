@@ -1,4 +1,4 @@
-import { UserDetails } from './dataStore';
+import { UserDetails } from './interface';
 import { getData } from './dataStore';
 /**
  * Given an admin user's userId, return details about the user.

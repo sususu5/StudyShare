@@ -1,5 +1,6 @@
 import { setData, getData } from './dataStore';
 import { getHashedPassword } from './helperFunction';
+import { validPassword } from './helperFunction';
 /**
  * Change the user's password
  * @param token 
@@ -14,7 +15,7 @@ export function changeUserPassword(token: string, oldPassword: string, newPasswo
         return { error: 'Wrong old password' };
     }
     // validate the new password
-    if (!validatePassword(newPassword)) {
+    if (!validPassword(newPassword)) {
         return { error: 'Invalid password' };
     } else {
         user.password = getHashedPassword(newPassword);
