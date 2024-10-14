@@ -1,10 +1,10 @@
 
 import { register } from './register';
-
+const DEFAULT_THUMBNAIL_URL = 'https://mrvian.com/wp-content/uploads/2023/03/unsw-logo.png';
 describe('adminAuthRegister', () => {
   // Successful test with valid inputs
   test('has the correct return type if no error', () => {
-    const user1 = register('Mark', 'Comp1531YAY');
+    const user1 = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
     expect(user1).toStrictEqual({ token: expect.any(String) });
   });
 
@@ -24,7 +24,7 @@ describe('adminAuthRegister', () => {
     
   ])('returns an error for invalid name length',
     ({ username, password }) => {
-      const errorAdmin = register(username, password);
+      const errorAdmin = register(username, password, DEFAULT_THUMBNAIL_URL);
       expect(errorAdmin).toStrictEqual({ error: expect.any(String) });
     });
 
@@ -42,7 +42,7 @@ describe('adminAuthRegister', () => {
     },
   ])('returns an error for password missing required character types',
     ({ username, password }) => {
-      const errorAdmin = register(username, password);
+      const errorAdmin = register(username, password, DEFAULT_THUMBNAIL_URL);
       expect(errorAdmin).toStrictEqual({ error: expect.any(String) });
     });
 
