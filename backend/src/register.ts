@@ -18,16 +18,15 @@ const maxNameLength = 20;
  * @param {string} password 
  * @returns {string} token
  */
-export function register(username: string, password: string) {
+export function register(username: string, password: string, avatar: string) {
   
-	const data = getData();
-
+  const data = getData();
   // if nameFirst or nameLast contains characters other than
   // lower/upper case letters spaces, hyphens or apostrophes --> error
   if (!containsValidName(username)) {
-    return {
+      return {
       error: 'nameFirst contains restricted characters.'
-    };
+      };
   }
 
   // if nameFirst or nameLast is less than 2 characters or more than 20
@@ -50,8 +49,9 @@ export function register(username: string, password: string) {
 	const newUser = {
     userId,
 		token: [token],
-    username: username,
-    password: hashedPassword,
+		username: username,
+		avatar: avatar,
+		password: hashedPassword,
 		usedPassword: [hashedPassword]
   };
 

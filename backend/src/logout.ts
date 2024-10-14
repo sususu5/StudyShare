@@ -4,7 +4,7 @@
  * @returns {object} empty object
  */
 export function logout(token: string): object {
-    // TODO: implement logout
-    // For now, return an empty object
-    return {};
+	// TODO: implement logout
+	// For now, return an empty object
+	return {};
 }

@@ -1,6 +1,6 @@
 // YOU SHOULD MODIFY THIS OBJECT BELOW ONLY
 import fs from 'fs';
-import {Data} from './interface';
+import { Data } from './interface';
 
 const DATA_FILE_PATH = './dataStore.json';
 
