@@ -20,9 +20,10 @@ export interface Note {
 	timeCreated: number;
 	timeLastEdited: number;
 	description: string;
+	upvoteCount: number;
 }
 
 export interface Data {
 	users: User[];
-	notes: Note[];  
+	notes: Note[];
 }

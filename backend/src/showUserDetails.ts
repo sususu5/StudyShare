@@ -2,13 +2,16 @@ import { UserDetails } from './interface';
 import { getData } from './dataStore';
 /**
  * Given an admin user's userId, return details about the user.
- * "name" is the first and last name concatenated with a single space between them.
- * @param {string} token user's token
- * @returns {Object} An object containing the id of the newly user.
+ * 
+ * @param {number} userId
+ * @returns {Object} An object containing the details of the user.
  */
-export function showUserDetails(token: string): { user: UserDetails } {
+export function showUserDetails(userId: number): { user: UserDetails } | { error: string } {
     const data = getData();
-    const user = data.users.find(u => u.token.includes(token));
+    const user = data.users.find(u => u.userId === userId);
+		if (!user) {
+			return { error: 'User not found' };
+		}
   
     const userdetail = {
       userId: user.userId,

@@ -8,7 +8,7 @@ import { setData, getData } from './dataStore';
  */
 export function updateUserDetails(token: string, username: string, avatar: string) {
     const data = getData();
-    const user = getData().users.find(u => u.token.includes(token));
+    const user = data.users.find(u => u.token.includes(token));
     user.username = username;
     user.avatar = avatar;
 
