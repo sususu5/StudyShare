@@ -53,31 +53,6 @@ function App() {
     }
   };
 
-  const courses = [
-    { id: "COMP1511", name: "COMP1511" },
-    { id: "COMP1521", name: "COMP1521" },
-    { id: "COMP1531", name: "COMP1531" },
-    { id: "COMP2511", name: "COMP2511" },
-    { id: "COMP2521", name: "COMP2521" },
-    { id: "COMP3141", name: "COMP3141" },
-    { id: "COMP3151", name: "COMP3151" },
-    { id: "COMP3161", name: "COMP3161" },
-    { id: "COMP3231", name: "COMP3231" },
-    { id: "COMP3331", name: "COMP3331" },
-    { id: "COMP3411", name: "COMP3411" },
-    { id: "COMP3821", name: "COMP3821" },
-    { id: "COMP3891", name: "COMP3891" },
-    { id: "COMP3900", name: "COMP3900" },
-    { id: "COMP4121", name: "COMP4121" },
-    { id: "COMP4141", name: "COMP4141" },
-    { id: "COMP4161", name: "COMP4161" },
-    { id: "COMP4920", name: "COMP4920" },
-    { id: "COMP6441", name: "COMP6441" },
-    { id: "COMP6841", name: "COMP6841" },
-    { id: "COMP9242", name: "COMP9242" },
-    { id: "COMP9243", name: "COMP9243" },
-  ];
-
   return (
     <div className="app">
       <nav className="navbar">
@@ -93,8 +68,7 @@ function App() {
       </nav>
 
       <div className="main-content">
-        <Sidebar courses={courses}></Sidebar>
-
+        <Sidebar></Sidebar>
         <main className="content">
           <h2>Recent Notes</h2>
           <div className="search-upload">
