@@ -14,12 +14,7 @@ export function login(username: string, password: string) {
 	let user = null;
 	
 	// find user
-	for (const User of data.users) {
-		if (User.username === username) {
-			user = User;
-			break;
-		}
-	}
+	user = data.users.find(u => u.username === username);
 
 	// check for errors 
 	if (user === null) {
