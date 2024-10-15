@@ -1,0 +1,49 @@
+.sidebar {
+    text-align: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-right: calc(100% - 100vw);
+    padding: 17px;
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.sidebar-title {
+    font-size: 24px;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.sidebar-searchbar {
+    width: 100%;
+    padding: 15px 15px;
+    margin: 10px 0;
+    border: 2px solid black;
+    box-sizing: border-box;
+}
+
+.course-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.course-item {
+    padding: 15px 0;
+    background-color: #bee7e9;
+    border: 1px solid black;
+    color: black;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.course-item:hover {
+    background-color: #8fc2c9;
+}
