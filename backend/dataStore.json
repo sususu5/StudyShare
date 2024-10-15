@@ -1,4 +1,30 @@
 {
-  "users": [],
+  "users": [
+    {
+      "userId": 6580973385,
+      "token": [
+        "9ed82cacce052fe25355004566fd517b",
+        "c3d9ddf5f529ad8c19a55e4005d8c104"
+      ],
+      "username": "Mark",
+      "avatar": "https://mrvian.com/wp-content/uploads/2023/03/unsw-logo.png",
+      "password": "238858e1076fcdc42bcb4afc97cb5f364c1acf4c7ed8b73132fd932e038e9d57",
+      "usedPassword": [
+        "238858e1076fcdc42bcb4afc97cb5f364c1acf4c7ed8b73132fd932e038e9d57"
+      ]
+    },
+    {
+      "userId": 7470441808,
+      "token": [
+        "564bfab750ee5cebfe6e1240b0b9075d"
+      ],
+      "username": "Mark",
+      "avatar": "https://mrvian.com/wp-content/uploads/2023/03/unsw-logo.png",
+      "password": "238858e1076fcdc42bcb4afc97cb5f364c1acf4c7ed8b73132fd932e038e9d57",
+      "usedPassword": [
+        "238858e1076fcdc42bcb4afc97cb5f364c1acf4c7ed8b73132fd932e038e9d57"
+      ]
+    }
+  ],
   "notes": []
 }
