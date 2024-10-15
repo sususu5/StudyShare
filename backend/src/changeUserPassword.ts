@@ -10,17 +10,21 @@ import { validPassword } from './helperFunction';
 export function changeUserPassword(token: string, oldPassword: string, newPassword: string) {
 	const data = getData();
 	const user = data.users.find(u => u.token.includes(token));
+  if (!user) {
+    return { error: 'Invalid token' };
+  }
 	// validate the old password
 	if (user.password !== getHashedPassword(oldPassword)) {
 			return { error: 'Wrong old password' };
 	}
 	// validate the new password
-	if (!validPassword(newPassword)) {
+	if (!validPassword(newPassword) || newPassword === oldPassword) {
 			return { error: 'Invalid password' };
-	} else {
-			user.password = getHashedPassword(newPassword);
 	}
-	user.usedPassword.push(oldPassword);
+  const hashedPassword = getHashedPassword(newPassword);
+	user.password = hashedPassword;
+	user.usedPassword.push(hashedPassword);
+
 	setData(data);
 	return {};
 }

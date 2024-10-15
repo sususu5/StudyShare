@@ -1,6 +1,14 @@
-
+import { clear } from './helperFunction';
 import { register } from './register';
-const DEFAULT_THUMBNAIL_URL = 'https://mrvian.com/wp-content/uploads/2023/03/unsw-logo.png';
+const DEFAULT_THUMBNAIL_URL = 'https://i.pinimg.com/736x/bf/4f/6d/bf4f6d3010d3ecdfb3eb6770f420dde9.jpg';
+
+beforeEach(() => {
+  clear();
+});
+afterAll(() => {
+  clear();
+});
+
 describe('adminAuthRegister', () => {
   // Successful test with valid inputs
   test('has the correct return type if no error', () => {
