@@ -24,21 +24,27 @@ export function register(username: string, password: string, avatar: string) {
   // if nameFirst or nameLast contains characters other than
   // lower/upper case letters spaces, hyphens or apostrophes --> error
   if (!containsValidName(username)) {
-      return {
-      error: 'nameFirst contains restricted characters.'
-      };
+    return {
+    error: 'username contains restricted characters.'
+    };
   }
 
   // if nameFirst or nameLast is less than 2 characters or more than 20
   // characters --> error
   if (username.length < minNameLength || username.length > maxNameLength) {
-    return { error: 'nameFirst must be between 2 and 20 characters.' };
+    return { error: 'username must be between 2 and 20 characters.' };
   }
 
 	// check for invalid password 
   if (!validPassword(password)) {
 		return {error: 'invalid password'};
 	}
+
+  // check if username already exists 
+  const existingUser = data.users.find(user => user.username === username);
+  if (existingUser) {
+      return { error: 'username already exists.' };
+  }
 
   // if no errors occured, we can register the user
   // we will generate an ID based on the number of users
