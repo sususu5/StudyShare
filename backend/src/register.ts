@@ -18,7 +18,8 @@ const maxNameLength = 20;
  * @param {string} password 
  * @returns {string} token
  */
-export function register(username: string, password: string, avatar: string) {
+export function register(username: string, password: string, avatar: string)
+: { token: string } | { error: string } {
   
   const data = getData();
   // if nameFirst or nameLast contains characters other than

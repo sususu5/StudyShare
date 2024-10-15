@@ -5,7 +5,7 @@ import { getData, setData } from './dataStore';
  * @param {string} token 
  * @returns {object} empty object
  */
-export function logout(token: string): object {
+export function logout(token: string): Record<string, string> {
 	const data = getData();
 
 	// find user
