@@ -1,14 +1,14 @@
 import { UserDetails } from './interface';
 import { getData } from './dataStore';
 /**
- * Given an admin user's userId, return details about the user.
+ * Given an admin user's username, return details about the user.
  * 
- * @param {number} userId
+ * @param {string} username
  * @returns {Object} An object containing the details of the user.
  */
-export function showUserDetails(userId: number): { user: UserDetails } | { error: string } {
+export function showUserDetails(username: string): { user: UserDetails } | { error: string } {
     const data = getData();
-    const user = data.users.find(u => u.userId === userId);
+    const user = data.users.find(u => u.username === username);
 		if (!user) {
 			return { error: 'User not found' };
 		}

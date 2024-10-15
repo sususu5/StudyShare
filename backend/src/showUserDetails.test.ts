@@ -8,7 +8,7 @@ describe('showUserDetails', () => {
     const user1 = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
     expect(user1).toStrictEqual({ token: expect.any(String) });
 
-		const userdetails = showUserDetails(user1.token);
+		const userdetails = showUserDetails('Mark');
 		expect(userdetails).toStrictEqual({
 			user: {
 				userId: expect.any(Number),
