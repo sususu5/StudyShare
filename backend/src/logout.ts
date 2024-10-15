@@ -8,18 +8,11 @@ import { getData, setData } from './dataStore';
 export function logout(token: string): object {
 	const data = getData();
 
-	let user = null; 
-
 	// find user
-	for (const User of data.users) {
-		if (User.token.includes(token)) {
-			user = User;
-			break;
-		}
-	}
+	const user = data.users.find(User => User.token.includes(token));
 
 	// check for error
-	if (user === null) {
+	if (!user) {
 		return { error: 'Invalid token.' };
 	}
 
