@@ -1,7 +1,7 @@
 import { login } from './login';
 import { logout } from './logout';
 import { register } from './register';
-import { clear } from "../helperFunction";
+import { clear } from "./helperFunction";
 let user: any;
 let loginreturn: any;
 
@@ -11,6 +11,9 @@ beforeEach(() => {
 	clear();
   user = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
   loginreturn = login('Mark', 'Comp1531YAY');
+});
+afterAll(() => {
+  clear();
 });
 
 test('succesful logout', () => {
