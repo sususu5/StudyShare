@@ -10,9 +10,7 @@ beforeEach(() => {
   user = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
   token = login('Mark', 'Comp1531YAY');
 });
-afterAll(() => {
-  clear();
-});
+
 
 describe('adminAuthLogin', () => {
   test('returns the correct Auth User Id object when logging in successfully', () => {

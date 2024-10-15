@@ -12,9 +12,6 @@ beforeEach(() => {
   user = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
   loginreturn = login('Mark', 'Comp1531YAY');
 });
-afterAll(() => {
-  clear();
-});
 
 test('succesful logout', () => {
 	expect(logout(loginreturn.token)).toStrictEqual({});
