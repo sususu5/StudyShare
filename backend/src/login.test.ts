@@ -1,3 +1,4 @@
+import { clear } from './helperFunction';
 import { login } from './login';
 import { register } from './register';
 import { clear } from './helperFunction';
