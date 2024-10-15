@@ -1,8 +1,21 @@
 import crypto from 'crypto';
-import {Data} from './interface';
-
+import { Data } from './interface';
+import { setData } from './dataStore';
 // defined constants
 const minPassLength = 8;
+
+/**
+ * This function clears all data in the dataStore
+ * @returns an empty object
+ */
+export function clear(): Record<string, never> {
+  setData({
+    users: [],
+    notes: []
+  });
+  return {};
+}
+
 
 /**
  * This function returns a random token
