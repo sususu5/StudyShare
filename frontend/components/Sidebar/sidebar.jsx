@@ -28,7 +28,7 @@ function Sidebar() {
   useEffect(() => {
     const getCourses = async () => {
       try {
-        const { data, errors } = await fetchGraphQL(query, { capacity: 100 });
+        const { data, errors } = await fetchGraphQL(query, {});
 
         if (errors) {
           console.error('Error fetching courses:', errors);
