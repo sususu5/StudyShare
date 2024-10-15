@@ -7,7 +7,8 @@ import { generateRandomToken, getHashedPassword } from './helperFunction';
  * @param {string} password 
  * @returns {string} token
  */
-export function login(username: string, password: string) {
+export function login(username: string, password: string)
+: { token: string } | { error: string } {
 	const data = getData();
 	const hashedPassword = getHashedPassword(password);
 
@@ -17,7 +18,7 @@ export function login(username: string, password: string) {
 	user = data.users.find(u => u.username === username);
 
 	// check for errors 
-	if (user === null) {
+	if (!user) {
 		return { error: 'Incorrect username.' };
 	}
 	if (user.password !== hashedPassword) {

@@ -5,16 +5,23 @@ import { clear } from "./helperFunction";
 let user: any;
 let loginreturn: any;
 
-const DEFAULT_THUMBNAIL_URL = 'https://mrvian.com/wp-content/uploads/2023/03/unsw-logo.png';
+const DEFAULT_THUMBNAIL_URL = 'https://i.pinimg.com/736x/bf/4f/6d/bf4f6d3010d3ecdfb3eb6770f420dde9.jpg';
 
 beforeEach(() => {
-	clear();
-  user = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
-  loginreturn = login('Mark', 'Comp1531YAY');
+  clear();
+});
+afterAll(() => {
+  clear();
+});
+
+let userToken: any;
+
+beforeEach(() => {
+  userToken = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
 });
 
 test('succesful logout', () => {
-	expect(logout(loginreturn.token)).toStrictEqual({});
+	expect(logout(userToken.token)).toStrictEqual({});
 });
 
 test('invalid token', () => {
