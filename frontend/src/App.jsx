@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react'
-import Sidebar from '../components/Sidebar/sidebar'
-import './App.css'
+import { useEffect, useState } from 'react';
+import CourseList from '../components/CourseList/courseList';
+import Sidebar from '../components/Sidebar/sidebar';
+import './App.css';
 
 function App() {
   const [user, setUser] = useState(null)
   const [notes, setNotes] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
 
+  const [courses, setCourses] = useState([]);
+  const [selectedSchool, setSelectedSchool] = useState(null);
+
   useEffect(() => {
-    fetchNotes()
+    fetchNotes();
+    fetchCourses();
   }, [])
 
   const fetchNotes = async () => {
@@ -19,6 +24,33 @@ function App() {
     } catch (error) {
       console.error('Error fetching notes:', error)
     }
+  }
+
+  const fetchCourses = async () => {
+    const query = `query MyQuery {
+      courses {
+        course_code
+        course_name
+        school
+      }
+    }`;
+    try {
+      const response = await fetch('https://graphql.csesoc.app/v1/graphql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query }),
+      });
+      const data = await response.json();
+      setCourses(data.data.courses || []);
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+    }
+  };
+
+  const handleSchoolSelect = (school) => {
+    setSelectedSchool(school);
   }
 
   const handleLogout = () => {
@@ -68,7 +100,7 @@ function App() {
       </nav>
 
       <div className="main-content">
-        <Sidebar></Sidebar>
+        <Sidebar courses={courses} onSchoolSelect={handleSchoolSelect} />
         <main className="content">
           <h2>Recent Notes</h2>
           <div className="search-upload">
@@ -92,6 +124,7 @@ function App() {
                 </li>
               ))}
           </ul>
+          <CourseList courses={courses} selectedSchool={selectedSchool} />
         </main>
       </div>
     </div>

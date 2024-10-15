@@ -2,8 +2,6 @@
     text-align: center;
     overflow-y: scroll;
     overflow-x: hidden;
-    margin-right: calc(100% - 100vw);
-    padding: 17px;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -29,21 +27,22 @@
     box-sizing: border-box;
 }
 
-.course-list {
+.school-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
-.course-item {
-    padding: 15px 0;
+.school-item {
+    padding: 15px 5px;
     background-color: #bee7e9;
     border: 1px solid black;
     color: black;
     border-radius: 15px;
     transition: background-color 0.3s ease;
+    font-weight: bold;
 }
 
-.course-item:hover {
+.school-item:hover {
     background-color: #8fc2c9;
 }

@@ -1,67 +1,49 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import "./sidebar.css";
 
-async function fetchGraphQL(query, variables) {
-  const result = await fetch('https://graphql.csesoc.app/v1/graphql', {
-    method: 'POST',
-    body: JSON.stringify({
-      query,
-      variables,
-    }),
-  });
-  return await result.json();
-}
-
-const query = `query MyQuery {
-  courses {
-    course_code
-    course_name
-  }
-}
-`
-
-function Sidebar() {
-  const [courses, setCourses] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+function Sidebar({ courses, onSchoolSelect }) {
+  const [uniqueSchools, setUniqueSchools] = useState([]);
+  const [selectedSchool, setSelectedSchool] = useState(null);
 
   useEffect(() => {
-    const getCourses = async () => {
-      try {
-        const { data, errors } = await fetchGraphQL(query, {});
+    const schools = [... new Set(courses.map(course => course.school))];
+    setUniqueSchools(schools);
+  }, [courses]);
 
-        if (errors) {
-          console.error('Error fetching courses:', errors);
-          return;
-        }
-
-        console.log(data);
-        setCourses(data.courses || []);
-      } catch (error) {
-        console.error('Error fetching courses:', error);
-      }
-    };
-
-    getCourses();
-  }, []);
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const handleSchoolSelect = (school) => {
+    setSelectedSchool(school);
+    onSchoolSelect(school);
+  }
 
   return (
     <aside className="sidebar">
       <h2 className="sidebar-title">Courses</h2>
-      <input type="text" placeholder="Search courses..." value={searchTerm} onChange={handleSearchChange} className="sidebar-searchbar" />
-      <div className="course-list">
-        {courses.filter((course) => course.course_code.toLowerCase().includes(searchTerm.toLowerCase()))
-          .map((course, index) => (
-            <div key={index} className="course-item">
-              {course.course_code}
-            </div>
-          ))}
+      <div className="school-list">
+        {uniqueSchools.map((school, index) => (
+          <button
+            key={index}
+            className="school-item"
+            onClick={() => handleSchoolSelect(school)}
+            style={{
+              backgroundColor: selectedSchool === school ? '#646cff' : '#bee7e9',
+              color: selectedSchool === school ? "white" : "black",
+            }}>
+            {school}
+          </button>
+        ))}
       </div>
-    </aside>
+    </aside >
   );
 }
+
+Sidebar.propTypes = {
+  courses: PropTypes.arrayOf(
+    PropTypes.shape({
+      school: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  onSchoolSelect: PropTypes.func.isRequired,
+};
 
 export default Sidebar;
