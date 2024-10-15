@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import "./sidebar.css";
 
@@ -64,14 +63,5 @@ function Sidebar() {
     </aside>
   );
 }
-
-Sidebar.propTypes = {
-  courses: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
 
 export default Sidebar;
