@@ -1,4 +1,4 @@
-import { getData } from './dataStore';
+import { getData, setData } from './dataStore';
 import { generateRandomToken, getHashedPassword } from './helperFunction';
 
 /**
@@ -11,18 +11,23 @@ export function login(username: string, password: string) {
 	const data = getData();
 	const hashedPassword = getHashedPassword(password);
 
-	for (const User of data.users) {
-		if (User.username !== username && User.password === hashedPassword) {
-			return { error: 'Incorrect username' };
-		} else if (User.username === username && User.password !== hashedPassword) {
-			return { error: 'Incorrect password' };
-		} else if (User.username !== username && User.password !== hashedPassword) {
-			return { error: 'Incorrect username and password' };
-		}
+	let user = null;
+	
+	// find user
+	user = data.users.find(u => u.username === username);
+
+	// check for errors 
+	if (user === null) {
+		return { error: 'Incorrect username.' };
+	}
+	if (user.password !== hashedPassword) {
+		return { error: 'Incorrect password.'};
 	}
 
-
+	// make and save token 
 	const token = generateRandomToken();
+	user.token.push(token);
+	setData(data);
 
-	return {token};
+	return { token };
 }
