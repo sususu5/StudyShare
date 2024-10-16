@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import CourseList from './components/CourseList/courseList';
 import RecentNotes from './components/CurrentNotes/recentNotes';
@@ -98,24 +98,27 @@ function App() {
             <button onClick={handleLogin}>Login</button>
           )}
         </nav>
-
-        <div className="main-content">
-          <Sidebar courses={courses} onSchoolSelect={handleSchoolSelect} />
-          <main className="content">
-            <div className="search-upload">
-              <input
-                type="text"
-                placeholder="Search notes..."
-                value={searchTerm}
-                onChange={handleSearch}
-              />
-              <UploadButton />
-            </div>
-            <h2>Recent Notes</h2>
-            <RecentNotes notes={notes} handleUpvote={handleUpvote} />
-            <CourseList courses={courses} selectedSchool={selectedSchool} />
-          </main>
-        </div>
+        <Routes>
+          <Route path='/' element={
+            <div className="main-content">
+              <Sidebar courses={courses} onSchoolSelect={handleSchoolSelect} />
+              <main className="content">
+                <div className="search-upload">
+                  <input
+                    type="text"
+                    placeholder="Search notes..."
+                    value={searchTerm}
+                    onChange={handleSearch}
+                  />
+                  <UploadButton />
+                </div>
+                <h2>Recent Notes</h2>
+                <RecentNotes notes={notes} handleUpvote={handleUpvote} />
+                <CourseList courses={courses} selectedSchool={selectedSchool} />
+              </main>
+            </div>}>
+          </Route>
+        </Routes>
 
         <Routes>
           <Route path="/uploadPage" element={<UploadNotePage />} />
