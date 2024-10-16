@@ -1,0 +1,56 @@
+.navbar .login {
+  margin-left: auto;
+  margin-right: 2vw;
+}
+
+.navbar .navbuttons .button {
+  background-color: #646cff;
+  border: none;
+  border-radius: 0px;
+  height: 10vh;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0px 0px;
+  cursor: pointer;
+}
+
+.navbar .navbuttons .button:hover {
+  background-color: #5961f5;
+}
+
+.navbar .navbuttons button:focus,
+.navbar .navbuttons button:focus-visible {
+  outline: none;
+  background-color: #4951f4;
+}
+
+.navbar {
+  background-color: #646cff;
+  padding-left: 0.1vw;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+  height: 10vh;
+  box-sizing: border-box;
+  overflow-y: inherit;
+}
+
+.navbar h1 {
+  color: #d8d9ff;
+  padding: 1rem;
+  font-size: 30px;
+  margin-top: 4vh;
+  margin-left: 20px;
+  margin-right: 19px;
+}
+
+.navbar h2 {
+  color: black;
+  font-size: 1rem;
+  padding: 2rem;
+}

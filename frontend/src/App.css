@@ -18,37 +18,6 @@ html, body {
   width: 100vw;
 }
 
-.navbar .login {
-  margin-left: auto;
-  margin-right: 2vw;
-}
-
-.navbar {
-  background-color: #646cff;
-  padding-left: 0.1vw;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100vw;
-  height: 10vh;
-  box-sizing: border-box;
-  overflow-y: inherit;
-}
-
-.navbar h1 {
-  color: #d8d9ff;
-  padding: 2rem;
-  font-size: 2rem;
-  margin-top: 2vw;
-  margin-left: 0%;
-}
-
-.navbar h2 {
-  color: black;
-  font-size: 1rem;
-  padding: 2rem;
-}
-
 .main-content {
   display: flex;
   flex-grow: 1;

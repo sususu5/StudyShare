@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [setUser] = useState(null)
   const [notes, setNotes] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -26,8 +26,6 @@ function App() {
   };
 
   const handleLogin = () => {
-    // Add login logic here
-    // For example: redirect to login page or open login modal
     console.log('Login clicked');
   };
 
@@ -54,33 +52,6 @@ function App() {
 
   return (
     <div className="app">
-      <nav className="navbar">
-        <h1>StudyShare</h1>
-        
-        
-        <h2>Home</h2>
-        <h2>Browse Courses</h2>
-        {user ? (
-        <>
-          <h2>My Notes</h2>
-          </>
-        ) : (
-          <></>
-        )}
-        
-        
-        <div className="login">
-          {user ? (
-            <>
-              <span>Welcome, {user.name}</span>
-              <button onClick={handleLogout}>Logout</button>
-            </>
-          ) : (
-            <button onClick={handleLogin}>Login</button>
-          )}
-        </div>
-        
-      </nav>
 
       <div className="main-content">
         <aside className="sidebar">
