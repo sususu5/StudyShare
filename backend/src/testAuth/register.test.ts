@@ -1,5 +1,5 @@
-import { clear } from './helperFunction';
-import { register } from './register';
+import { clear } from '../helperFunction';
+import { register } from '../auth/register';
 const DEFAULT_THUMBNAIL_URL = 'https://i.pinimg.com/736x/bf/4f/6d/bf4f6d3010d3ecdfb3eb6770f420dde9.jpg';
 
 beforeEach(() => {

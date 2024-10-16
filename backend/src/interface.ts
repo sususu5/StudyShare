@@ -26,6 +26,13 @@ export interface Note {
 	timeLastEdited: number;
 }
 
+export interface NoteDisplay {
+  noteId: number;
+  title: string;
+  upvotes: number;
+  timeLastEdited: string;
+}
+
 export interface Data {
 	users: User[];
 	notes: Note[];

@@ -12,7 +12,7 @@ import { updateUserDetails } from './user/updateUserDetails';
 import { getData } from './dataStore';
 import { changeUserPassword } from './user/changeUserPassword';
 import { generateRandomNoteId, getCurrentTime } from './helperFunction';
-import { Note } from './interface';
+import { Note, NoteDisplay } from './interface';
 dotenv.config();
 
 const app = express();
@@ -24,18 +24,12 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json({ limit: '3mb' }));
 
-// Dummy data for notes
-interface NoteDisplay {
-  noteId: number;
-  title: string;
-  upvotes: number;
-}
-
 const notes: NoteDisplay[] = [
   { 
     noteId: 1000000000, 
     title: 'Sample Note Just for frontend', 
     upvotes: 0,
+    timeLastEdited: '2024-02-20',
   }
 ];
 
