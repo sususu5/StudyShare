@@ -3,13 +3,13 @@ import cors from 'cors';
 import path from 'path';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
-import { register } from './register';
-import { login } from './login';
-import { logout } from './logout';
-import { showUserDetails } from './showUserDetails';
-import { updateUserDetails } from './updateUserDetails';
+import { register } from './auth/register';
+import { login } from './auth/login';
+import { logout } from './auth/logout';
+import { showUserDetails } from './user/showUserDetails';
+import { updateUserDetails } from './user/updateUserDetails';
 import { getData } from './dataStore';
-import { changeUserPassword } from './changeUserPassword';
+import { changeUserPassword } from './user/changeUserPassword';
 
 dotenv.config();
 

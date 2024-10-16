@@ -1,5 +1,5 @@
-import { changeUserPassword } from "../changeUserPassword";
-import { register } from "../register";
+import { changeUserPassword } from "../user/changeUserPassword";
+import { register } from "../auth/register";
 import { clear } from "../helperFunction";
 const DEFAULT_THUMBNAIL_URL = 'https://i.pinimg.com/736x/bf/4f/6d/bf4f6d3010d3ecdfb3eb6770f420dde9.jpg';
 let user1Token: { token: string } | { error: string };
