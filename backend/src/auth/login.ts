@@ -1,5 +1,5 @@
-import { getData, setData } from './dataStore';
-import { generateRandomToken, getHashedPassword } from './helperFunction';
+import { getData, setData } from '../dataStore';
+import { generateRandomToken, getHashedPassword } from '../helperFunction';
 
 /**
  * Login a user and return a token

@@ -25,14 +25,18 @@ app.use(morgan('dev'));
 app.use(express.json({ limit: '3mb' }));
 
 // Dummy data for notes
-// interface Note {
-//   id: number;
-//   title: string;
-//   upvotes: number;
-// }
+interface NoteDisplay {
+  noteId: number;
+  title: string;
+  upvotes: number;
+}
 
-const notes: Note[] = [
-  
+const notes: NoteDisplay[] = [
+  { 
+    noteId: 1000000000, 
+    title: 'Sample Note Just for frontend', 
+    upvotes: 0,
+  }
 ];
 
 app.get('/api/notes', (req: Request, res: Response) => {

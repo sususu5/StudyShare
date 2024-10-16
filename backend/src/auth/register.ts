@@ -4,8 +4,8 @@ import {
 	containsValidName,
 	validPassword, 
 	generateRandomUserId
-} from './helperFunction';
-import { getData, setData } from './dataStore';
+} from '../helperFunction';
+import { getData, setData } from '../dataStore';
 
 // defined constants
 const minNameLength = 2;

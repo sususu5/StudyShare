@@ -1,4 +1,4 @@
-import { getData, setData } from './dataStore';
+import { getData, setData } from '../dataStore';
 
 /**
  * Logout a user and return an empty object

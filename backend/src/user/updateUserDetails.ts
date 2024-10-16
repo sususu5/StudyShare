@@ -1,5 +1,5 @@
-import { setData, getData } from './dataStore';
-import { containsValidName } from './helperFunction';
+  import { setData, getData } from '../dataStore';
+import { containsValidName } from '../helperFunction';
 /**
  * Update the user's details
  * @param token 

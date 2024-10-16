@@ -1,6 +1,6 @@
-import { setData, getData } from './dataStore';
-import { getHashedPassword } from './helperFunction';
-import { validPassword } from './helperFunction';
+import { setData, getData } from '../dataStore';
+import { getHashedPassword } from '../helperFunction';
+import { validPassword } from '../helperFunction';
 /**
  * Change the user's password
  * @param token 
