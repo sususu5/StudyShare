@@ -3,6 +3,13 @@ import cors from 'cors';
 import path from 'path';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
+import { register } from './register';
+import { login } from './login';
+import { logout } from './logout';
+import { showUserDetails } from './showUserDetails';
+import { updateUserDetails } from './updateUserDetails';
+import { getData } from './dataStore';
+import { changeUserPassword } from './changeUserPassword';
 
 dotenv.config();
 
@@ -44,30 +51,85 @@ app.get('*', (req: Request, res: Response) => {
 
 // User registration
 app.post('/api/register', (req: Request, res: Response) => {
-  // TODO: Implement user registration
-  // 1. Validate input
-  // 2. Check if user already exists
-  // 3. Hash password
-  // 4. Save user to database
-  res.status(201).json({ message: 'User registered successfully' });
+  const { username, password, avatar } = req.body;
+  const resBody = register(username, password, avatar);
+  if ('error' in resBody) {
+    res.status(400).json({ error: resBody.error });
+    return; // Ensure the function exits after sending the error response
+  }
+  res.status(200).json({ message: 'User registered successfully' });
 });
 
 // User login
 app.post('/api/login', (req: Request, res: Response) => {
-  // TODO: Implement user login
-  // 1. Validate input
-  // 2. Check if user exists
-  // 3. Verify password
-  // 4. Generate and send JWT token
-  res.json({ token: 'dummy_token', user: { id: 1, name: 'John Doe' } });
+  const { username, password } = req.body;
+  const resBody = login(username, password);
+  if ('error' in resBody) {
+    res.status(400).json({ error: resBody.error });
+    return; // Ensure the function exits after sending the error response
+  }
+  res.status(200).json({ message: 'User logged in successfully' });
 });
 
 // User logout
 app.post('/api/logout', (req: Request, res: Response) => {
-  // TODO: Implement user logout
-  // 1. Invalidate token (if using token-based auth)
-  // 2. Clear session (if using session-based auth)
-  res.json({ message: 'Logged out successfully' });
+  const token = req.header('token') as string;
+  const user = getData().users.find(u => u.token.includes(token));
+  if (!user) {
+    res.status(401).json({ error: 'Token is invalid' });
+    return;
+  }
+  const resBody = logout(token);
+  if ('error' in resBody) {
+    res.status(400).json({ error: resBody.error });
+    return; // Ensure the function exits after sending the error response
+  }
+  res.status(200).json({ message: 'User logged out successfully' });
+});
+
+// get user profile
+app.get('/api/user/:username', (req: Request, res: Response) => {
+  const username = req.params.username;
+  const resBody = showUserDetails(username);
+  if ('error' in resBody) {
+    res.status(400).json({ error: resBody.error });
+    return; // Ensure the function exits after sending the error response
+  }
+  res.status(200);
+});
+
+// update user profile
+app.put('/api/user', (req: Request, res: Response) => {
+  const token = req.header('token') as string;
+  const { username, avatar } = req.body;
+  const user = getData().users.find(u => u.token.includes(token));
+  if (!user) {
+    res.status(401).json({ error: 'Token is invalid' });
+    return;
+  }
+  const resBody = updateUserDetails(token, username, avatar);
+  if ('error' in resBody) {
+    res.status(400).json({ error: resBody.error });
+    return; // Ensure the function exits after sending the error response
+  }
+  res.status(200);
+});
+
+// change password
+app.put('/api/user/password', (req: Request, res: Response) => {
+  const token = req.header('token') as string;
+  const { oldPassword, newPassword } = req.body;
+  const user = getData().users.find(u => u.token.includes(token));
+  if (!user) {
+    res.status(401).json({ error: 'Token is invalid' });
+    return;
+  }
+  const resBody = changeUserPassword(token, oldPassword, newPassword);
+  if ('error' in resBody) {
+    res.status(400).json({ error: resBody.error });
+    return; // Ensure the function exits after sending the error response
+  }
+  res.status(200).json({ message: 'Password changed successfully' });
 });
 
 app.listen(port, () => {
