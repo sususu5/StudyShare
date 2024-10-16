@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import CourseList from '../components/CourseList/courseList';
-import RecentNotes from '../components/CurrentNotes/recentNotes';
-import Sidebar from '../components/Sidebar/sidebar';
+import { BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
+import CourseList from './components/CourseList/courseList';
+import RecentNotes from './components/CurrentNotes/recentNotes';
+import Sidebar from './components/Sidebar/sidebar';
+import UploadButton from './components/UploadButton/uploadButton';
 
 function App() {
   const [user, setUser] = useState(null)
@@ -70,11 +72,6 @@ function App() {
     setSearchTerm(e.target.value)
   }
 
-  const handleUpload = () => {
-    // Add upload logic here
-    console.log('Upload clicked');
-  };
-
   const handleUpvote = async (noteId) => {
     try {
       const response = await fetch(`/api/notes/${noteId}/upvote`, { method: 'POST' });
@@ -87,37 +84,43 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <nav className="navbar">
-        <h1>StudyNotes Share</h1>
-        {user ? (
-          <>
-            <span>Welcome, {user.name}</span>
-            <button onClick={handleLogout}>Logout</button>
-          </>
-        ) : (
-          <button onClick={handleLogin}>Login</button>
-        )}
-      </nav>
+    <Router>
+      <div className="app">
+        <nav className="navbar">
+          <h1>StudyNotes Share</h1>
+          {user ? (
+            <>
+              <span>Welcome, {user.name}</span>
+              <button onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <button onClick={handleLogin}>Login</button>
+          )}
+        </nav>
 
-      <div className="main-content">
-        <Sidebar courses={courses} onSchoolSelect={handleSchoolSelect} />
-        <main className="content">
-          <div className="search-upload">
-            <input
-              type="text"
-              placeholder="Search notes..."
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-            <button onClick={handleUpload}>Upload Note</button>
-          </div>
-          <h2>Recent Notes</h2>
-          <RecentNotes notes={notes} handleUpvote={handleUpvote} />
-          <CourseList courses={courses} selectedSchool={selectedSchool} />
-        </main>
+        <div className="main-content">
+          <Sidebar courses={courses} onSchoolSelect={handleSchoolSelect} />
+          <main className="content">
+            <div className="search-upload">
+              <input
+                type="text"
+                placeholder="Search notes..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              <UploadButton />
+            </div>
+            <h2>Recent Notes</h2>
+            <RecentNotes notes={notes} handleUpvote={handleUpvote} />
+            <CourseList courses={courses} selectedSchool={selectedSchool} />
+          </main>
+        </div>
+
+        <Routes>
+          {/* <Route path="/upload" element={<UploadNotePage />} /> */}
+        </Routes>
       </div>
-    </div>
+    </Router>
   )
 }
 
