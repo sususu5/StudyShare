@@ -13,6 +13,7 @@
     border-radius: 5px;
     height: 30px;
     font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 .notes-item:hover {
