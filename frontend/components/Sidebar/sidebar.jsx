@@ -23,12 +23,8 @@ function Sidebar({ courses, onSchoolSelect }) {
         {uniqueSchools.map((school, index) => (
           <button
             key={index}
-            className="school-item"
-            onClick={() => handleSchoolSelect(school)}
-            style={{
-              backgroundColor: selectedSchool === school ? '#646cff' : '#bee7e9',
-              color: selectedSchool === school ? "white" : "black",
-            }}>
+            className={`school-item ${school === selectedSchool ? 'selected' : ''}`}
+            onClick={() => handleSchoolSelect(school)}>
             {school}
           </button>
         ))}

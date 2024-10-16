@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import CourseList from '../components/CourseList/courseList';
+import RecentNotes from '../components/CurrentNotes/recentNotes';
 import Sidebar from '../components/Sidebar/sidebar';
 import './App.css';
 
@@ -102,7 +103,6 @@ function App() {
       <div className="main-content">
         <Sidebar courses={courses} onSchoolSelect={handleSchoolSelect} />
         <main className="content">
-          <h2>Recent Notes</h2>
           <div className="search-upload">
             <input
               type="text"
@@ -112,18 +112,8 @@ function App() {
             />
             <button onClick={handleUpload}>Upload Note</button>
           </div>
-          <ul className="notes-list">
-            {notes
-              .filter(note => note.title.toLowerCase().includes(searchTerm.toLowerCase()))
-              .map(note => (
-                <li key={note.id} className="note-item">
-                  <span>{note.title}</span>
-                  <button onClick={() => handleUpvote(note.id)}>
-                    Upvote ({note.upvotes})
-                  </button>
-                </li>
-              ))}
-          </ul>
+          <h2>Recent Notes</h2>
+          <RecentNotes notes={notes} handleUpvote={handleUpvote} />
           <CourseList courses={courses} selectedSchool={selectedSchool} />
         </main>
       </div>

@@ -3,7 +3,7 @@ import './courseList.css';
 
 function CourseList({ courses, selectedSchool }) {
   return (
-    <ul className='courses-list'>
+    <ul className='course-list'>
       {courses.filter(course => course.school === selectedSchool).map((course, index) => (
         <li key={index} className='course-item'>
           {course.course_code}

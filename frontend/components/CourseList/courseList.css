@@ -1,4 +1,4 @@
-.courses-list {
+.course-list {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
@@ -17,4 +17,9 @@
     text-align: center;
     height: 30px;
     font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.course-item:hover {
+    background-color: #FF7F50;
 }

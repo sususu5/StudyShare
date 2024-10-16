@@ -46,3 +46,8 @@
 .school-item:hover {
     background-color: #8fc2c9;
 }
+
+.school-item.selected {
+    background-color: #646cff;
+    color: white;
+  }
