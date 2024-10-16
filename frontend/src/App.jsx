@@ -118,7 +118,7 @@ function App() {
         </div>
 
         <Routes>
-          <Route path="/upload" element={<UploadNotePage />} />
+          <Route path="/uploadPage" element={<UploadNotePage />} />
         </Routes>
       </div>
     </Router>
