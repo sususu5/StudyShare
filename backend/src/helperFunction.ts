@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import { Data } from './interface';
-import { setData } from './dataStore';
+import { getData, setData } from './dataStore';
 // defined constants
 const minPassLength = 8;
 
@@ -16,6 +16,13 @@ export function clear(): Record<string, never> {
   return {};
 }
 
+/**
+ * get the current time in seconds
+ * @returns the current time in seconds
+ */
+export function getCurrentTime(): number {
+  return Math.floor(Date.now() / 1000);
+}
 
 /**
  * This function returns a random token
@@ -23,6 +30,18 @@ export function clear(): Record<string, never> {
  */
 export function generateRandomToken() {
     return crypto.randomBytes(16).toString('hex');
+}
+
+/**
+ * This function generates a random note ID from 1000000000 to 9999999999 
+ * @returns a random note ID
+ */
+export function generateRandomNoteId() {
+  let noteId =  Math.floor(Math.random() * 9000000000) + 1000000000;
+  while (getData().notes.find(Note => Note.noteId === noteId)) {
+    noteId = Math.floor(Math.random() * 9000000000) + 1000000000;
+  }
+  return noteId;
 }
 
 /**

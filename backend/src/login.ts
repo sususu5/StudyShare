@@ -11,11 +11,9 @@ export function login(username: string, password: string)
 : { token: string } | { error: string } {
 	const data = getData();
 	const hashedPassword = getHashedPassword(password);
-
-	let user = null;
-	
+  
 	// find user
-	user = data.users.find(u => u.username === username);
+	const user = data.users.find(u => u.username === username);
 
 	// check for errors 
 	if (!user) {
