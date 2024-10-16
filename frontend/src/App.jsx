@@ -25,10 +25,6 @@ function App() {
     // Add any additional logout logic here (e.g., clearing local storage, API calls)
   };
 
-  const handleLogin = () => {
-    console.log('Login clicked');
-  };
-
   // Add this function
   const handleSearch = (e) => {
     setSearchTerm(e.target.value)
