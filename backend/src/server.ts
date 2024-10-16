@@ -1,4 +1,5 @@
 import express, { json, Request, Response } from 'express';
+import fs from 'fs';
 import cors from 'cors';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -10,27 +11,28 @@ import { showUserDetails } from './user/showUserDetails';
 import { updateUserDetails } from './user/updateUserDetails';
 import { getData } from './dataStore';
 import { changeUserPassword } from './user/changeUserPassword';
-
+import { generateRandomNoteId, getCurrentTime } from './helperFunction';
+import { Note } from './interface';
 dotenv.config();
 
 const app = express();
 const port: number = parseInt(process.env.PORT || '5000', 10);
+const dataStorePath = path.join(__dirname, '../dataStore.json');
 app.use(json());
 app.use(cors());
 // for logging errors (print to terminal)
 app.use(morgan('dev'));
+app.use(express.json({ limit: '3mb' }));
 
 // Dummy data for notes
-interface Note {
-  id: number;
-  title: string;
-  upvotes: number;
-}
+// interface Note {
+//   id: number;
+//   title: string;
+//   upvotes: number;
+// }
 
 const notes: Note[] = [
-  { id: 1, title: 'Math 101 Notes', upvotes: 5 },
-  { id: 2, title: 'History 202 Study Guide', upvotes: 3 },
-  { id: 3, title: 'Computer Science 301 Cheat Sheet', upvotes: 7 },
+  
 ];
 
 app.get('/api/notes', (req: Request, res: Response) => {
@@ -131,6 +133,64 @@ app.put('/api/user/password', (req: Request, res: Response) => {
   }
   res.status(200).json({ message: 'Password changed successfully' });
 });
+
+// save notes to dataStore.json
+app.post('/api/saveNotes', (req: Request, res: Response) => {
+  const token = req.header('token') as string;
+  const { courseCode, tag, title, description, file } = req.body;
+  const user = getData().users.find(u => u.token.includes(token));
+  if (!user) {
+    res.status(401).json({ error: 'Token is invalid' });
+    return;
+  }
+
+  if (!file) {
+    res.status(400).send('File is missing');
+    return;
+  }
+
+  // read dataStore.json
+  fs.readFile(dataStorePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Failed to read dataStore.json:', err);
+      return res.status(500).send('Server error');
+    }
+
+    let dataStore = [];
+    if (data) {
+      dataStore = JSON.parse(data);
+    }
+
+    const noteId = generateRandomNoteId();
+
+    // create new note
+    const newNote: Note = {
+      noteId,
+      userId: user.userId,
+      title,
+      courseCode,
+      tag,
+      description,
+      upvoteCount: [],
+      file, // base64
+      timeCreated: getCurrentTime(),
+      timeLastEdited: getCurrentTime(),
+    };
+
+    // add new note to dataStore
+    dataStore.push(newNote);
+
+    // write back to dataStore.json
+    fs.writeFile(dataStorePath, JSON.stringify(dataStore, null, 2), (err) => {
+      if (err) {
+        console.error('Failed to write to dataStore.json:', err);
+        return res.status(500).send('Server error');
+      }
+      res.json({ message: 'File saved successfully' });
+    });
+  });
+});
+
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

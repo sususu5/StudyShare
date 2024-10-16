@@ -16,11 +16,14 @@ export interface UserDetails {
 export interface Note {
 	noteId: number;
 	userId: number;
-	name: string;
+	title: string;
+	courseCode: string;
+	tag: string;
+	description: string;
+	upvoteCount: string[];
+	file: string;
 	timeCreated: number;
 	timeLastEdited: number;
-	description: string;
-	upvoteCount: number;
 }
 
 export interface Data {
