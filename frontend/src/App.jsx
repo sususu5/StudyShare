@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
 import UploadNotePage from './components/UploadNotePage/uploadNotePage';
 import ShowOneNote from './components/ShowOneNote/showOneNote';
+import MyNoteButton from './components/MyNoteButton/myNoteButton';
 function App() {
   const [user, setUser] = useState(null)
   const [notes, setNotes] = useState([])
@@ -90,14 +91,17 @@ function App() {
       <div className="app">
         <nav className="navbar">
           <h1>StudyNotes Share</h1>
-          {user ? (
-            <>
-              <span>Welcome, {user.name}</span>
-              <button onClick={handleLogout}>Logout</button>
-            </>
-          ) : (
-            <button onClick={handleLogin}>Login</button>
-          )}
+          <div className="button-container">
+            <MyNoteButton />
+            {user ? (
+              <>
+                <span>Welcome, {user.name}</span>
+                <button onClick={handleLogout}>Logout</button>
+              </>
+            ) : (
+              <button onClick={handleLogin}>Login</button>
+            )}
+          </div>
         </nav>
         <Routes>
           <Route path='/' element={

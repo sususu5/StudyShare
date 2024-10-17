@@ -29,6 +29,17 @@ html, body {
   box-sizing: border-box;
 }
 
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-container button,
+.button-container span {
+  margin: 0 10px;
+}
+
 .navbar h1 {
   margin: 0;
   color: black;

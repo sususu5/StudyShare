@@ -13,6 +13,6 @@ export async function upvoteNote(noteId: number, userId: number) {
         note.upvoteArray.push(userId);
     }
     note.upvoteCounter = note.upvoteArray.length;
-    setData(data);
+    await setData(data);
     return { message: 'Upvote successful' };
 }

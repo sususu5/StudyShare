@@ -18,7 +18,7 @@ export async function logout(token: string): Promise<Record<string, string>> {
 
 	// remove token and save
 	user.token = user.token.filter(usertoken => usertoken !== token);
-	setData(data);
+	await setData(data);
 
 	return {};
 }

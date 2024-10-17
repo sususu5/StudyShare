@@ -17,6 +17,7 @@ import { generateRandomNoteId, getCurrentTime } from './helperFunction';
 import { Note, NoteDisplay } from './interface';
 import { upvoteNote } from './upvoteNote';
 import fsSync from 'fs'; // Add this line to import the synchronous fs module
+import { deleteNote } from './deleteNote';
 dotenv.config();
 
 const app = express();
@@ -222,6 +223,16 @@ app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Resp
     console.error('Failed to read/write dataStore.json:', err);
     res.status(500).send('Server error');
   }
+});
+
+app.put('/api/deleteNote', async (req: Request, res: Response) => {
+  const { noteId } = req.body;
+  const resBody = await deleteNote(noteId);
+  if ('error' in resBody) {
+    res.status(400).json({ error: resBody.error });
+    return; // Ensure the function exits after sending the error response
+  }
+  res.status(200).json({ message: 'Note deleted successfully' });
 });
 
 app.put('/api/upvoteNote', (req: Request, res: Response) => {
