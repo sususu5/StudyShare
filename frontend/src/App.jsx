@@ -98,7 +98,7 @@ function App() {
                 <div className="search-upload">
                   <input
                     type="text"
-                    placeholder="Search notes..."
+                    placeholder="Search courses..."
                     value={searchTerm}
                     onChange={handleSearch}
                   />
@@ -106,7 +106,7 @@ function App() {
                 </div>
                 <h2>Recent Notes</h2>
                 <RecentNotes notes={notes} />
-                <CourseList courses={courses} selectedSchool={selectedSchool} />
+                <CourseList courses={courses} selectedSchool={selectedSchool} searchTerm={searchTerm} />
               </main>
             </div>}>
           </Route>
