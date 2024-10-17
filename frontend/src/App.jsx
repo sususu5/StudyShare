@@ -3,10 +3,10 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import CourseList from './components/CourseList/courseList';
 import RecentNotes from './components/CurrentNotes/recentNotes';
+import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJustUploaded';
 import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
 import UploadNotePage from './components/UploadNotePage/uploadNotePage';
-import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/ShowNoteJustUploaded';
 function App() {
   const [user, setUser] = useState(null)
   const [notes, setNotes] = useState([])
