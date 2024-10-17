@@ -7,29 +7,29 @@ let token: any;
 beforeEach(() => {
   clear();
 });
-afterAll(() => {
+afterAll(async () => {
   clear();
 });
 
 let userToken: any;
 
-beforeEach(() => {
-  userToken = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
+beforeEach(async () => {
+  userToken = await register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
 });
 
 describe('adminAuthLogin', () => {
-  test('returns the correct Auth User Id object when logging in successfully', () => {
-    token = login('Mark', 'Comp1531YAY');
+  test('returns the correct Auth User Id object when logging in successfully', async () => {
+    token = await login('Mark', 'Comp1531YAY');
     expect(token).toStrictEqual({ token: expect.any(String) });
   });
 
-  test('returns an error when logging in with incorrect password', () => {
-    token = login('Mark', 'Comp1531YAY123');
+  test('returns an error when logging in with incorrect password', async () => {
+    token = await login('Mark', 'Comp1531YAY123');
     expect(token).toStrictEqual({ error: 'Incorrect password.' });
   });
 
-  test('returns an error when logging in with incorrect username', () => {
-    token = login('Mark123', 'Comp1531YAY');
+  test('returns an error when logging in with incorrect username', async () => {
+    token = await login('Mark123', 'Comp1531YAY');
     expect(token).toStrictEqual({ error: 'Incorrect username.' });
   });
 });

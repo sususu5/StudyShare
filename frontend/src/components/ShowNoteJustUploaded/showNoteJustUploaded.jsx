@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './showNoteJustUploaded.css'; // Import the CSS for styling
 
 function ShowNoteJustUploaded() {
+  const location = useLocation();
   const [pdfUrl, setPdfUrl] = useState('');
   useEffect(() => {
     // when the user uploads a note, the server will return a url to the uploaded file
-    const uploadedFileUrl = 'http://localhost:5000/' + localStorage.getItem('uploadedFileUrl');
+    //const uploadedFileUrls = JSON.parse(localStorage.getItem('uploadedFileUrls'));
+    const uploadedFileUrl = 'http://localhost:5000/' + location.state.uploadedFileUrl;
     if (uploadedFileUrl) {
       setPdfUrl(uploadedFileUrl);
     }
-  }, []);
+  }, [location.state.uploadedFileUrl]);
 
   return (
     <div className="show-note-just-uploaded">

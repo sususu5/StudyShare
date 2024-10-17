@@ -2,27 +2,33 @@
 import fs from 'fs';
 import { Data } from './interface';
 
-const DATA_FILE_PATH = './dataStore.json';
+const DEFAULT_DATA_FILE_PATH = './dataStore.json';
 
 // Use get() to access the data
-export function getData(): Data {
+export async function getData(): Promise<Data> {
+  console.log("Getting data");
   let data: Data | null = null;
   try {
-    const rawData = fs.readFileSync(DATA_FILE_PATH, 'utf8');
+    const rawData = await fs.promises.readFile(DEFAULT_DATA_FILE_PATH, 'utf8');
+    console.log("Raw data: ", rawData);
     data = JSON.parse(rawData);
+    console.log("Parsed data: ", data);
   } catch (error) {
+    console.log("Error reading data: ", error);
     if (error.code === 'ENOENT') {
-      console.log('dataStore.json not found, creating new dataStore.json file.');
+      console.log(`${DEFAULT_DATA_FILE_PATH} not found, creating new dataStore.json file.`);
       data = {
         users: [],
         notes: []
       };
-      fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(data, null, 2));
+      await fs.promises.writeFile(DEFAULT_DATA_FILE_PATH, JSON.stringify(data, null, 2));
     }
   }
+  console.log("Data: ", data);
 
   // if data is not initialized, initialize it
   if (!data) {
+    console.log("data is not initialized");
     data = {
       users: [],
       notes: []
@@ -32,6 +38,11 @@ export function getData(): Data {
 }
 
 // Use set(newData) to pass in the entire data object, with modifications made
-export function setData(newData: Data): void {
-  fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(newData, null, 2));
+export async function setData(newData: Data): Promise<void> {
+  try {
+    await fs.promises.writeFile(DEFAULT_DATA_FILE_PATH, JSON.stringify(newData, null, 2));
+  } catch (error) {
+    console.error('Error writing data:', error);
+    throw error;
+  }
 }

@@ -11,8 +11,8 @@ afterAll(() => {
 
 describe('adminAuthRegister', () => {
   // Successful test with valid inputs
-  test('has the correct return type if no error', () => {
-    const user1 = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
+  test('has the correct return type if no error', async () => {
+    const user1 = await register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
     expect(user1).toStrictEqual({ token: expect.any(String) });
   });
 
@@ -31,8 +31,8 @@ describe('adminAuthRegister', () => {
     }
     
   ])('returns an error for invalid name length',
-    ({ username, password }) => {
-      const errorAdmin = register(username, password, DEFAULT_THUMBNAIL_URL);
+    async ({ username, password }) => {
+      const errorAdmin = await register(username, password, DEFAULT_THUMBNAIL_URL);
       expect(errorAdmin).toStrictEqual({ error: expect.any(String) });
     });
 
@@ -49,8 +49,8 @@ describe('adminAuthRegister', () => {
       password: '153115311531'
     },
   ])('returns an error for password missing required character types',
-    ({ username, password }) => {
-      const errorAdmin = register(username, password, DEFAULT_THUMBNAIL_URL);
+    async ({ username, password }) => {
+      const errorAdmin = await register(username, password, DEFAULT_THUMBNAIL_URL);
       expect(errorAdmin).toStrictEqual({ error: expect.any(String) });
     });
 
