@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './ShowNoteJustUploaded.css'; // Import the CSS for styling
+import './showNoteJustUploaded.css'; // Import the CSS for styling
 
 function ShowNoteJustUploaded() {
   const [pdfUrl, setPdfUrl] = useState('');
