@@ -11,40 +11,40 @@ afterAll(() => {
   clear();
 });
 
-beforeEach(() => {
-  user1Token = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
+beforeEach(async () => {
+  user1Token = await register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
 });
 
 describe('changeUserPassword', () => {
-  test('Invalid token', () => {
-    const updatedUser = changeUserPassword('Invalid token', 'Comp1531YAY', 'Comp1531YAY123');
+  test('Invalid token', async () => {
+    const updatedUser = await changeUserPassword('Invalid token', 'Comp1531YAY', 'Comp1531YAY123');
     expect(updatedUser).toStrictEqual({ error: 'Invalid token' });
   });
 
-  test('Wrong old password', () => {
+  test('Wrong old password', async () => {
     if ('token' in user1Token) {
-      const updatedUser = changeUserPassword(user1Token.token, 'Comp1531YA', 'Comp1531YAY123');
+      const updatedUser = await changeUserPassword(user1Token.token, 'Comp1531YA', 'Comp1531YAY123');
       expect(updatedUser).toStrictEqual({ error: 'Wrong old password' });
     }
   });
 
-  test('same as old password', () => {
+  test('same as old password', async () => {
     if ('token' in user1Token) {
-      const updatedUser = changeUserPassword(user1Token.token, 'Comp1531YAY', 'Comp1531YAY');
+      const updatedUser = await changeUserPassword(user1Token.token, 'Comp1531YAY', 'Comp1531YAY');
       expect(updatedUser).toStrictEqual({ error: 'Invalid password' });
     }
   });
 
-  test('Invalid password', () => {
+  test('Invalid password', async () => {
     if ('token' in user1Token) {
-      const updatedUser = changeUserPassword(user1Token.token, 'Comp1531YAY', 'C');
+      const updatedUser = await changeUserPassword(user1Token.token, 'Comp1531YAY', 'C');
       expect(updatedUser).toStrictEqual({ error: 'Invalid password' });
     }
   });
 
-  test('Valid password', () => {
+  test('Valid password', async () => {
     if ('token' in user1Token) {
-      const updatedUser = changeUserPassword(user1Token.token, 'Comp1531YAY', 'Comp1531YAY123');
+      const updatedUser = await changeUserPassword(user1Token.token, 'Comp1531YAY', 'Comp1531YAY123');
       expect(updatedUser).toStrictEqual({});
     }
   });

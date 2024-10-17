@@ -4,11 +4,11 @@ import './App.css';
 import CourseList from './components/CourseList/courseList';
 import RecentNotes from './components/CurrentNotes/recentNotes';
 import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJustUploaded';
+import ShowOneNote from './components/ShowOneNote/showOneNote';
 import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
 import UploadNotePage from './components/UploadNotePage/uploadNotePage';
 import ViewNotes from './components/ViewNotes/viewNotes';
-
 
 function App() {
   const [user, setUser] = useState(null)
@@ -113,6 +113,7 @@ function App() {
           <Route path="/uploadPage" element={<UploadNotePage />} />
           <Route path="/showNoteJustUploaded" element={<ShowNoteJustUploaded />} />
           <Route path='/viewNotes/:courseCode' element={<ViewNotes />} />
+          <Route path="/showOneNote" element={<ShowOneNote />} />
         </Routes>
       </div>
     </Router>

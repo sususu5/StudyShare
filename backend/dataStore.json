@@ -16,7 +16,7 @@
   ],
   "notes": [
     {
-      "noteId": 3473925025,
+      "noteId": 2369024570,
       "userId": 1,
       "title": "A note about Lab Test1 of MATH1081",
       "courseCode": "MATH1081",
@@ -26,6 +26,32 @@
       "file": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
       "timeCreated": "1,729,089,761",
       "timeLastEdited": "1,729,089,761"
+    },
+    {
+      "noteId": 3501944949,
+      "userId": 1,
+      "title": "3",
+      "courseCode": "MATH1081",
+      "tag": "2",
+      "description": "4",
+      "upvoteArray": [],
+      "upvoteCounter": 0,
+      "filePath": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
+      "timeCreated": "1,729,158,479",
+      "timeLastEdited": "1,729,158,479"
+    },
+    {
+      "noteId": 7538620703,
+      "userId": 1,
+      "title": "MATH1081 lab test",
+      "courseCode": "MATH1081",
+      "tag": "lab",
+      "description": "hi",
+      "upvoteArray": [],
+      "upvoteCounter": 0,
+      "filePath": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
+      "timeCreated": "1,729,159,312",
+      "timeLastEdited": "1,729,159,313"
     }
   ]
 }

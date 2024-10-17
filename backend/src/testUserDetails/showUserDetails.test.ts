@@ -12,15 +12,15 @@ afterAll(() => {
 });
 
 let user1Token: { token: string } | { error: string };
-beforeEach(() => {
-  user1Token = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
+beforeEach(async () => {
+  user1Token = await register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
 });
 
 describe('showUserDetails', () => {
-  test('has the correct return type if no error', () => {
+  test('has the correct return type if no error', async () => {
     expect(user1Token).toStrictEqual({ token: expect.any(String) });
 
-		const userdetails = showUserDetails('Mark');
+		const userdetails = await showUserDetails('Mark');
 		expect(userdetails).toStrictEqual({
 			user: {
 				userId: expect.any(Number),
@@ -30,8 +30,8 @@ describe('showUserDetails', () => {
 		});
   });
 
-  test('User not found', () => {
-    const userdetails = showUserDetails('May');
+  test('User not found', async () => {
+    const userdetails = await showUserDetails('May');
     expect(userdetails).toStrictEqual({ error: 'User not found' });
   });
 });

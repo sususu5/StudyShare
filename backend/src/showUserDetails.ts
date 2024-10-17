@@ -1,5 +1,5 @@
-import { UserDetails } from '../interface';
-import { getData } from '../dataStore';
+import { UserDetails } from './interface';
+import { getData } from './dataStore';
 /**
  * Given an admin user's username, return details about the user.
  * 

@@ -16,6 +16,7 @@ import { changeUserPassword } from './user/changeUserPassword';
 import { showUserDetails } from './user/showUserDetails';
 import { updateUserDetails } from './user/updateUserDetails';
 
+import fsSync from 'fs'; // Add this line to import the synchronous fs module
 dotenv.config();
 
 const app = express();
@@ -31,8 +32,8 @@ app.use(express.urlencoded({ limit: '20mb', extended: true }));
 
 const uploadDir = path.join(__dirname, '../uploads');
 app.use('/uploads', express.static(uploadDir));
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
+if (!fsSync.existsSync(uploadDir)) { // Use fsSync for synchronous methods
+  fsSync.mkdirSync(uploadDir);
 }
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -80,6 +81,7 @@ app.get('/api/viewNotes', (req: Request, res: Response) => {
   });
 });
 
+
 // User registration
 app.post('/api/register', (req: Request, res: Response) => {
   const { username, password, avatar } = req.body;
@@ -103,9 +105,10 @@ app.post('/api/login', (req: Request, res: Response) => {
 });
 
 // User logout
-app.post('/api/logout', (req: Request, res: Response) => {
+app.post('/api/logout', async (req: Request, res: Response) => {
   const token = req.header('token') as string;
-  const user = getData().users.find(u => u.token.includes(token));
+  const data = await getData();
+  const user = data.users.find(u => u.token.includes(token));
   if (!user) {
     res.status(401).json({ error: 'Token is invalid' });
     return;
@@ -116,6 +119,17 @@ app.post('/api/logout', (req: Request, res: Response) => {
     return; // Ensure the function exits after sending the error response
   }
   res.status(200).json({ message: 'User logged out successfully' });
+});
+
+app.get('/api/data', async (req: Request, res: Response) => {
+  try {
+    const data = await getData();
+    console.log("data: ", data);
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching data:', error); // Log the error
+    res.status(500).json({ error: 'Internal Server Error' }); // Send a 500 response
+  }
 });
 
 // get user profile
@@ -130,10 +144,11 @@ app.get('/api/user/:username', (req: Request, res: Response) => {
 });
 
 // update user profile
-app.put('/api/user', (req: Request, res: Response) => {
+app.put('/api/user', async (req: Request, res: Response) => {
   const token = req.header('token') as string;
   const { username, avatar } = req.body;
-  const user = getData().users.find(u => u.token.includes(token));
+  const data = await getData();
+  const user = data.users.find(u => u.token.includes(token));
   if (!user) {
     res.status(401).json({ error: 'Token is invalid' });
     return;
@@ -147,10 +162,11 @@ app.put('/api/user', (req: Request, res: Response) => {
 });
 
 // change password
-app.put('/api/user/password', (req: Request, res: Response) => {
+app.put('/api/user/password', async (req: Request, res: Response) => {
   const token = req.header('token') as string;
   const { oldPassword, newPassword } = req.body;
-  const user = getData().users.find(u => u.token.includes(token));
+  const data = await getData();
+  const user = data.users.find(u => u.token.includes(token));
   if (!user) {
     res.status(401).json({ error: 'Token is invalid' });
     return;
@@ -164,11 +180,12 @@ app.put('/api/user/password', (req: Request, res: Response) => {
 });
 
 // Save notes to dataStore.json with multer
-app.post('/api/saveNotes', upload.single('file'), (req: Request, res: Response) => {
-  const token = req.header('token') as string; // This will work when register and login is done
-  // const token = "token1";// This is used for testing when register and login have not been done
+app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Response) => {
+  //const token = req.header('token') as string; // This will work when register and login is done
+  const token = "token1";// This is used for testing when register and login have not been done
   const { courseCode, tag, title, description } = req.body;
-  const user = getData().users.find(u => u.token.includes(token));
+  const data = await getData();
+  const user = data.users.find(u => u.token.includes(token));
   if (!user) {
     console.log('Token is invalid');
     res.status(401).json({ error: 'Token is invalid' });
@@ -184,25 +201,21 @@ app.post('/api/saveNotes', upload.single('file'), (req: Request, res: Response) 
   const filePath = req.file.path; // Get the file path
   //console.log("filePath: ", filePath);
 
-  // Read dataStore.json
-  fs.readFile(dataStorePath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Failed to read dataStore.json:', err);
-      return res.status(500).send('Server error');
-    }
-
+  try {
+    // Read dataStore.json
+    const data = await fs.readFile(dataStorePath, 'utf8');
     let dataStore = [];
     if (data) {
       try {
         dataStore = JSON.parse(data);
-        console.log("dataStore: ", dataStore);
       } catch (parseError) {
         console.error('Failed to parse dataStore.json:', parseError);
-        return res.status(500).send('Server error');
+        res.status(500).send('Server error');
+        return;
       }
     }
 
-    const noteId = generateRandomNoteId();
+    const noteId = await generateRandomNoteId();
 
     // Create new note
     const newNote: Note = {
@@ -214,7 +227,7 @@ app.post('/api/saveNotes', upload.single('file'), (req: Request, res: Response) 
       description,
       upvoteArray: [],
       upvoteCounter: 0,
-      file: filePath, // Store the file path
+      filePath, // Store the file path
       timeCreated: getCurrentTime().toLocaleString(),
       timeLastEdited: getCurrentTime().toLocaleString(),
     };
@@ -223,14 +236,12 @@ app.post('/api/saveNotes', upload.single('file'), (req: Request, res: Response) 
     dataStore.notes.push(newNote);
 
     // Write back to dataStore.json
-    fs.writeFile(dataStorePath, JSON.stringify(dataStore, null, 2), (err) => {
-      if (err) {
-        console.error('Failed to write to dataStore.json:', err);
-        return res.status(500).send('Server error');
-      }
-      res.json({ message: 'File saved successfully', filePath });
-    });
-  });
+    await fs.writeFile(dataStorePath, JSON.stringify(dataStore, null, 2));
+    res.json({ message: 'File saved successfully', filePath, newNote });
+  } catch (err) {
+    console.error('Failed to read/write dataStore.json:', err);
+    res.status(500).send('Server error');
+  }
 });
 
 app.put('/api/upvoteNote', (req: Request, res: Response) => {
