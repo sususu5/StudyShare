@@ -1,20 +1,20 @@
+import cors from 'cors';
+import dotenv from 'dotenv';
 import express, { json, Request, Response } from 'express';
 import fs from 'fs';
-import cors from 'cors';
-import path from 'path';
-import dotenv from 'dotenv';
 import morgan from 'morgan';
 import multer from 'multer';
-import { register } from './auth/register';
+import path from 'path';
 import { login } from './auth/login';
 import { logout } from './auth/logout';
-import { showUserDetails } from './user/showUserDetails';
-import { updateUserDetails } from './user/updateUserDetails';
+import { register } from './auth/register';
 import { getData } from './dataStore';
-import { changeUserPassword } from './user/changeUserPassword';
 import { generateRandomNoteId, getCurrentTime } from './helperFunction';
 import { Note, NoteDisplay } from './interface';
 import { upvoteNote } from './upvoteNote';
+import { changeUserPassword } from './user/changeUserPassword';
+import { showUserDetails } from './user/showUserDetails';
+import { updateUserDetails } from './user/updateUserDetails';
 dotenv.config();
 
 const app = express();
@@ -44,9 +44,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const notes: NoteDisplay[] = [
-  { 
-    noteId: 1000000000, 
-    title: 'Sample Note Just for frontend', 
+  {
+    noteId: 1000000000,
+    title: 'Sample Note Just for frontend',
     upvotes: 0,
     timeLastEdited: '2024-02-20',
   }

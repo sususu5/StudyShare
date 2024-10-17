@@ -1,15 +1,22 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import './courseList.css';
 
 function CourseList({ courses, selectedSchool }) {
+  const navigate = useNavigate();
+
+  const handleCourseClick = (courseCode) => {
+    navigate(`/viewNotes/${courseCode}`);
+  }
+
   return (
-    <ul className='course-list'>
+    <div className='course-list'>
       {courses.filter(course => course.school === selectedSchool).map((course, index) => (
-        <li key={index} className='course-item'>
+        <button key={index} className='course-item' onClick={() => handleCourseClick(course.course_code)} >
           {course.course_code}
-        </li>
+        </button>
       ))}
-    </ul>
+    </div>
   );
 }
 
