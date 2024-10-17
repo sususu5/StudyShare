@@ -1,6 +1,7 @@
 .show-one-note {
-  text-align: center;
+  text-align: left;
   margin-top: 50px;
+  margin-left: 10%;
 }
 
 .show-one-note h2 {

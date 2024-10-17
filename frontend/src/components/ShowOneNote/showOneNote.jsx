@@ -12,10 +12,14 @@ function ShowOneNote() {
       const noteId = location.state.noteId;
       console.log("noteId: ", noteId);
       try {
-        // get data through api
         const response = await fetch('http://localhost:5000/api/data');
         if (!response.ok) {
           console.error('Failed to fetch data');
+          return;
+        }
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          console.error('Response is not JSON');
           return;
         }
         const result = await response.json();
@@ -43,7 +47,7 @@ function ShowOneNote() {
       {noteDetails && (
         <div className="note-details">
           <h2>{noteDetails.title}</h2>
-          <p>{noteDetails.description}</p>
+          <p>Description: {noteDetails.description}</p>
           <p>Course: {noteDetails.courseCode}</p>
           <p>Tag: {noteDetails.tag}</p>
         </div>

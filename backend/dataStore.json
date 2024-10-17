@@ -1,4 +1,58 @@
 {
-  "users": [],
-  "notes": []
+  "users": [
+    {
+      "userId": 1,
+      "token": [
+        "token1",
+        "token2"
+      ],
+      "username": "test",
+      "avatar": "test",
+      "password": "test",
+      "usedPassword": [
+        "test"
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "noteId": 2369024570,
+      "userId": 1,
+      "title": "d",
+      "courseCode": "s",
+      "tag": "a",
+      "description": "d",
+      "upvoteArray": [],
+      "upvoteCounter": 0,
+      "filePath": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
+      "timeCreated": "1,729,156,356",
+      "timeLastEdited": "1,729,156,356"
+    },
+    {
+      "noteId": 3501944949,
+      "userId": 1,
+      "title": "3",
+      "courseCode": "1",
+      "tag": "2",
+      "description": "4",
+      "upvoteArray": [],
+      "upvoteCounter": 0,
+      "filePath": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
+      "timeCreated": "1,729,158,479",
+      "timeLastEdited": "1,729,158,479"
+    },
+    {
+      "noteId": 7538620703,
+      "userId": 1,
+      "title": "MATH1081 lab test",
+      "courseCode": "MATH1081",
+      "tag": "lab",
+      "description": "hi",
+      "upvoteArray": [],
+      "upvoteCounter": 0,
+      "filePath": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
+      "timeCreated": "1,729,159,312",
+      "timeLastEdited": "1,729,159,313"
+    }
+  ]
 }

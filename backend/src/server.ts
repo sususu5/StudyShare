@@ -62,14 +62,6 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello from Express!');
 });
 
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '../../frontend')));
-
-// Anything that doesn't match the above, send back index.html
-app.get('*', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, '../../frontend/index.html'));
-});
-
 // User registration
 app.post('/api/register', (req: Request, res: Response) => {
   const { username, password, avatar } = req.body;
@@ -112,7 +104,7 @@ app.post('/api/logout', async (req: Request, res: Response) => {
 app.get('/api/data', async (req: Request, res: Response) => {
   try {
     const data = await getData();
-    console.log("data: ", data); // Consider using a logging library
+    console.log("data: ", data);
     res.json(data);
   } catch (error) {
     console.error('Error fetching data:', error); // Log the error
@@ -196,7 +188,6 @@ app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Resp
     if (data) {
       try {
         dataStore = JSON.parse(data);
-        console.log("dataStore: ", dataStore);
       } catch (parseError) {
         console.error('Failed to parse dataStore.json:', parseError);
         res.status(500).send('Server error');
@@ -241,6 +232,14 @@ app.put('/api/upvoteNote', (req: Request, res: Response) => {
     return; // Ensure the function exits after sending the error response
   }
   res.status(200).json({ message: 'Upvote successful' });
+});
+
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, '../../frontend')));
+
+// Anything that doesn't match the above, send back index.html
+app.get('*', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '../../frontend/index.html'));
 });
 
 app.listen(port, () => {
