@@ -22,7 +22,7 @@ export interface Note {
 	description: string;
 	upvoteArray: number[];
   upvoteCounter: number;
-	file: string;
+	filePath: string;
 	timeCreated: string;
 	timeLastEdited: string;
 }

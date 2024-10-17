@@ -68,11 +68,10 @@ function UploadNotePage() {
       }
 
       const result = await response.json();
-      console.log('Upload success:', result);
-      // store the url to the uploaded file in the local storage
-      localStorage.setItem('uploadedFileUrl', result.filePath);
+      console.log('Upload success:', result.newNote);
       // navigate to the page that shows the uploaded note
-      navigate('/showNoteJustUploaded');
+      //navigate('/showNoteJustUploaded', { state: { uploadedFileUrl: result.filePath } });
+      navigate('/showOneNote', { state: { noteId: result.newNote.noteId } });
     } catch (error) {
       console.error('Upload error:', error);
     }

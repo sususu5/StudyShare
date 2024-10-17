@@ -1,0 +1,22 @@
+.show-one-note {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.show-one-note h2 {
+  color: #4CAF50;
+}
+
+.show-one-note button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.show-one-note button:hover {
+  background-color: #45a049;
+}
+

@@ -13,15 +13,15 @@ afterAll(() => {
 
 let userToken: any;
 
-beforeEach(() => {
-  userToken = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
+beforeEach(async () => {
+  userToken = await register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
 });
 
-test('succesful logout', () => {
-	expect(logout(userToken.token)).toStrictEqual({});
+test('succesful logout', async () => {
+	expect(await logout(userToken.token)).toStrictEqual({});
 });
 
-test('invalid token', () => {
-	expect(logout('abc')).toStrictEqual({ error: expect.any(String) });
+test('invalid token', async () => {
+	expect(await logout('abc')).toStrictEqual({ error: expect.any(String) });
 });
 
