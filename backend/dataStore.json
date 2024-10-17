@@ -18,11 +18,11 @@
     {
       "noteId": 3473925025,
       "userId": 1,
-      "title": "w",
-      "courseCode": "w",
+      "title": "A note about Lab Test1 of MATH1081",
+      "courseCode": "MATH1081",
       "tag": "q",
       "description": "1",
-      "upvoteCount": [],
+      "upvoteCounter": 5,
       "file": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
       "timeCreated": "1,729,089,761",
       "timeLastEdited": "1,729,089,761"

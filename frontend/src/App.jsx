@@ -76,17 +76,6 @@ function App() {
     setSearchTerm(e.target.value)
   }
 
-  const handleUpvote = async (noteId) => {
-    try {
-      const response = await fetch(`/api/notes/${noteId}/upvote`, { method: 'POST' });
-      if (response.ok) {
-        fetchNotes(); // Refresh notes after upvoting
-      }
-    } catch (error) {
-      console.error('Error upvoting note:', error);
-    }
-  };
-
   return (
     <Router>
       <div className="app">
@@ -116,7 +105,7 @@ function App() {
                   <UploadButton />
                 </div>
                 <h2>Recent Notes</h2>
-                <RecentNotes notes={notes} handleUpvote={handleUpvote} />
+                <RecentNotes notes={notes} />
                 <CourseList courses={courses} selectedSchool={selectedSchool} />
               </main>
             </div>}>

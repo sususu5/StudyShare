@@ -15,17 +15,20 @@ import { upvoteNote } from './upvoteNote';
 import { changeUserPassword } from './user/changeUserPassword';
 import { showUserDetails } from './user/showUserDetails';
 import { updateUserDetails } from './user/updateUserDetails';
+
 dotenv.config();
 
 const app = express();
 const port: number = parseInt(process.env.PORT || '5000', 10);
 const dataStorePath = path.join(__dirname, '../dataStore.json');
+
 app.use(json());
 app.use(cors());
 // for logging errors (print to terminal)
 app.use(morgan('dev'));
 app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ limit: '20mb', extended: true }));
+
 const uploadDir = path.join(__dirname, '../uploads');
 app.use('/uploads', express.static(uploadDir));
 if (!fs.existsSync(uploadDir)) {
@@ -52,20 +55,29 @@ const notes: NoteDisplay[] = [
   }
 ];
 
-app.get('/api/notes', (req: Request, res: Response) => {
-  res.json(notes);
-});
-
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello from Express!');
 });
 
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.get('/api/notes', (req: Request, res: Response) => {
+  res.json(notes);
+});
 
-// Anything that doesn't match the above, send back index.html
-app.get('*', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+app.get('/api/viewNotes', (req: Request, res: Response) => {
+  fs.readFile(dataStorePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Failed to read dataStore.json:', err);
+      return res.status(500).json({ error: 'Failed to read notes' });
+    }
+
+    try {
+      const notes = JSON.parse(data);
+      res.json(notes);
+    } catch (parseError) {
+      console.error('Failed to parse dataStore.json:', parseError);
+      return res.status(500).json({ error: 'Failed to parse notes' });
+    }
+  });
 });
 
 // User registration
@@ -229,6 +241,14 @@ app.put('/api/upvoteNote', (req: Request, res: Response) => {
     return; // Ensure the function exits after sending the error response
   }
   res.status(200).json({ message: 'Upvote successful' });
+});
+
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, '../../frontend')));
+
+// Anything that doesn't match the above, send back index.html
+app.get('*', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '../../frontend/index.html'));
 });
 
 app.listen(port, () => {
