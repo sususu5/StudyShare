@@ -6,7 +6,7 @@ import RecentNotes from './components/CurrentNotes/recentNotes';
 import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
 import UploadNotePage from './components/UploadNotePage/uploadNotePage';
-
+import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/ShowNoteJustUploaded';
 function App() {
   const [user, setUser] = useState(null)
   const [notes, setNotes] = useState([])
@@ -118,10 +118,8 @@ function App() {
               </main>
             </div>}>
           </Route>
-        </Routes>
-
-        <Routes>
           <Route path="/uploadPage" element={<UploadNotePage />} />
+          <Route path="/showNoteJustUploaded" element={<ShowNoteJustUploaded />} />
         </Routes>
       </div>
     </Router>

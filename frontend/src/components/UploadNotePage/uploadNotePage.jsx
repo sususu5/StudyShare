@@ -1,81 +1,145 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './uploadNotePage.css';
 
 function UploadNotePage() {
   const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState('');
+  const [courseCode, setCourseCode] = useState('');
+  const [tag, setTag] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const navigate = useNavigate();
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
-      // Check file size limit 3MB
+      setFileName(selectedFile.name);
       if (selectedFile.size > 3 * 1024 * 1024) {
         alert('File size cannot exceed 3MB');
         return;
       }
-
-      // File size is ok, start reading and converting to base64
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const base64String = e.target.result;
-        console.log('Base64 file: ', base64String);
-        
-        // Call upload API
-        uploadNotes("user-token", "CS101", "Lecture", base64String, "Lecture Notes", "These are the notes for week 1");
-      };
-      reader.readAsDataURL(selectedFile);
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!file) {
       alert('Please select a file to upload');
       return;
     }
-    // Additional logic for handling form submission
+    if (!courseCode) {
+      alert('Please enter the course code');
+      return;
+    }
+    if (!tag) {
+      alert('Please enter the tag');
+      return;
+    }
+    if (!title) {
+      alert('Please enter the title');
+      return;
+    }
+    if (!description) {
+      alert('Please enter the description');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('courseCode', courseCode);
+    formData.append('tag', tag);
+    formData.append('title', title);
+    formData.append('description', description);
+
+    try {
+      const token = localStorage.getItem('authToken'); // Retrieve the token
+
+      const response = await fetch('http://localhost:5173/api/saveNotes', {
+        method: 'POST',
+        headers: {
+          token: token || '', // Use the token or an empty string if not found
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Upload failed!!!');
+      }
+
+      const result = await response.json();
+      console.log('Upload success:', result);
+      // store the url to the uploaded file in the local storage
+      localStorage.setItem('uploadedFileUrl', result.filePath);
+      // navigate to the page that shows the uploaded note
+      navigate('/showNoteJustUploaded');
+    } catch (error) {
+      console.error('Upload error:', error);
+    }
   };
 
   return (
     <div className="upload-note-page">
-      <h2>Upload Your Note</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileChange} />
-        <button type="submit">Upload</button>
+      <h2 className="title">Upload Your Note</h2>
+      <form onSubmit={handleSubmit} className="form">
+        <div className="form-group">
+          <label htmlFor="file" className="choose-file">Choose File</label>
+          <input
+            type="file"
+            id="file"
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
+          {fileName && <p className="file-name">Selected file: {fileName}</p>}
+        </div>
+  
+        <div className="form-group">
+          <label htmlFor="courseCode">Course Code:</label>
+          <input
+            type="text"
+            id="courseCode"
+            placeholder="Enter Course Code"
+            value={courseCode}
+            onChange={(e) => setCourseCode(e.target.value)}
+          />
+        </div>
+  
+        <div className="form-group">
+          <label htmlFor="tag">Tag:</label>
+          <input
+            type="text"
+            id="tag"
+            placeholder="Enter Tag"
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
+          />
+        </div>
+  
+        <div className="form-group">
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            placeholder="Enter Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+  
+        <div className="form-group">
+          <label htmlFor="description">Description:</label>
+          <textarea
+            id="description"
+            placeholder="Enter Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+  
+        <button type="submit" className="submit-button">Upload</button>
       </form>
     </div>
   );
-}
-
-// Dummy upload function, replace with actual API call
-async function uploadNotes(token, courseCode, tag, base64File, title, description) {
-  const noteData = {
-    token,
-    courseCode,
-    tag,
-    file: base64File, // base64
-    title,
-    description,
-  };
-
-  try {
-    const response = await fetch('http://localhost:3000/api/saveNotes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        token: token,
-      },
-      body: JSON.stringify(noteData),
-    });
-
-    if (!response.ok) {
-      throw new Error('Upload failed');
-    }
-
-    const result = await response.json();
-    console.log('Upload success:', result);
-  } catch (error) {
-    console.error('Upload error:', error);
-  }
 }
 
 export default UploadNotePage;
