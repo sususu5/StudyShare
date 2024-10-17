@@ -61,4 +61,14 @@ button:focus-visible {
     background-color: #ffffff;
   }
 }
+
+.main-content {
+    height: 100vh;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
   
+.main-content::-webkit-scrollbar {
+    display: none;
+}
