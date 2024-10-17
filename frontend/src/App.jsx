@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes, Link } from 'react-router-dom';
 import './App.css';
 import CourseList from './components/CourseList/courseList';
 import RecentNotes from './components/CurrentNotes/recentNotes';
@@ -81,7 +81,9 @@ function App() {
     <Router>
       <div className="app">
         <nav className="navbar">
-          <h1>StudyNotes Share</h1>
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <h1>StudyNotes Share</h1>
+          </Link>
           <div className="button-container">
             <MyNoteButton />
             {user ? (

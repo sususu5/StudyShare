@@ -10,9 +10,7 @@ export async function getData(): Promise<Data> {
   let data: Data | null = null;
   try {
     const rawData = await fs.promises.readFile(DEFAULT_DATA_FILE_PATH, 'utf8');
-    console.log("Raw data: ", rawData);
     data = JSON.parse(rawData);
-    console.log("Parsed data: ", data);
   } catch (error) {
     console.log("Error reading data: ", error);
     if (error.code === 'ENOENT') {
@@ -24,7 +22,6 @@ export async function getData(): Promise<Data> {
       await fs.promises.writeFile(DEFAULT_DATA_FILE_PATH, JSON.stringify(data, null, 2));
     }
   }
-  console.log("Data: ", data);
 
   // if data is not initialized, initialize it
   if (!data) {
