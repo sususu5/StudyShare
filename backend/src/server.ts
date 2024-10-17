@@ -4,6 +4,7 @@ import cors from 'cors';
 import path from 'path';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
+import multer from 'multer';
 import { register } from './auth/register';
 import { login } from './auth/login';
 import { logout } from './auth/logout';
@@ -13,6 +14,7 @@ import { getData } from './dataStore';
 import { changeUserPassword } from './user/changeUserPassword';
 import { generateRandomNoteId, getCurrentTime } from './helperFunction';
 import { Note, NoteDisplay } from './interface';
+import { upvoteNote } from './upvoteNote';
 dotenv.config();
 
 const app = express();
@@ -22,7 +24,24 @@ app.use(json());
 app.use(cors());
 // for logging errors (print to terminal)
 app.use(morgan('dev'));
-app.use(express.json({ limit: '3mb' }));
+app.use(express.json({ limit: '20mb' }));
+app.use(express.urlencoded({ limit: '20mb', extended: true }));
+const uploadDir = path.join(__dirname, '../uploads');
+app.use('/uploads', express.static(uploadDir));
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Ensure this directory exists
+  },
+  filename: (req, file, cb) => {
+    //cb(null, Date.now() + '-' + file.originalname);
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
 
 const notes: NoteDisplay[] = [
   { 
@@ -42,11 +61,11 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Anything that doesn't match the above, send back index.html
 app.get('*', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 // User registration
@@ -132,22 +151,28 @@ app.put('/api/user/password', (req: Request, res: Response) => {
   res.status(200).json({ message: 'Password changed successfully' });
 });
 
-// save notes to dataStore.json
-app.post('/api/saveNotes', (req: Request, res: Response) => {
-  const token = req.header('token') as string;
-  const { courseCode, tag, title, description, file } = req.body;
+// Save notes to dataStore.json with multer
+app.post('/api/saveNotes', upload.single('file'), (req: Request, res: Response) => {
+  const token = req.header('token') as string; // This will work when register and login is done
+  // const token = "token1";// This is used for testing when register and login have not been done
+  const { courseCode, tag, title, description } = req.body;
   const user = getData().users.find(u => u.token.includes(token));
   if (!user) {
+    console.log('Token is invalid');
     res.status(401).json({ error: 'Token is invalid' });
     return;
   }
 
-  if (!file) {
+  if (!req.file) {
+    console.log('File is missing');
     res.status(400).send('File is missing');
     return;
   }
 
-  // read dataStore.json
+  const filePath = req.file.path; // Get the file path
+  //console.log("filePath: ", filePath);
+
+  // Read dataStore.json
   fs.readFile(dataStorePath, 'utf8', (err, data) => {
     if (err) {
       console.error('Failed to read dataStore.json:', err);
@@ -156,12 +181,18 @@ app.post('/api/saveNotes', (req: Request, res: Response) => {
 
     let dataStore = [];
     if (data) {
-      dataStore = JSON.parse(data);
+      try {
+        dataStore = JSON.parse(data);
+        console.log("dataStore: ", dataStore);
+      } catch (parseError) {
+        console.error('Failed to parse dataStore.json:', parseError);
+        return res.status(500).send('Server error');
+      }
     }
 
     const noteId = generateRandomNoteId();
 
-    // create new note
+    // Create new note
     const newNote: Note = {
       noteId,
       userId: user.userId,
@@ -169,26 +200,36 @@ app.post('/api/saveNotes', (req: Request, res: Response) => {
       courseCode,
       tag,
       description,
-      upvoteCount: [],
-      file, // base64
-      timeCreated: getCurrentTime(),
-      timeLastEdited: getCurrentTime(),
+      upvoteArray: [],
+      upvoteCounter: 0,
+      file: filePath, // Store the file path
+      timeCreated: getCurrentTime().toLocaleString(),
+      timeLastEdited: getCurrentTime().toLocaleString(),
     };
 
-    // add new note to dataStore
-    dataStore.push(newNote);
+    // Add new note to dataStore
+    dataStore.notes.push(newNote);
 
-    // write back to dataStore.json
+    // Write back to dataStore.json
     fs.writeFile(dataStorePath, JSON.stringify(dataStore, null, 2), (err) => {
       if (err) {
         console.error('Failed to write to dataStore.json:', err);
         return res.status(500).send('Server error');
       }
-      res.json({ message: 'File saved successfully' });
+      res.json({ message: 'File saved successfully', filePath });
     });
   });
 });
 
+app.put('/api/upvoteNote', (req: Request, res: Response) => {
+  const { noteId, userId } = req.body;
+  const resBody = upvoteNote(noteId, userId);
+  if ('error' in resBody) {
+    res.status(400).json({ error: resBody.error });
+    return; // Ensure the function exits after sending the error response
+  }
+  res.status(200).json({ message: 'Upvote successful' });
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

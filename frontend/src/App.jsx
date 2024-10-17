@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import CourseList from './components/CourseList/courseList';
 import RecentNotes from './components/CurrentNotes/recentNotes';
 import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
 import UploadNotePage from './components/UploadNotePage/uploadNotePage';
-
+import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/ShowNoteJustUploaded';
 function App() {
   const [user, setUser] = useState(null)
   const [notes, setNotes] = useState([])
@@ -98,27 +98,28 @@ function App() {
             <button onClick={handleLogin}>Login</button>
           )}
         </nav>
-
-        <div className="main-content">
-          <Sidebar courses={courses} onSchoolSelect={handleSchoolSelect} />
-          <main className="content">
-            <div className="search-upload">
-              <input
-                type="text"
-                placeholder="Search notes..."
-                value={searchTerm}
-                onChange={handleSearch}
-              />
-              <UploadButton />
-            </div>
-            <h2>Recent Notes</h2>
-            <RecentNotes notes={notes} handleUpvote={handleUpvote} />
-            <CourseList courses={courses} selectedSchool={selectedSchool} />
-          </main>
-        </div>
-
         <Routes>
-          <Route path="/upload" element={<UploadNotePage />} />
+          <Route path='/' element={
+            <div className="main-content">
+              <Sidebar courses={courses} onSchoolSelect={handleSchoolSelect} />
+              <main className="content">
+                <div className="search-upload">
+                  <input
+                    type="text"
+                    placeholder="Search notes..."
+                    value={searchTerm}
+                    onChange={handleSearch}
+                  />
+                  <UploadButton />
+                </div>
+                <h2>Recent Notes</h2>
+                <RecentNotes notes={notes} handleUpvote={handleUpvote} />
+                <CourseList courses={courses} selectedSchool={selectedSchool} />
+              </main>
+            </div>}>
+          </Route>
+          <Route path="/uploadPage" element={<UploadNotePage />} />
+          <Route path="/showNoteJustUploaded" element={<ShowNoteJustUploaded />} />
         </Routes>
       </div>
     </Router>

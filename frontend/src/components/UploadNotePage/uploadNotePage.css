@@ -1,0 +1,140 @@
+:root {
+  --background-color: #ffffff;
+  --text-color: #333;
+  --input-background-color: #f9f9f9;
+  --input-border-color: #ccc;
+  --button-background-color: #007bff;
+  --button-hover-color: #0056b3;
+  --button-active-color: #003f7f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1e1e1e;
+    --text-color: #f0f0f0;
+    --input-background-color: #2e2e2e;
+    --input-border-color: #555;
+    --button-background-color: #0056b3;
+    --button-hover-color: #007bff;
+    --button-active-color: #003f7f;
+  }
+}
+
+.upload-note-page {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+  overflow: visible;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 20%;
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid var(--input-border-color);
+  background-color: var(--input-background-color);
+  color: var(--text-color);
+  font-size: 16px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--button-background-color);
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}
+
+.form-group textarea {
+  width: 60%;
+  height: 20%;
+}
+
+.submit-button {
+  width: 20%;
+  padding: 12px 20px;
+  background-color: var(--button-background-color);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.submit-button:active {
+  background-color: var(--button-active-color);
+}
+
+input[type="file"] {
+  padding: 8px 0;
+  color: var(--text-color);
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.file-name {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--text-color);
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.choose-file {
+  width: 20%;
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.choose-file:hover {
+  background-color: #0056b3;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: auto; /* Ensure scrolling is enabled */
+}

@@ -1,4 +1,31 @@
 {
-  "users": [],
-  "notes": []
+  "users": [
+    {
+      "userId": 1,
+      "token": [
+        "token1",
+        "token2"
+      ],
+      "username": "test",
+      "avatar": "test",
+      "password": "test",
+      "usedPassword": [
+        "test"
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "noteId": 3473925025,
+      "userId": 1,
+      "title": "w",
+      "courseCode": "w",
+      "tag": "q",
+      "description": "1",
+      "upvoteCount": [],
+      "file": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
+      "timeCreated": "1,729,089,761",
+      "timeLastEdited": "1,729,089,761"
+    }
+  ]
 }
