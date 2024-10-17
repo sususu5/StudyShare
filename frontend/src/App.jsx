@@ -7,7 +7,7 @@ import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJust
 import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
 import UploadNotePage from './components/UploadNotePage/uploadNotePage';
-import ShowOneNote from './components/ShowOneNote/showOneNote';\
+import ShowOneNote from './components/ShowOneNote/showOneNote';
 function App() {
   const [user, setUser] = useState(null)
   const [notes, setNotes] = useState([])
