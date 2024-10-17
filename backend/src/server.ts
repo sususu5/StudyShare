@@ -184,7 +184,7 @@ app.put('/api/user/password', async (req: Request, res: Response) => {
 // Save notes to dataStore.json with multer
 app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Response) => {
   //const token = req.header('token') as string; // This will work when register and login is done
-  const token = "token1";// This is used for testing when register and login have not been done
+  const token = "token1";// TODO: This is used for testing when register and login have not been done
   const { courseCode, tag, title, description } = req.body;
   const data = await getData();
   const user = data.users.find(u => u.token.includes(token));

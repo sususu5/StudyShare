@@ -53,7 +53,7 @@ function UploadNotePage() {
     formData.append('description', description);
 
     try {
-      const token = localStorage.getItem('authToken'); // Retrieve the token
+      const token = localStorage.getItem('token'); // Retrieve the token
 
       const response = await fetch('http://localhost:5173/api/saveNotes', {
         method: 'POST',

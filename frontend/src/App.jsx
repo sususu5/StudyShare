@@ -82,7 +82,7 @@ function App() {
       <div className="app">
         <nav className="navbar">
           <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <h1>StudyNotes Share</h1>
+            <h1 className="navbar-title">StudyNotes Share</h1>
           </Link>
           <div className="button-container">
             <MyNoteButton />
