@@ -4,11 +4,13 @@ import './App.css';
 import CourseList from './components/CourseList/courseList';
 import RecentNotes from './components/CurrentNotes/recentNotes';
 import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJustUploaded';
+import ShowOneNote from './components/ShowOneNote/showOneNote';
 import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
 import UploadNotePage from './components/UploadNotePage/uploadNotePage';
-import ShowOneNote from './components/ShowOneNote/showOneNote';
 import MyNoteButton from './components/MyNoteButton/myNoteButton';
+import ViewNotes from './components/ViewNotes/viewNotes';
+
 function App() {
   const [user, setUser] = useState(null)
   const [notes, setNotes] = useState([])
@@ -75,17 +77,6 @@ function App() {
     setSearchTerm(e.target.value)
   }
 
-  const handleUpvote = async (noteId) => {
-    try {
-      const response = await fetch(`/api/notes/${noteId}/upvote`, { method: 'POST' });
-      if (response.ok) {
-        fetchNotes(); // Refresh notes after upvoting
-      }
-    } catch (error) {
-      console.error('Error upvoting note:', error);
-    }
-  };
-
   return (
     <Router>
       <div className="app">
@@ -118,13 +109,14 @@ function App() {
                   <UploadButton />
                 </div>
                 <h2>Recent Notes</h2>
-                <RecentNotes notes={notes} handleUpvote={handleUpvote} />
+                <RecentNotes notes={notes} />
                 <CourseList courses={courses} selectedSchool={selectedSchool} />
               </main>
             </div>}>
           </Route>
           <Route path="/uploadPage" element={<UploadNotePage />} />
           <Route path="/showNoteJustUploaded" element={<ShowNoteJustUploaded />} />
+          <Route path='/viewNotes/:courseCode' element={<ViewNotes />} />
           <Route path="/showOneNote" element={<ShowOneNote />} />
         </Routes>
       </div>

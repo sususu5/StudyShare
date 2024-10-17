@@ -1,0 +1,92 @@
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.back-button {
+    background-color: #FF1493;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-right: 20px;
+    width: 90px;
+    height: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #D1137F;
+}
+
+.notes-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    flex:1;
+}
+
+.notes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px;
+    color: black;
+}
+
+.note-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 10px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.note-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.note-title {
+    font-size: 20px;
+}
+
+.upvote-button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: 2px solid black;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    margin: 10px 0;
+}
+
+.upvote-button:hover {
+    background-color: darkgray;
+}
+
+.upvote-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+}
+
+.note-upvotes {
+    font-size: 20px;
+    color: black;
+}
+
+.upvote-icon.upvoted {
+    filter: brightness(0) saturate(100%) invert(18%) sepia(82%) saturate(7444%) hue-rotate(329deg) brightness(89%) contrast(109%);
+}
+  
+.note-upvotes.upvoted {
+    color: red;
+}

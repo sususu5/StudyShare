@@ -1,21 +1,22 @@
-import express, { json, Request, Response } from 'express';
-
-import fs from 'fs/promises';
 import cors from 'cors';
-import path from 'path';
 import dotenv from 'dotenv';
+import express, { json, Request, Response } from 'express';
+import fs from 'fs';
+import fsPromises from 'fs/promises';
 import morgan from 'morgan';
 import multer from 'multer';
-import { register } from './auth/register';
+import path from 'path';
 import { login } from './auth/login';
 import { logout } from './auth/logout';
-import { showUserDetails } from './user/showUserDetails';
-import { updateUserDetails } from './user/updateUserDetails';
+import { register } from './auth/register';
 import { getData } from './dataStore';
-import { changeUserPassword } from './user/changeUserPassword';
 import { generateRandomNoteId, getCurrentTime } from './helperFunction';
 import { Note, NoteDisplay } from './interface';
 import { upvoteNote } from './upvoteNote';
+import { changeUserPassword } from './user/changeUserPassword';
+import { showUserDetails } from './user/showUserDetails';
+import { updateUserDetails } from './user/updateUserDetails';
+
 import fsSync from 'fs'; // Add this line to import the synchronous fs module
 import { deleteNote } from './deleteNote';
 dotenv.config();
@@ -23,12 +24,14 @@ dotenv.config();
 const app = express();
 const port: number = parseInt(process.env.PORT || '5000', 10);
 const dataStorePath = path.join(__dirname, '../dataStore.json');
+
 app.use(json());
 app.use(cors());
 // for logging errors (print to terminal)
 app.use(morgan('dev'));
 app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ limit: '20mb', extended: true }));
+
 const uploadDir = path.join(__dirname, '../uploads');
 app.use('/uploads', express.static(uploadDir));
 if (!fsSync.existsSync(uploadDir)) { // Use fsSync for synchronous methods
@@ -47,21 +50,39 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const notes: NoteDisplay[] = [
-  { 
-    noteId: 1000000000, 
-    title: 'Sample Note Just for frontend', 
+  {
+    noteId: 1000000000,
+    title: 'Sample Note Just for frontend',
     upvotes: 0,
     timeLastEdited: '2024-02-20',
   }
 ];
 
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello from Express!');
+});
+
 app.get('/api/notes', (req: Request, res: Response) => {
   res.json(notes);
 });
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello from Express!');
+app.get('/api/viewNotes', (req: Request, res: Response) => {
+  fs.readFile(dataStorePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Failed to read dataStore.json:', err);
+      return res.status(500).json({ error: 'Failed to read notes' });
+    }
+
+    try {
+      const notes = JSON.parse(data);
+      res.json(notes);
+    } catch (parseError) {
+      console.error('Failed to parse dataStore.json:', parseError);
+      return res.status(500).json({ error: 'Failed to parse notes' });
+    }
+  });
 });
+
 
 // User registration
 app.post('/api/register', (req: Request, res: Response) => {
@@ -184,7 +205,7 @@ app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Resp
 
   try {
     // Read dataStore.json
-    const data = await fs.readFile(dataStorePath, 'utf8');
+    const data = await fsPromises.readFile(dataStorePath, 'utf8');
     let dataStore = [];
     if (data) {
       try {
@@ -217,7 +238,7 @@ app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Resp
     dataStore.notes.push(newNote);
 
     // Write back to dataStore.json
-    await fs.writeFile(dataStorePath, JSON.stringify(dataStore, null, 2));
+    await fsPromises.writeFile(dataStorePath, JSON.stringify(dataStore, null, 2));
     res.json({ message: 'File saved successfully', filePath, newNote });
   } catch (err) {
     console.error('Failed to read/write dataStore.json:', err);
