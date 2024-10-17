@@ -13,3 +13,15 @@ function UploadButton() {
 }
 
 export default UploadButton;
+// import { Link } from 'react-router-dom';
+// import './uploadButton.css';
+
+// function UploadButton() {
+//   return (
+//     <Link to="/uploadPage" className="upload-button">
+//       Upload Note
+//     </Link>
+//   );
+// }
+
+//export default UploadButton;

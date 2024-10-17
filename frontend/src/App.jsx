@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import CourseList from './components/CourseList/courseList';
 import RecentNotes from './components/CurrentNotes/recentNotes';
 import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
-import UploadNotePage from './components/UploadNotePage/uploadNotePage';
 
 function App() {
   const [setUser] = useState(null)
@@ -79,32 +78,26 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="app">
-
-        <div className="main-content">
-          <Sidebar courses={courses} onSchoolSelect={handleSchoolSelect} />
-          <main className="content">
-            <div className="search-upload">
-              <input
-                type="text"
-                placeholder="Search notes..."
-                value={searchTerm}
-                onChange={handleSearch}
-              />
-              <UploadButton />
-            </div>
-            <h2>Recent Notes</h2>
-            <RecentNotes notes={notes} handleUpvote={handleUpvote} />
-            <CourseList courses={courses} selectedSchool={selectedSchool} />
-          </main>
-        </div>
-
-        <Routes>
-          <Route path="/upload" element={<UploadNotePage />} />
-        </Routes>
+    <div className="app">
+      <div className="main-content">
+        <Sidebar courses={courses} onSchoolSelect={handleSchoolSelect} />
+        <main className="content">
+          <div className="search-upload">
+            <input
+              type="text"
+              placeholder="Search notes..."
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+            <UploadButton />
+          </div>
+          <h2>Recent Notes</h2>
+          <RecentNotes notes={notes} handleUpvote={handleUpvote} />
+          <CourseList courses={courses} selectedSchool={selectedSchool} />
+        </main>
       </div>
-    </Router>
+    </div>
+    
   )
 }
 

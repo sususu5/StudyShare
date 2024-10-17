@@ -20,10 +20,11 @@ export interface Note {
 	courseCode: string;
 	tag: string;
 	description: string;
-	upvoteCount: string[];
+	upvoteArray: number[];
+  upvoteCounter: number;
 	file: string;
-	timeCreated: number;
-	timeLastEdited: number;
+	timeCreated: string;
+	timeLastEdited: string;
 }
 
 export interface NoteDisplay {
