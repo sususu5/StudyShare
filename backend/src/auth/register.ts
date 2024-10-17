@@ -63,7 +63,7 @@ export async function register(username: string, password: string, avatar: strin
   };
 
   data.users.push(newUser);
-	setData(data);
+	await setData(data);
 
   return {token};
 }

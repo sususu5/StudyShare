@@ -2,6 +2,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { json, Request, Response } from 'express';
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 import morgan from 'morgan';
 import multer from 'multer';
 import path from 'path';
@@ -17,6 +18,7 @@ import { showUserDetails } from './user/showUserDetails';
 import { updateUserDetails } from './user/updateUserDetails';
 
 import fsSync from 'fs'; // Add this line to import the synchronous fs module
+import { deleteNote } from './deleteNote';
 dotenv.config();
 
 const app = express();
@@ -182,7 +184,7 @@ app.put('/api/user/password', async (req: Request, res: Response) => {
 // Save notes to dataStore.json with multer
 app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Response) => {
   //const token = req.header('token') as string; // This will work when register and login is done
-  const token = "token1";// This is used for testing when register and login have not been done
+  const token = "token1";// TODO: This is used for testing when register and login have not been done
   const { courseCode, tag, title, description } = req.body;
   const data = await getData();
   const user = data.users.find(u => u.token.includes(token));
@@ -203,7 +205,7 @@ app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Resp
 
   try {
     // Read dataStore.json
-    const data = await fs.readFile(dataStorePath, 'utf8');
+    const data = await fsPromises.readFile(dataStorePath, 'utf8');
     let dataStore = [];
     if (data) {
       try {
@@ -236,12 +238,22 @@ app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Resp
     dataStore.notes.push(newNote);
 
     // Write back to dataStore.json
-    await fs.writeFile(dataStorePath, JSON.stringify(dataStore, null, 2));
+    await fsPromises.writeFile(dataStorePath, JSON.stringify(dataStore, null, 2));
     res.json({ message: 'File saved successfully', filePath, newNote });
   } catch (err) {
     console.error('Failed to read/write dataStore.json:', err);
     res.status(500).send('Server error');
   }
+});
+
+app.put('/api/deleteNote', async (req: Request, res: Response) => {
+  const { noteId } = req.body;
+  const resBody = await deleteNote(noteId);
+  if ('error' in resBody) {
+    res.status(400).json({ error: resBody.error });
+    return; // Ensure the function exits after sending the error response
+  }
+  res.status(200).json({ message: 'Note deleted successfully' });
 });
 
 app.put('/api/upvoteNote', (req: Request, res: Response) => {

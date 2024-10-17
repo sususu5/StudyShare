@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes, Link } from 'react-router-dom';
 import './App.css';
 import CourseList from './components/CourseList/courseList';
 import RecentNotes from './components/CurrentNotes/recentNotes';
@@ -8,6 +8,7 @@ import ShowOneNote from './components/ShowOneNote/showOneNote';
 import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
 import UploadNotePage from './components/UploadNotePage/uploadNotePage';
+import MyNoteButton from './components/MyNoteButton/myNoteButton';
 import ViewNotes from './components/ViewNotes/viewNotes';
 
 function App() {
@@ -80,15 +81,20 @@ function App() {
     <Router>
       <div className="app">
         <nav className="navbar">
-          <h1>StudyNotes Share</h1>
-          {user ? (
-            <>
-              <span>Welcome, {user.name}</span>
-              <button onClick={handleLogout}>Logout</button>
-            </>
-          ) : (
-            <button onClick={handleLogin}>Login</button>
-          )}
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <h1 className="navbar-title">StudyNotes Share</h1>
+          </Link>
+          <div className="button-container">
+            <MyNoteButton />
+            {user ? (
+              <>
+                <span>Welcome, {user.name}</span>
+                <button onClick={handleLogout}>Logout</button>
+              </>
+            ) : (
+              <button onClick={handleLogin}>Login</button>
+            )}
+          </div>
         </nav>
         <Routes>
           <Route path='/' element={

@@ -50,6 +50,7 @@ function ShowOneNote() {
           <p>Description: {noteDetails.description}</p>
           <p>Course: {noteDetails.courseCode}</p>
           <p>Tag: {noteDetails.tag}</p>
+          <button className="download-button" onClick={() => window.open(pdfUrl, '_blank')}>Download Note</button>
         </div>
       )}
       {pdfUrl ? (

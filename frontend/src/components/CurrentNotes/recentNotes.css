@@ -8,7 +8,7 @@
     align-items: center;
     margin-bottom: 10px;
     padding: 10px 10px;
-    background-color: rgba(255, 255, 204, 0.8);
+    background-color: rgba(255, 204, 0, 0.8);
     border: 1px solid black;
     border-radius: 5px;
     height: 30px;
@@ -17,9 +17,18 @@
 }
 
 .notes-item:hover {
-    background-color: rgba(255, 204, 0, 0.8);
+    background-color: rgba(198, 140, 4, 0.8);;
 }
 
 .last-modified {
     color: gray;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1e1e1e;
+    --note-background-color: #2e2e2e;
+    --text-color: #fff;
+    --note-border-color: #444;
+  }
 }

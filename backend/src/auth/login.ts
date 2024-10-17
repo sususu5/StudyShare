@@ -28,7 +28,7 @@ export async function login(username: string, password: string)
 	// make and save token 
 	const token = generateRandomToken();
 	user.token.push(token);
-	setData(data);
+	await setData(data);
 
 	return { token };
 }

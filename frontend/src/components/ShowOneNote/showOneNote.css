@@ -5,7 +5,7 @@
 }
 
 .show-one-note h2 {
-  color: #4CAF50;
+  color: #4b83f4;
 }
 
 .show-one-note button {
@@ -19,5 +19,15 @@
 
 .show-one-note button:hover {
   background-color: #45a049;
+}
+
+.download-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 

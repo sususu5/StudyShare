@@ -53,7 +53,7 @@ function UploadNotePage() {
     formData.append('description', description);
 
     try {
-      const token = localStorage.getItem('authToken'); // Retrieve the token
+      const token = localStorage.getItem('token'); // Retrieve the token
 
       const response = await fetch('http://localhost:5173/api/saveNotes', {
         method: 'POST',
@@ -70,8 +70,8 @@ function UploadNotePage() {
       const result = await response.json();
       console.log('Upload success:', result.newNote);
       // navigate to the page that shows the uploaded note
-      //navigate('/showNoteJustUploaded', { state: { uploadedFileUrl: result.filePath } });
-      navigate('/showOneNote', { state: { noteId: result.newNote.noteId } });
+      navigate('/showNoteJustUploaded', { state: { uploadedFileUrl: result.filePath } });
+      //navigate('/showOneNote', { state: { noteId: result.newNote.noteId } });
     } catch (error) {
       console.error('Upload error:', error);
     }
