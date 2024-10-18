@@ -58,7 +58,7 @@ function Layout() {
             <button className="home-button">Home</button>
           </Link>
           {user ? (
-            <button className='my-note-button' onClick={handleMyNote}>MyNote</button>
+            <button className='my-note-button' onClick={handleMyNote}>MyNotes</button>
           ) : (
             <></>
           )}
