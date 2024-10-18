@@ -1,17 +1,19 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 
 function Login() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
       const response = await fetch(`/api/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ username, password })
       });
@@ -23,6 +25,8 @@ function Login() {
       const data = await response.json();
       localStorage.setItem('authToken', data.token);
       setErrorMessage('');
+      navigate('/');
+      window.location.reload();
     } catch (error) {
       setErrorMessage('Invalid login credentials');
       console.error('Login error: ', error);

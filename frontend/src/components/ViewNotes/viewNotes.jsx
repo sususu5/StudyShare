@@ -33,7 +33,7 @@ function ViewNotes() {
 
   const handleUpvote = async (noteId) => {
     try {
-      const token = localStorage.getItem('token');// TODO: This should work after login
+      const token = localStorage.getItem('authToken');// TODO: This should work after login
       const dataResponse = await fetch('http://localhost:5000/api/data');
       if (!dataResponse.ok) {
         console.error('Failed to fetch data');

@@ -3,6 +3,7 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
 #root {
   max-width: 100%;
   margin: 0;
@@ -49,7 +50,7 @@ html, body {
   flex-grow: 1;
   height: calc(100vh - 64px); /* Adjust based on your navbar's actual height */
   width: 100%;
-}
+} 
 
 .sidebar {
   width: 200px;
