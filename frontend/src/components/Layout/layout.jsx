@@ -73,7 +73,6 @@ function Layout() {
             </>
           ) : (
             <>
-              <ProfileButton />
               <Link to="/login">
                 <button>Login</button>
               </Link>

@@ -7,7 +7,8 @@ import { validPassword } from '../helperFunction';
  * @param password 
  * @return empty object
  */
-export async function changeUserPassword(userId: number, oldPassword: string, newPassword: string) {
+export async function changeUserPassword(userId: number, oldPassword: string, newPassword: string)
+: Promise<{ error?: string }> {
 	const data = await getData();
 	const user = data.users.find(u => u.userId === userId);
   if (!user) {

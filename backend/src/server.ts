@@ -15,7 +15,7 @@ import { Note, NoteDisplay } from './interface';
 import { upvoteNote } from './upvoteNote';
 import { changeUserPassword } from './user/changeUserPassword';
 import { showUserDetails } from './user/showUserDetails';
-import { updateUserDetails } from './user/updateUserDetails';
+import { updateUserAvatar } from './user/updateUserDetails';
 
 import fsSync from 'fs'; // Add this line to import the synchronous fs module
 import { deleteNote } from './deleteNote';
@@ -149,16 +149,16 @@ app.get('/api/user/:userId', async (req: Request, res: Response) => {
 });
 
 // update user profile
-app.put('/api/user/:userId', async (req: Request, res: Response) => {
+app.put('/api/user/avatar/:userId', async (req: Request, res: Response) => {
   const userId = parseInt(req.params.userId, 10);
-  const { username, avatar } = req.body;
+  const avatar = req.body;
   const data = await getData();
   const user = data.users.find(u => u.userId === userId);
   if (!user) {
     res.status(401).json({ error: 'Token is invalid' });
     return;
   }
-  const resBody = updateUserDetails(userId, username, avatar);
+  const resBody = updateUserAvatar(userId, avatar);
   if ('error' in resBody) {
     res.status(400).json({ error: resBody.error });
     return; // Ensure the function exits after sending the error response
