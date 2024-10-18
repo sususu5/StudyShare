@@ -18,8 +18,8 @@ function Login() {
         body: JSON.stringify({ username, password })
       });
       if (!response.ok) {
-        setErrorMessage('Login failed.');
-        throw new Error('Login failed');
+        const errorData = await response.json();
+        throw new Error(errorData.error);
       }
 
       const data = await response.json();
@@ -28,13 +28,13 @@ function Login() {
       navigate('/');
       window.location.reload();
     } catch (error) {
-      setErrorMessage('Invalid login credentials');
-      console.error('Login error: ', error);
+      setErrorMessage(`${error}`);
+      console.error(error);
     }
   };
 
   return (
-    <div className="details">
+    <div className="input">
       <div className="userinput">
         <h1 className="header">Log in</h1>
         <div className="username">
@@ -55,8 +55,13 @@ function Login() {
           />
         </div>
       </div>
-      <button className="enter" onClick={handleLogin}>Login</button>
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      <div className="registerlink">
+        Don't have an account? 
+        <a href="/register"> Register here</a>
+      </div>
+      
+      <button className="enter" onClick={(e) => handleLogin(username, password)}>Login</button>
+      {errorMessage && <p style={{ color: '#ff4d88' }}>{errorMessage}</p>}
     </div>
   )
 }

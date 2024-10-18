@@ -16,9 +16,11 @@ export async function login(username: string, password: string)
 	
 	// find user
 	user = data.users.find(u => u.username === username);
+	console.log(user);
 
 	// check for errors 
 	if (!user) {
+		console.log("USER UNDEFINED\n");
 		return { error: 'Incorrect username.' };
 	}
 	if (user.password !== hashedPassword) {

@@ -76,7 +76,7 @@ function App() {
           </div>
           <h2>Recent Notes</h2>
           <RecentNotes notes={notes} />
-          <CourseList courses={courses} selectedSchool={selectedSchool} searchTerm={searchTerm} />
+          {selectedSchool && <CourseList courses={courses} selectedSchool={selectedSchool} searchTerm={searchTerm} />}
         </main>
       </div>
     </div>

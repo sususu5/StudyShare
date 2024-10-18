@@ -9,7 +9,9 @@ function Layout() {
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('authToken');
-    if (loggedInUser) {
+    console.log("LOGGEDINUSER TOKEN IS ", loggedInUser);
+    if (loggedInUser && loggedInUser !== 'undefined' && loggedInUser !== '') {
+      console.log("LOGGED IN");
       setUser(loggedInUser);
     }
   }, [user]);
