@@ -13,6 +13,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.navbar h1 {
+  color: #d8d9ff;
+  padding: 1rem;
+  font-size: 30px;
+  margin-top: 7px;
+  margin-bottom: 9px;
+  margin-left: 20px;
+  margin-right: 19px;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -61,4 +71,14 @@ button:focus-visible {
     background-color: #ffffff;
   }
 }
+
+.main-content {
+    height: 100vh;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
   
+.main-content::-webkit-scrollbar {
+    display: none;
+}

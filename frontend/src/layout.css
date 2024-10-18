@@ -3,6 +3,15 @@
   margin-right: 2vw;
 }
 
+.navbar h1 {
+  color: #d8d9ff;
+  padding: 1rem;
+  font-size: 30px;
+  margin-top: 0.25vh;
+  margin-left: 20px;
+  margin-right: 19px;
+}
+
 .navbar .navbuttons .button {
   background-color: #646cff;
   border: none;
@@ -38,19 +47,4 @@
   height: 10vh;
   box-sizing: border-box;
   overflow-y: inherit;
-}
-
-.navbar h1 {
-  color: #d8d9ff;
-  padding: 1rem;
-  font-size: 30px;
-  margin-top: 4vh;
-  margin-left: 20px;
-  margin-right: 19px;
-}
-
-.navbar h2 {
-  color: black;
-  font-size: 1rem;
-  padding: 2rem;
 }

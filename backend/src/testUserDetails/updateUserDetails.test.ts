@@ -15,19 +15,19 @@ afterAll(() => {
 
 let user1Token: { token: string } | { error: string };
 
-beforeEach(() => {
-  user1Token = register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
+beforeEach(async () => {
+  user1Token = await register('Mark', 'Comp1531YAY', DEFAULT_THUMBNAIL_URL);
 });
 
 describe('updateUserDetails', () => {
-  test('has the correct return type if no error', () => {
+  test('has the correct return type if no error', async () => {
     expect(user1Token).toStrictEqual({ token: expect.any(String) });
 
     if ('token' in user1Token) {
-      const updatedUser = updateUserDetails(user1Token.token, 'Mike', NEW_THUMBNAIL_URL);
+      const updatedUser = await updateUserDetails(user1Token.token, 'Mike', NEW_THUMBNAIL_URL);
       expect(updatedUser).toStrictEqual({});
 
-      const userDetails = showUserDetails('Mike');
+      const userDetails = await showUserDetails('Mike');
       expect(userDetails).toStrictEqual({
         user: {
           userId: expect.any(Number),
@@ -38,14 +38,14 @@ describe('updateUserDetails', () => {
     }
   });
 
-  test('Invalid token', () => {
-    const updatedUser = updateUserDetails('Invalid token', 'Mike', NEW_THUMBNAIL_URL);
+  test('Invalid token', async () => {
+    const updatedUser = await updateUserDetails('Invalid token', 'Mike', NEW_THUMBNAIL_URL);
     expect(updatedUser).toStrictEqual({ error: 'Invalid token' });
   });
 
-  test('Username contains restricted characters', () => {
+  test('Username contains restricted characters', async () => {
     if ('token' in user1Token) {
-      const updatedUser = updateUserDetails(user1Token.token, 'Mike!', NEW_THUMBNAIL_URL);
+      const updatedUser = await updateUserDetails(user1Token.token, 'Mike!', NEW_THUMBNAIL_URL);
       expect(updatedUser).toStrictEqual({ error: 'username contains restricted characters.' });
     }
   });

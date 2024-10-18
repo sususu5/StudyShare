@@ -36,9 +36,10 @@ export function generateRandomToken() {
  * This function generates a random note ID from 1000000000 to 9999999999 
  * @returns a random note ID
  */
-export function generateRandomNoteId() {
+export async function generateRandomNoteId() {
   let noteId =  Math.floor(Math.random() * 9000000000) + 1000000000;
-  while (getData().notes.find(Note => Note.noteId === noteId)) {
+  const data = await getData();
+  while (data.notes.find(Note => Note.noteId === noteId)) {
     noteId = Math.floor(Math.random() * 9000000000) + 1000000000;
   }
   return noteId;

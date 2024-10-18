@@ -1,5 +1,6 @@
 import { Outlet,  Link } from "react-router-dom";
 import { useState } from 'react'
+import MyNoteButton from './components/MyNoteButton/myNoteButton';
 import './layout.css'
 
 function Layout() {
@@ -15,7 +16,7 @@ function Layout() {
           </Link>
           {user ? (
           <>
-            <h2>My Notes</h2>
+            <MyNoteButton />
             </>
           ) : (
             <></>

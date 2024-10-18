@@ -6,7 +6,10 @@ import App from './App.jsx'
 import Login from './login.jsx'
 import UploadNotePage from './components/UploadNotePage/uploadNotePage.jsx';
 import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJustUploaded.jsx';
+import ViewNotes from './components/ViewNotes/viewNotes';
+import ShowOneNote from './components/ShowOneNote/showOneNote';
 import './index.css'
+import './layout.css'
 
 export default function Main() {
   return (
@@ -18,6 +21,9 @@ export default function Main() {
             <Route path="login" element={<Login />} />
             <Route path="/uploadPage" element={<UploadNotePage />} />
             <Route path="/showNoteJustUploaded" element={<ShowNoteJustUploaded />} />
+            <Route path="/showOneNote" element={<ShowOneNote />} />
+            <Route path='/viewNotes/:courseCode' element={<ViewNotes />} />
+            
           </Route>
         </Routes>
       </BrowserRouter>

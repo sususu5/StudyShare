@@ -7,9 +7,9 @@ import { generateRandomToken, getHashedPassword } from '../helperFunction';
  * @param {string} password 
  * @returns {string} token
  */
-export function login(username: string, password: string)
-: { token: string } | { error: string } {
-	const data = getData();
+export async function login(username: string, password: string)
+: Promise<{ token: string } | { error: string }> {
+	const data = await getData();
 	const hashedPassword = getHashedPassword(password);
 
 	let user = null;
@@ -28,7 +28,7 @@ export function login(username: string, password: string)
 	// make and save token 
 	const token = generateRandomToken();
 	user.token.push(token);
-	setData(data);
+	await setData(data);
 
 	return { token };
 }

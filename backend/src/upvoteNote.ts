@@ -1,7 +1,7 @@
 import { getData, setData } from "./dataStore";
 
-export function upvoteNote(noteId: number, userId: number) {
-  const data = getData();
+export async function upvoteNote(noteId: number, userId: number) {
+  const data = await getData();
     const note = data.notes.find(n => n.noteId === noteId);
     if (!note) {
         return { error: 'Note not found' };
@@ -13,6 +13,6 @@ export function upvoteNote(noteId: number, userId: number) {
         note.upvoteArray.push(userId);
     }
     note.upvoteCounter = note.upvoteArray.length;
-    setData(data);
+    await setData(data);
     return { message: 'Upvote successful' };
 }

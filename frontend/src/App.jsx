@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes, Link } from 'react-router-dom';
 import './App.css';
 import CourseList from './components/CourseList/courseList';
 import RecentNotes from './components/CurrentNotes/recentNotes';
+import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJustUploaded';
+
 import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
+import UploadNotePage from './components/UploadNotePage/uploadNotePage';
+
 
 function App() {
   const [setUser] = useState(null)
@@ -66,17 +70,6 @@ function App() {
     setSearchTerm(e.target.value)
   }
 
-  const handleUpvote = async (noteId) => {
-    try {
-      const response = await fetch(`/api/notes/${noteId}/upvote`, { method: 'POST' });
-      if (response.ok) {
-        fetchNotes(); // Refresh notes after upvoting
-      }
-    } catch (error) {
-      console.error('Error upvoting note:', error);
-    }
-  };
-
   return (
     <div className="app">
       <div className="main-content">
@@ -92,8 +85,8 @@ function App() {
             <UploadButton />
           </div>
           <h2>Recent Notes</h2>
-          <RecentNotes notes={notes} handleUpvote={handleUpvote} />
-          <CourseList courses={courses} selectedSchool={selectedSchool} />
+          <RecentNotes notes={notes} />
+          <CourseList courses={courses} selectedSchool={selectedSchool} searchTerm={searchTerm} />
         </main>
       </div>
     </div>

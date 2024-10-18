@@ -18,10 +18,10 @@ const maxNameLength = 20;
  * @param {string} password 
  * @returns {string} token
  */
-export function register(username: string, password: string, avatar: string)
-: { token: string } | { error: string } {
+export async function register(username: string, password: string, avatar: string)
+: Promise<{ token: string } | { error: string }> {
   
-  const data = getData();
+  const data = await getData();
   // if nameFirst or nameLast contains characters other than
   // lower/upper case letters spaces, hyphens or apostrophes --> error
   if (!containsValidName(username)) {
@@ -63,7 +63,7 @@ export function register(username: string, password: string, avatar: string)
   };
 
   data.users.push(newUser);
-	setData(data);
+	await setData(data);
 
   return {token};
 }

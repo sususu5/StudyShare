@@ -5,8 +5,8 @@ import { getData, setData } from '../dataStore';
  * @param {string} token 
  * @returns {object} empty object
  */
-export function logout(token: string): Record<string, string> {
-	const data = getData();
+export async function logout(token: string): Promise<Record<string, string>> {
+	const data = await getData();
 
 	// find user
 	const user = data.users.find(User => User.token.includes(token));
@@ -18,7 +18,7 @@ export function logout(token: string): Record<string, string> {
 
 	// remove token and save
 	user.token = user.token.filter(usertoken => usertoken !== token);
-	setData(data);
+	await setData(data);
 
 	return {};
 }
