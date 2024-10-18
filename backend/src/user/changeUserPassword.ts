@@ -3,13 +3,13 @@ import { getHashedPassword } from '../helperFunction';
 import { validPassword } from '../helperFunction';
 /**
  * Change the user's password
- * @param token 
+ * @param userId 
  * @param password 
  * @return empty object
  */
-export async function changeUserPassword(token: string, oldPassword: string, newPassword: string) {
+export async function changeUserPassword(userId: number, oldPassword: string, newPassword: string) {
 	const data = await getData();
-	const user = data.users.find(u => u.token.includes(token));
+	const user = data.users.find(u => u.userId === userId);
   if (!user) {
     return { error: 'Invalid token' };
   }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import ProfileButton from '../ProfileButton/profileButton';
 import './layout.css';
 
 function Layout() {
@@ -43,12 +44,16 @@ function Layout() {
         <div className="login">
           {user ? (
             <>
+              <ProfileButton />
               <button onClick={handleLogout}>Logout</button>
             </>
           ) : (
-            <Link to="/login">
-              <button >Login</button>
-            </Link>
+            <>
+              <ProfileButton />
+              <Link to="/login">
+                <button>Login</button>
+              </Link>
+            </>
           )}
         </div>
       </nav>

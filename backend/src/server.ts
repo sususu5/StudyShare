@@ -138,27 +138,27 @@ app.get('/api/data', async (req: Request, res: Response) => {
 });
 
 // get user profile
-app.get('/api/user/:username', (req: Request, res: Response) => {
-  const username = req.params.username;
-  const resBody = showUserDetails(username);
+app.get('/api/user/:userId', async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId, 10);
+  const resBody = await showUserDetails(userId);
   if ('error' in resBody) {
     res.status(400).json({ error: resBody.error });
     return; // Ensure the function exits after sending the error response
   }
-  res.status(200);
+  res.status(200).json(resBody);
 });
 
 // update user profile
-app.put('/api/user', async (req: Request, res: Response) => {
-  const token = req.header('token') as string;
+app.put('/api/user/:userId', async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId, 10);
   const { username, avatar } = req.body;
   const data = await getData();
-  const user = data.users.find(u => u.token.includes(token));
+  const user = data.users.find(u => u.userId === userId);
   if (!user) {
     res.status(401).json({ error: 'Token is invalid' });
     return;
   }
-  const resBody = updateUserDetails(token, username, avatar);
+  const resBody = updateUserDetails(userId, username, avatar);
   if ('error' in resBody) {
     res.status(400).json({ error: resBody.error });
     return; // Ensure the function exits after sending the error response
@@ -166,17 +166,29 @@ app.put('/api/user', async (req: Request, res: Response) => {
   res.status(200);
 });
 
-// change password
-app.put('/api/user/password', async (req: Request, res: Response) => {
-  const token = req.header('token') as string;
-  const { oldPassword, newPassword } = req.body;
+app.get('/api/user/avatar/:userId', async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId, 10);
   const data = await getData();
-  const user = data.users.find(u => u.token.includes(token));
+  const user = data.users.find(u => u.userId === userId);
   if (!user) {
     res.status(401).json({ error: 'Token is invalid' });
     return;
   }
-  const resBody = changeUserPassword(token, oldPassword, newPassword);
+  console.log("user: ", user);
+  res.status(200).json({ avatar: user.avatar });
+});
+
+// change password
+app.put('/api/user/password/:userId', async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId, 10);
+  const { oldPassword, newPassword } = req.body;
+  const data = await getData();
+  const user = data.users.find(u => u.userId === userId);
+  if (!user) {
+    res.status(401).json({ error: 'Token is invalid' });
+    return;
+  }
+  const resBody = changeUserPassword(userId, oldPassword, newPassword);
   if ('error' in resBody) {
     res.status(400).json({ error: resBody.error });
     return; // Ensure the function exits after sending the error response

@@ -7,9 +7,9 @@ import { containsValidName } from '../helperFunction';
  * @param avatar 
  * @return empty object
  */
-export async function updateUserDetails(token: string, username: string, avatar: string) {
+export async function updateUserDetails(userId: number, username: string, avatar: string) {
     const data = await getData();
-    const user = data.users.find(u => u.token.includes(token));
+    const user = data.users.find(u => u.userId === userId);
     if (!user) {
         return { error: 'Invalid token' };
     }
