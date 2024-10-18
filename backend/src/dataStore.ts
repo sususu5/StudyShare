@@ -6,7 +6,6 @@ const DEFAULT_DATA_FILE_PATH = './dataStore.json';
 
 // Use get() to access the data
 export async function getData(): Promise<Data> {
-  console.log("Getting data");
   let data: Data | null = null;
   try {
     const rawData = await fs.promises.readFile(DEFAULT_DATA_FILE_PATH, 'utf8');

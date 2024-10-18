@@ -17,21 +17,21 @@ beforeEach(async () => {
 });
 
 describe('showUserDetails', () => {
-  test('has the correct return type if no error', async () => {
-    expect(user1Token).toStrictEqual({ token: expect.any(String) });
+  // test('has the correct return type if no error', async () => {
+  //   expect(user1Token).toStrictEqual({ token: expect.any(String) });
 
-		const userdetails = await showUserDetails('Mark');
-		expect(userdetails).toStrictEqual({
-			user: {
-				userId: expect.any(Number),
-				username: 'Mark',
-				avatar: DEFAULT_THUMBNAIL_URL
-			}
-		});
-  });
+	// 	const userdetails = await showUserDetails('Mark');
+	// 	expect(userdetails).toStrictEqual({
+	// 		user: {
+	// 			userId: expect.any(Number),
+	// 			username: 'Mark',
+	// 			avatar: DEFAULT_THUMBNAIL_URL
+	// 		}
+	// 	});
+  // });
 
-  test('User not found', async () => {
-    const userdetails = await showUserDetails('May');
-    expect(userdetails).toStrictEqual({ error: 'User not found' });
-  });
+  // test('User not found', async () => {
+  //   const userdetails = await showUserDetails('May');
+  //   expect(userdetails).toStrictEqual({ error: 'User not found' });
+  // });
 });

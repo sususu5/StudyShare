@@ -1,5 +1,5 @@
-<div style="font-size: 45px; font-weight: bold; margin-top: 30px; color: rgb(128, 0, 128)">StudyShare</div>
---- A platform where students can share their notes for courses
+# StudyShare
+A platform where students can share their notes for courses
 
 
 ## Instructions of running the server and frontend
@@ -18,4 +18,6 @@
 ```
 3. Open the url shown in your terminal
 
-<div style="font-size: 24px; font-weight: bold; margin-left: 20%; margin-top: 30px; color: rgb(128, 0, 128)">Feel free to play around!</div>
+<br>
+
+## Feel free to play around!!!
