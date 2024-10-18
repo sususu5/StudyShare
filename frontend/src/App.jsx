@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Route, BrowserRouter as Router, Routes, Link } from 'react-router-dom';
 import './App.css';
 import CourseList from './components/CourseList/courseList';
 import RecentNotes from './components/CurrentNotes/recentNotes';
-import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJustUploaded';
-
 import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
-import UploadNotePage from './components/UploadNotePage/uploadNotePage';
 
 
 function App() {
