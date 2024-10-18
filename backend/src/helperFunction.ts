@@ -51,7 +51,7 @@ export async function generateRandomNoteId() {
  * @returns the hashed password
  */
 export function getHashedPassword(password: string) {
-    return crypto.createHash('sha256').update(password).digest('hex');
+  return crypto.createHash('sha256').update(password).digest('hex');
 }
 
 // checks if str contains characters other than lower/upper case letters

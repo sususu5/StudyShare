@@ -89,14 +89,24 @@ app.post('/api/register', (req: Request, res: Response) => {
 });
 
 // User login
-app.post('/api/login', (req: Request, res: Response) => {
+app.post('/api/login', async (req: Request, res: Response) => {
   const { username, password } = req.body;
-  const resBody = login(username, password);
-  if ('error' in resBody) {
-    res.status(400).json({ error: resBody.error });
-    return; // Ensure the function exits after sending the error response
+
+  try {
+    const resBody = await login(username, password);
+    if ('error' in resBody) {
+      console.log("username in server: ", username);
+      console.log("password in server: ", password);
+      console.log('Login error:', resBody.error);
+      res.status(400).json({ error: resBody.error });
+      return;
+    }
+
+    res.status(200).json({ message: 'User logged in successfully', token: resBody.token });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-  res.status(200).json({ message: 'User logged in successfully' });
 });
 
 // User logout
@@ -176,8 +186,8 @@ app.put('/api/user/password', async (req: Request, res: Response) => {
 
 // Save notes to dataStore.json with multer
 app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Response) => {
-  //const token = req.header('token') as string; // This will work when register and login is done
-  const token = "token1";// TODO: This is used for testing when register and login have not been done
+  const token = req.header('token') as string; // This will work when register and login is done
+  //const token = "token1";// TODO: This is used for testing when register and login have not been done
   const { courseCode, tag, title, description } = req.body;
   const data = await getData();
   const user = data.users.find(u => u.token.includes(token));
