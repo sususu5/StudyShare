@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './myNotePage.css';
+import { ArrowBack } from '@mui/icons-material';
 
 function MyNotePage() {
   const navigate = useNavigate();
@@ -25,7 +26,9 @@ function MyNotePage() {
         setUserId(userId);
         const filteredNotes = data.notes.filter(note => note.userId === userId);
         setNotes(filteredNotes);
-        const username = data.users.find(user => user.userId === userId).username;
+        
+        const user = data.users.find(user => user.userId === userId);
+        const username = user ? user.username : 'Unknown User';
         setUsername(username);
       } catch (error) {
         setError(error.message);
@@ -34,7 +37,7 @@ function MyNotePage() {
       }
     }
     fetchNotes();
-  }, []);
+  }, [token, setUserId]);
 
   const handleUpvote = async (noteId) => {
     try {
@@ -100,7 +103,7 @@ function MyNotePage() {
   return (
     <>
       <div className="top-bar">
-        <button className="back-button" onClick={() => navigate(-1)}>Back</button>
+        <ArrowBack className="back-button" onClick={() => navigate(-1)} />
         <header className="notes-header">Notes for {username}</header>
       </div>
       <div className='notes-container'>

@@ -28,6 +28,34 @@
   transition: background-color 0.3s ease;
 }
 
+.home-button {
+  font-family: "Roboto", sans-serif;
+  background-color: #646cff;
+  border: none;
+  border-radius: 0px;
+  height: 10vh;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+}
+
+.my-note-button {
+  font-family: "Roboto", sans-serif;
+  background-color: #646cff;
+  border: none;
+  border-radius: 0px;
+  height: 10vh;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0px 0px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 .navbar-title {
   font-family: "Playwrite GB S", serif;
   font-optical-sizing: auto;
