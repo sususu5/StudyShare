@@ -1,7 +1,7 @@
 .show-one-note {
   text-align: left;
-  margin-top: 50px;
-  margin-left: 10%;
+  margin-left: 1%;
+  margin-bottom: 20px;
 }
 
 .show-one-note h2 {
@@ -21,6 +21,14 @@
   background-color: #45a049;
 }
 
+.note-details {
+  margin-left: 10%;
+}
+
+.pdf-viewer {
+  margin-left: 4%;
+}
+
 .download-button {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -31,3 +39,70 @@
   cursor: pointer;
 }
 
+.show-one-note .back-button {
+  position: relative;
+  background-color: #8e02e5;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-right: 20px;
+  width: 90px;
+  height: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.arrow-back-icon {
+  position: relative;
+  background-color: #8e02e5;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-left: 0;
+  width: 90px;
+  height: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.arrow-back-icon:hover {
+  background-color: #7e2984;
+}
+
+.upvote-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: 2px solid black;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  margin: 10px 0;
+  height: 50px;
+  width: 95px;
+}
+
+.upvote-button:hover {
+  background-color: darkgray;
+}
+
+.upvote-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  margin-left: 1px;
+}
+
+.note-upvotes {
+  font-size: 20px;
+  color: black;
+}
+
+.upvote-icon.upvoted {
+  filter: brightness(0) saturate(100%) invert(18%) sepia(82%) saturate(7444%) hue-rotate(329deg) brightness(89%) contrast(109%);
+}
+
+.note-upvotes.upvoted {
+  color: red;
+}

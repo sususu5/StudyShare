@@ -1,3 +1,4 @@
+import { ArrowBack } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import './viewNotes.css';
@@ -32,21 +33,21 @@ function ViewNotes() {
 
   const handleUpvote = async (noteId) => {
     try {
-      const token = localStorage.getItem('token');// TODO: This should work after login
+      const token = localStorage.getItem('authToken');// TODO: This should work after login
       const dataResponse = await fetch('http://localhost:5000/api/data');
-        if (!dataResponse.ok) {
-          console.error('Failed to fetch data');
-          return;
-        }
-        const contentType = dataResponse.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-          console.error('Response is not JSON');
-          return;
-        }
-        const data = await dataResponse.json();
-        console.log("result ", data);
-        const user = data.users.find(u => u.token.includes(token));
-        const userId = user.userId;
+      if (!dataResponse.ok) {
+        console.error('Failed to fetch data');
+        return;
+      }
+      const contentType = dataResponse.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        console.error('Response is not JSON');
+        return;
+      }
+      const data = await dataResponse.json();
+      console.log("result ", data);
+      const user = data.users.find(u => u.token.includes(token));
+      const userId = user.userId;
       const response = await fetch(`http://localhost:5000/api/upvoteNote`, {
         method: 'PUT',
         headers: {
@@ -96,7 +97,7 @@ function ViewNotes() {
   return (
     <>
       <div className="top-bar">
-        <button className="back-button" onClick={() => navigate(-1)}>Back</button>
+        <ArrowBack className="back-button" onClick={() => navigate(-1)} />
         <header className="notes-header">Notes for {courseCode}</header>
       </div>
       <div className='notes-container'>

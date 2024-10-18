@@ -1,42 +1,92 @@
-import { Outlet,  Link } from "react-router-dom";
-import { useState } from 'react'
-import MyNoteButton from '../MyNoteButton/myNoteButton';
-import './layout.css'
+import { useEffect, useState } from 'react';
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import ProfileButton from '../ProfileButton/profileButton';
+import './layout.css';
 
 function Layout() {
-  const [user] = useState(null);
+  const navigate = useNavigate();
+  const [user, setUser] = useState('');
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('authToken');
+    console.log("LOGGEDINUSER TOKEN IS ", loggedInUser);
+    if (loggedInUser && loggedInUser !== 'undefined' && loggedInUser !== '') {
+      console.log("LOGGED IN");
+      setUser(loggedInUser);
+    }
+  }, [user]);
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      try {
+        const response = await fetch('/api/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'token': token,
+          },
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          alert(`Logout failed: ${errorData.error}`);
+          return;
+        }
+
+        // Logout successful
+        localStorage.removeItem('authToken');
+        setUser('');
+        navigate('/');
+      } catch (error) {
+        console.error('Error during logout:', error);
+      }
+    }
+  };
+
+  const handleMyNote = () => {
+    navigate('/myNotePage');
+  }
+
   return (
     <>
       <nav className="navbar">
-        <h1>StudyShare</h1>
+        <Link to="/">
+          <h1 className="navbar-title">StudyShare</h1>
+        </Link>
 
         <div className="navbuttons">
-          <a href="/">
-            <button className="button">Home</button>
-          </a>
+          <Link to="/">
+            <button className="home-button">Home</button>
+          </Link>
           {user ? (
-          <>
-            <MyNoteButton />
-            </>
+            <button className='my-note-button' onClick={handleMyNote}>MyNotes</button>
           ) : (
             <></>
           )}
         </div>
-        
+
         <div className="login">
           {user ? (
             <>
-              <button>Logout</button>
+              <div className='profile-container'>
+                <ProfileButton />
+                <button onClick={handleLogout}>Logout</button>
+              </div>
             </>
           ) : (
-            <a href="/login">
-              <button>Login</button>
-            </a>
+            <>
+              <Link to="/login">
+                <button>Login</button>
+              </Link>
+            </>
           )}
-        </div>  
+        </div>
       </nav>
       <Outlet />
     </>
   )
 };
+
 export default Layout;

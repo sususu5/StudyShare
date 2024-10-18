@@ -15,7 +15,7 @@ import { Note, NoteDisplay } from './interface';
 import { upvoteNote } from './upvoteNote';
 import { changeUserPassword } from './user/changeUserPassword';
 import { showUserDetails } from './user/showUserDetails';
-import { updateUserDetails } from './user/updateUserDetails';
+import { updateUserAvatar } from './user/updateUserDetails';
 
 import fsSync from 'fs'; // Add this line to import the synchronous fs module
 import { deleteNote } from './deleteNote';
@@ -49,20 +49,13 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-const notes: NoteDisplay[] = [
-  {
-    noteId: 1000000000,
-    title: 'Sample Note Just for frontend',
-    upvotes: 0,
-    timeLastEdited: '2024-02-20',
-  }
-];
-
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello from Express!');
 });
 
-app.get('/api/notes', (req: Request, res: Response) => {
+app.get('/api/notes', async (req: Request, res: Response) => {
+  const data = await getData();
+  const notes = data.notes;
   res.json(notes);
 });
 
@@ -93,20 +86,28 @@ app.post('/api/register', async (req: Request, res: Response) => {
     res.status(400).json({ error: resBody.error });
     return; // Ensure the function exits after sending the error response
   }
-  res.status(200).json({ message: 'User registered successfully' });
+  res.status(200).json({ message: 'User registered successfully', token: resBody.token });
 });
 
 // User login
 app.post('/api/login', async (req: Request, res: Response) => {
   const { username, password } = req.body;
-  const resBody = await login(username, password);
-  console.log("resbody is ", resBody);
-  if ('error' in resBody) {
-    console.log("ERROR IN RESBODY\n");
-    res.status(400).json({ error: resBody.error });
-    return; // Ensure the function exits after sending the error response
+
+  try {
+    const resBody = await login(username, password);
+    if ('error' in resBody) {
+      console.log("username in server: ", username);
+      console.log("password in server: ", password);
+      console.log('Login error:', resBody.error);
+      res.status(400).json({ error: resBody.error });
+      return;
+    }
+
+    res.status(200).json({ message: 'User logged in successfully', token: resBody.token });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-  res.status(200).json({ message: 'User logged in successfully' });
 });
 
 // User logout
@@ -138,27 +139,27 @@ app.get('/api/data', async (req: Request, res: Response) => {
 });
 
 // get user profile
-app.get('/api/user/:username', (req: Request, res: Response) => {
-  const username = req.params.username;
-  const resBody = showUserDetails(username);
+app.get('/api/user/:userId', async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId, 10);
+  const resBody = await showUserDetails(userId);
   if ('error' in resBody) {
     res.status(400).json({ error: resBody.error });
     return; // Ensure the function exits after sending the error response
   }
-  res.status(200);
+  res.status(200).json(resBody);
 });
 
 // update user profile
-app.put('/api/user', async (req: Request, res: Response) => {
-  const token = req.header('token') as string;
-  const { username, avatar } = req.body;
+app.put('/api/user/avatar/:userId', async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId, 10);
+  const avatar = req.body;
   const data = await getData();
-  const user = data.users.find(u => u.token.includes(token));
+  const user = data.users.find(u => u.userId === userId);
   if (!user) {
     res.status(401).json({ error: 'Token is invalid' });
     return;
   }
-  const resBody = updateUserDetails(token, username, avatar);
+  const resBody = updateUserAvatar(userId, avatar);
   if ('error' in resBody) {
     res.status(400).json({ error: resBody.error });
     return; // Ensure the function exits after sending the error response
@@ -166,17 +167,29 @@ app.put('/api/user', async (req: Request, res: Response) => {
   res.status(200);
 });
 
-// change password
-app.put('/api/user/password', async (req: Request, res: Response) => {
-  const token = req.header('token') as string;
-  const { oldPassword, newPassword } = req.body;
+app.get('/api/user/avatar/:userId', async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId, 10);
   const data = await getData();
-  const user = data.users.find(u => u.token.includes(token));
+  const user = data.users.find(u => u.userId === userId);
   if (!user) {
     res.status(401).json({ error: 'Token is invalid' });
     return;
   }
-  const resBody = changeUserPassword(token, oldPassword, newPassword);
+  console.log("user: ", user);
+  res.status(200).json({ avatar: user.avatar });
+});
+
+// change password
+app.put('/api/user/password/:userId', async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId, 10);
+  const { oldPassword, newPassword } = req.body;
+  const data = await getData();
+  const user = data.users.find(u => u.userId === userId);
+  if (!user) {
+    res.status(401).json({ error: 'Token is invalid' });
+    return;
+  }
+  const resBody = changeUserPassword(userId, oldPassword, newPassword);
   if ('error' in resBody) {
     res.status(400).json({ error: resBody.error });
     return; // Ensure the function exits after sending the error response
@@ -186,8 +199,8 @@ app.put('/api/user/password', async (req: Request, res: Response) => {
 
 // Save notes to dataStore.json with multer
 app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Response) => {
-  //const token = req.header('token') as string; // This will work when register and login is done
-  const token = "token1";// TODO: This is used for testing when register and login have not been done
+  const token = req.header('token') as string; // This will work when register and login is done
+  //const token = "token1";// TODO: This is used for testing when register and login have not been done
   const { courseCode, tag, title, description } = req.body;
   const data = await getData();
   const user = data.users.find(u => u.token.includes(token));
@@ -233,8 +246,8 @@ app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Resp
       upvoteArray: [],
       upvoteCounter: 0,
       filePath, // Store the file path
-      timeCreated: getCurrentTime().toLocaleString(),
-      timeLastEdited: getCurrentTime().toLocaleString(),
+      timeCreated: getCurrentTime(),
+      timeLastEdited: getCurrentTime(),
     };
 
     // Add new note to dataStore
@@ -249,7 +262,7 @@ app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Resp
   }
 });
 
-app.put('/api/deleteNote', async (req: Request, res: Response) => {
+app.delete('/api/deleteNote', async (req: Request, res: Response) => {
   const { noteId } = req.body;
   const resBody = await deleteNote(noteId);
   if ('error' in resBody) {

@@ -3,17 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import './login.css';
 
 function Login() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (username, password) => {
+  const handleLogin = async () => {
     try {
-      const response = await fetch(`/api/login`, { 
-        method: 'POST', 
+      const response = await fetch(`/api/login`, {
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ username, password })
       });
@@ -34,7 +34,7 @@ function Login() {
   };
 
   return (
-    <div className="details">
+    <div className="input">
       <div className="userinput">
         <h1 className="header">Log in</h1>
         <div className="username">
@@ -45,14 +45,14 @@ function Login() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        
+
         <div className="password">
           <input className="passbox"
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />  
+          />
         </div>
       </div>
       <div className="registerlink">

@@ -4,13 +4,22 @@
       "userId": 1,
       "token": [
         "token1",
-        "token2"
+        "token2",
+        "0f04d36d8681ba790e8b6e86eff314cf",
+        "f24cfb86637e8b6e6a5da9ed3cc4a5aa",
+        "cc4629f92dffaa495d1937f4480a52e3",
+        "d85d3603dbf298d90dffdec5f149feef",
+        "0080e735da6fcf43c15f4d3b85a3c7f5",
+        "725e9a074a0ff00a40a8fc166b50f775"
       ],
-      "username": "test",
-      "avatar": "test",
-      "password": "test",
+      "username": "Hayden",
+      "avatar": "https://i.pinimg.com/736x/bf/4f/6d/bf4f6d3010d3ecdfb3eb6770f420dde9.jpg",
+      "password": "f31b65bc6d0add3809c6b9e506b796a6cd6585769389266c9bc5a79a566af43e",
       "usedPassword": [
-        "test"
+        "test1234",
+        "6fec2a9601d5b3581c94f2150fc07fa3d6e45808079428354b868e412b76e6bb",
+        "85777f270ad7cf2a790981bbae3c4e484a1dc55e24a77390d692fbf1cffa12fa",
+        "f31b65bc6d0add3809c6b9e506b796a6cd6585769389266c9bc5a79a566af43e"
       ]
     },
     {
@@ -49,50 +58,188 @@
       "usedPassword": [
         "3247393f1dc92f68723db3153feedf5e10caff04ef427c8c156e61eefc930658"
       ]
+    },
+    {
+      "userId": 5043991730,
+      "token": [
+        "b6a0c6699af56510f2cfe8049ed88591"
+      ],
+      "username": "myaccount",
+      "avatar": null,
+      "password": "0036f7f60940376fbb467c340f68bbf18cbf577206534b84fcf0d07290a9fb5c",
+      "usedPassword": [
+        "0036f7f60940376fbb467c340f68bbf18cbf577206534b84fcf0d07290a9fb5c"
+      ]
+    },
+    {
+      "userId": 2212244490,
+      "token": [
+        "e7a779d5ec0ad985779b537bb4c94135"
+      ],
+      "username": "mytestuser",
+      "avatar": null,
+      "password": "f2651b75d35541962c5af2e23e75df8cf3c42ec3f7cb439b371ae14741d7bbea",
+      "usedPassword": [
+        "f2651b75d35541962c5af2e23e75df8cf3c42ec3f7cb439b371ae14741d7bbea"
+      ]
+    },
+    {
+      "userId": 8115948625,
+      "token": [
+        "a5cc5700fbfeda4e5e606c0d786ef57a"
+      ],
+      "username": "testingtest",
+      "avatar": null,
+      "password": "9265b8fcdecc36f9f2debc40db12fe4fa516525f44f689128b2b5bbcd237975a",
+      "usedPassword": [
+        "9265b8fcdecc36f9f2debc40db12fe4fa516525f44f689128b2b5bbcd237975a"
+      ]
+    },
+    {
+      "userId": 5238474854,
+      "token": [
+        "ff97a477483d8c23fb08bbc0da928ec2"
+      ],
+      "username": "okokokok",
+      "avatar": null,
+      "password": "e9913d17b3d3353ccc6449634eb3ef2b13f5dbdfaaaef5f3649d15e166ac0fed",
+      "usedPassword": [
+        "e9913d17b3d3353ccc6449634eb3ef2b13f5dbdfaaaef5f3649d15e166ac0fed"
+      ]
+    },
+    {
+      "userId": 6046896238,
+      "token": [
+        "93881f1f901bf89b85f4317a5f416a09"
+      ],
+      "username": "okokokokok",
+      "avatar": null,
+      "password": "1213dafb726a7337b274ec000f74c8866c4ac342c81e6f322f751664e36ae05f",
+      "usedPassword": [
+        "1213dafb726a7337b274ec000f74c8866c4ac342c81e6f322f751664e36ae05f"
+      ]
+    },
+    {
+      "userId": 4908373993,
+      "token": [
+        "db0df9853d9abf14fcf25bdaf5dc97e4"
+      ],
+      "username": "okokokokokok",
+      "avatar": null,
+      "password": "6d0ae7a4c8e45c62c8cc0656d992958237d4d9ab8fde68c7e0992403148c9808",
+      "usedPassword": [
+        "6d0ae7a4c8e45c62c8cc0656d992958237d4d9ab8fde68c7e0992403148c9808"
+      ]
+    },
+    {
+      "userId": 7056804860,
+      "token": [
+        "599fdfed581ec1f5ea6f4529edc4eaf6",
+        "8d2374f1e32fa0c1ecb057c8251466f9",
+        "52d04dad9bb322433d981c34e833bc1f"
+      ],
+      "username": "navigate",
+      "avatar": null,
+      "password": "487fb206add7645ec8541aa6ba16edb7e624bf53e1d263cd8e41c2e01d15b65c",
+      "usedPassword": [
+        "487fb206add7645ec8541aa6ba16edb7e624bf53e1d263cd8e41c2e01d15b65c"
+      ]
+    },
+    {
+      "userId": 1033151850,
+      "token": [
+        "eb24eb6a50346e093b7188c2f34760a2"
+      ],
+      "username": "moretestaccount",
+      "avatar": null,
+      "password": "1908ffde7e624e7559603c557c39e9a64c20a4eb766e15503278630ddbd27294",
+      "usedPassword": [
+        "1908ffde7e624e7559603c557c39e9a64c20a4eb766e15503278630ddbd27294"
+      ]
+    },
+    {
+      "userId": 2593990155,
+      "token": [
+        "d1d3ce8dbb586316ad44d8ba17734c16"
+      ],
+      "username": "register",
+      "avatar": null,
+      "password": "a9c7d42801bcd3643225658204c4f470144c2a36f3dae7f4f15d31f882f132c4",
+      "usedPassword": [
+        "a9c7d42801bcd3643225658204c4f470144c2a36f3dae7f4f15d31f882f132c4"
+      ]
+    },
+    {
+      "userId": 3070696570,
+      "token": [
+        "17e377433d91cb8b3ebe1e2ecd2ef2e0"
+      ],
+      "username": "createacc",
+      "avatar": null,
+      "password": "ab01dcdf96a00cfaaa8c1e97dd409156b89255f2e1be1f00aab3f39502910299",
+      "usedPassword": [
+        "ab01dcdf96a00cfaaa8c1e97dd409156b89255f2e1be1f00aab3f39502910299"
+      ]
+    },
+    {
+      "userId": 2897832271,
+      "token": [
+        "1f9e7537a1c6cd8ece9fc87fb2728dc1"
+      ],
+      "username": "creator",
+      "avatar": null,
+      "password": "154013b640689d20a43b689762dbde7fc7649bbcd112cfde2ce771a6225026a6",
+      "usedPassword": [
+        "154013b640689d20a43b689762dbde7fc7649bbcd112cfde2ce771a6225026a6"
+      ]
+    },
+    {
+      "userId": 1160129038,
+      "token": [],
+      "username": "accounttest",
+      "avatar": null,
+      "password": "b0afdcd8d909bc319aa9151e19fe661444cd8e655af904ec7283ed24a85d7f59",
+      "usedPassword": [
+        "b0afdcd8d909bc319aa9151e19fe661444cd8e655af904ec7283ed24a85d7f59"
+      ]
+    },
+    {
+      "userId": 3558372477,
+      "token": [],
+      "username": "hihihi",
+      "avatar": {},
+      "password": "ae2a730fb684a0b8d2df9d1421d2686a30a61009746d8ebd9a52201b08e36485",
+      "usedPassword": [
+        "ae2a730fb684a0b8d2df9d1421d2686a30a61009746d8ebd9a52201b08e36485"
+      ]
     }
   ],
   "notes": [
     {
-      "noteId": 3501944949,
+      "noteId": 4703935047,
       "userId": 1,
-      "title": "3",
-      "courseCode": "MATH1081",
-      "tag": "2",
-      "description": "4",
-      "upvoteArray": [
-        1,
-        "yourUserId"
-      ],
-      "upvoteCounter": 2,
-      "filePath": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
-      "timeCreated": "1,729,158,479",
-      "timeLastEdited": "1,729,158,479"
-    },
-    {
-      "noteId": 7538620703,
-      "userId": 1,
-      "title": "MATH1081 lab test",
+      "title": "1081Lab test",
       "courseCode": "MATH1081",
       "tag": "lab",
-      "description": "hi",
+      "description": "21",
       "upvoteArray": [],
       "upvoteCounter": 0,
-      "filePath": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
-      "timeCreated": "1,729,159,312",
-      "timeLastEdited": "1,729,159,313"
+      "filePath": "uploads/MATH1081 Lab Test 1 - Practice.pdf",
+      "timeCreated": 1729208886,
+      "timeLastEdited": 1729208886
     },
     {
-      "noteId": 1375855699,
+      "noteId": 6312725790,
       "userId": 1,
-      "title": "3",
-      "courseCode": "1",
-      "tag": "2",
-      "description": "4",
+      "title": "COMP1511 lecture",
+      "courseCode": "COMP1511",
+      "tag": "lecture slide",
+      "description": "COMP1511 lecture slide",
       "upvoteArray": [],
       "upvoteCounter": 0,
-      "filePath": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
-      "timeCreated": "1,729,160,674",
-      "timeLastEdited": "1,729,160,674"
+      "filePath": "uploads/COMP1511_24T1_Lecture16.pdf",
+      "timeCreated": 1729243407,
+      "timeLastEdited": 1729243407
     }
   ]
 }

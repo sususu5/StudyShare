@@ -25,6 +25,48 @@
   font-size: 16px;
   margin: 0px 0px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button {
+  margin-bottom: 20px;
+}
+
+.home-button {
+  font-family: "Roboto", sans-serif;
+  background-color: #646cff;
+  border: none;
+  border-radius: 0px;
+  height: 10vh;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+}
+
+.my-note-button {
+  font-family: "Roboto", sans-serif;
+  background-color: #646cff;
+  border: none;
+  border-radius: 0px;
+  height: 10vh;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0px 0px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-title {
+  font-family: "Playwrite GB S", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2rem;
+  color: white;
 }
 
 .navbar .navbuttons .button:hover {
@@ -41,10 +83,26 @@
   background-color: #646cff;
   padding-left: 0.1vw;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   width: 100vw;
   height: 10vh;
   box-sizing: border-box;
   overflow-y: inherit;
+}
+
+.login {
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+}
+
+.profile-container button {
+    margin-left: 10px;
 }
