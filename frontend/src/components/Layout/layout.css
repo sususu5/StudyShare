@@ -83,7 +83,7 @@
   background-color: #646cff;
   padding-left: 0.1vw;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   width: 100vw;
   height: 10vh;
@@ -93,4 +93,15 @@
 
 .login {
   margin-bottom: 15px;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 13px;
+}
+
+.profile-container button {
+    margin-left: 10px;
 }
