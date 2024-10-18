@@ -14,9 +14,33 @@ function Layout() {
     }
   }, [user]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    setUser(null);
+  const handleLogout = async () => {
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      try {
+        const response = await fetch('/api/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'token': token,
+          },
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          alert(`Logout failed: ${errorData.error}`);
+          return;
+        }
+
+        // Logout successful
+        localStorage.removeItem('authToken');
+        setUser('');
+        navigate('/');
+      } catch (error) {
+        console.error('Error during logout:', error);
+      }
+    }
   };
 
   const handleMyNote = () => {
