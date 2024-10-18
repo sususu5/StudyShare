@@ -1,0 +1,39 @@
+.details {
+  margin-left: 32vw;
+  margin-right: 36vw;
+  margin-top: 15vh;
+  
+}
+
+.details .userinput .header {
+  text-align: center;
+}
+
+.details .userbox {
+  width: 30vw;
+  height: 3.5vw;
+  font-size: 1.5vw;
+  border-radius: 30px;
+  background-color: #bdc1ff;
+  color: #1b24ae;
+  
+}
+
+.details .passbox {
+  width: 30vw;
+  height: 3.5vw;
+  font-size: 1.5vw;
+  border-radius: 30px;
+  background-color: #bdc1ff;
+  
+}
+
+.details .userinput .username{
+  padding-bottom: 30px;
+  
+}
+
+.details .userinput .password{
+  padding-bottom: 30px;
+  
+}

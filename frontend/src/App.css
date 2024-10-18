@@ -15,17 +15,9 @@ html, body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100%;
-}
-
-.navbar {
-  background-color: #646cff;
-  color: black;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100vw;
+<<<<<<< HEAD
+=======
   box-sizing: border-box;
 }
 
@@ -52,6 +44,7 @@ html, body {
 .navbar h1 {
   margin: 0;
   color: black;
+>>>>>>> bae136849a108c83225368d0ac06dfdb8d084e0d
 }
 
 .main-content {
