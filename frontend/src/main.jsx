@@ -5,6 +5,7 @@ import App from './App.jsx';
 import Layout from './components/Layout/layout.jsx';
 import Login from './components/Login/login.jsx';
 import MyNotePage from './components/MyNotePage/myNotePage.jsx';
+import Register from './components/Register/register.jsx'
 import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJustUploaded.jsx';
 import ShowOneNote from './components/ShowOneNote/showOneNote';
 import UploadNotePage from './components/UploadNotePage/uploadNotePage.jsx';
@@ -18,7 +19,8 @@ export default function Main() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<App />} />
-            <Route path="login" element={<Login />} />
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/uploadPage" element={<UploadNotePage />} />
             <Route path="/showNoteJustUploaded" element={<ShowNoteJustUploaded />} />
             <Route path="/showOneNote" element={<ShowOneNote />} />

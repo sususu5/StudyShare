@@ -29,7 +29,7 @@ RecentNotes.propTypes = {
     PropTypes.shape({
       noteId: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      timeLastEdited: PropTypes.string.isRequired,
+      timeLastEdited: PropTypes.number.isRequired,
     })
   ),
   searchTerm: PropTypes.string,
