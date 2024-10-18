@@ -5,7 +5,8 @@ import './myNotePage.css';
 function MyNotePage() {
   const navigate = useNavigate();
 
-  const userId = 1;
+  const token = localStorage.getItem('authToken');
+  const [userId, setUserId] = useState('');
   const [username, setUsername] = useState('');
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,6 +21,8 @@ function MyNotePage() {
           throw new Error('Failed to fetch notes');
         }
         const data = await response.json();
+        const userId = data.users.find(user => user.token.includes(token))?.userId;
+        setUserId(userId);
         const filteredNotes = data.notes.filter(note => note.userId === userId);
         setNotes(filteredNotes);
         const username = data.users.find(user => user.userId === userId).username;
@@ -31,12 +34,11 @@ function MyNotePage() {
       }
     }
     fetchNotes();
-  }, [userId]);
+  }, []);
 
   const handleUpvote = async (noteId) => {
     try {
       // TODO: This should work after login
-      const token = localStorage.getItem('token');
       const dataResponse = await fetch('http://localhost:5000/api/data');
       if (!dataResponse.ok) {
         console.error('Failed to fetch data');

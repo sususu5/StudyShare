@@ -1,7 +1,7 @@
 .show-one-note {
   text-align: left;
-  margin-top: 50px;
-  margin-left: 10%;
+  margin-left: 1%;
+  margin-bottom: 20px;
 }
 
 .show-one-note h2 {
@@ -21,6 +21,14 @@
   background-color: #45a049;
 }
 
+.note-details {
+  margin-left: 10%;
+}
+
+.pdf-viewer {
+  margin-left: 4%;
+}
+
 .download-button {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -30,4 +38,38 @@
   border: none;
   cursor: pointer;
 }
+
+.show-one-note .back-button {
+  position: relative;
+  background-color: #8e02e5;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-right: 20px;
+  width: 90px;
+  height: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.arrow-back-icon {
+  position: relative;
+  background-color: #8e02e5;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-left: 0;
+  width: 90px;
+  height: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.arrow-back-icon:hover {
+  background-color: #7e2984;
+}
+
+
 

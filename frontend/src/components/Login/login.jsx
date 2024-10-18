@@ -6,10 +6,13 @@ function Login() {
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleLogin = async (username, password) => {
+  const handleLogin = async () => {
     try {
-      const response = await fetch(`/api/login`, { 
-        method: 'POST', 
+      const response = await fetch(`/api/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ username, password })
       });
       if (!response.ok) {
@@ -29,26 +32,26 @@ function Login() {
   return (
     <div className="details">
       <div className="userinput">
-        <h1 class="header">Log in</h1>
+        <h1 className="header">Log in</h1>
         <div className="username">
-          <input class="userbox"
+          <input className="userbox"
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        
+
         <div className="password">
-          <input class="passbox"
+          <input className="passbox"
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />  
+          />
         </div>
       </div>
-      <button class="enter" onClick={handleLogin}>Login</button>
+      <button className="enter" onClick={handleLogin}>Login</button>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   )

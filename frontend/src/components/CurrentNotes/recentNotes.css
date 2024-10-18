@@ -14,6 +14,13 @@
     height: 30px;
     font-weight: bold;
     transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.note-title {
+    margin-left: 10px;
+    padding: 5px;
+    width: calc(100% - 20px);
 }
 
 .notes-item:hover {
@@ -21,7 +28,19 @@
 }
 
 .last-modified {
-    color: gray;
+    color: rgb(211, 211, 211);
+    padding: 5px;
+    width: calc(50% - 20px);
+}
+
+.course-code {
+    color: rgb(255, 255, 255);
+    margin-right: 2%;
+    margin-left: 10px;
+    border: 1px solid rgb(144, 12, 196);
+    background-color: rgb(144, 12, 196);
+    border-radius: 5px; 
+    padding: 2px 5px;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -49,20 +49,13 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-const notes: NoteDisplay[] = [
-  {
-    noteId: 1000000000,
-    title: 'Sample Note Just for frontend',
-    upvotes: 0,
-    timeLastEdited: '2024-02-20',
-  }
-];
-
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello from Express!');
 });
 
-app.get('/api/notes', (req: Request, res: Response) => {
+app.get('/api/notes', async (req: Request, res: Response) => {
+  const data = await getData();
+  const notes = data.notes;
   res.json(notes);
 });
 
@@ -230,8 +223,8 @@ app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Resp
       upvoteArray: [],
       upvoteCounter: 0,
       filePath, // Store the file path
-      timeCreated: getCurrentTime().toLocaleString(),
-      timeLastEdited: getCurrentTime().toLocaleString(),
+      timeCreated: getCurrentTime(),
+      timeLastEdited: getCurrentTime(),
     };
 
     // Add new note to dataStore
