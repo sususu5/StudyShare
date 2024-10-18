@@ -10,8 +10,8 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`/api/login`, { 
-        method: 'POST', 
+      const response = await fetch(`/api/login`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -26,6 +26,7 @@ function Login() {
       localStorage.setItem('authToken', data.token);
       setErrorMessage('');
       navigate('/');
+      window.location.reload();
     } catch (error) {
       setErrorMessage('Invalid login credentials');
       console.error('Login error: ', error);
@@ -44,14 +45,14 @@ function Login() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        
+
         <div className="password">
           <input className="passbox"
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />  
+          />
         </div>
       </div>
       <button className="enter" onClick={handleLogin}>Login</button>

@@ -1,7 +1,7 @@
+import { ArrowBack } from '@material-ui/icons';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import './viewNotes.css';
-import { ArrowBack } from '@mui/icons-material';
 
 function ViewNotes() {
   const { courseCode } = useParams();
@@ -35,19 +35,19 @@ function ViewNotes() {
     try {
       const token = localStorage.getItem('authToken');// TODO: This should work after login
       const dataResponse = await fetch('http://localhost:5000/api/data');
-        if (!dataResponse.ok) {
-          console.error('Failed to fetch data');
-          return;
-        }
-        const contentType = dataResponse.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-          console.error('Response is not JSON');
-          return;
-        }
-        const data = await dataResponse.json();
-        console.log("result ", data);
-        const user = data.users.find(u => u.token.includes(token));
-        const userId = user.userId;
+      if (!dataResponse.ok) {
+        console.error('Failed to fetch data');
+        return;
+      }
+      const contentType = dataResponse.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        console.error('Response is not JSON');
+        return;
+      }
+      const data = await dataResponse.json();
+      console.log("result ", data);
+      const user = data.users.find(u => u.token.includes(token));
+      const userId = user.userId;
       const response = await fetch(`http://localhost:5000/api/upvoteNote`, {
         method: 'PUT',
         headers: {

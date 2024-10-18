@@ -3,6 +3,7 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
 #root {
   max-width: 100%;
   margin: 0;
@@ -19,12 +20,37 @@ html, body {
   box-sizing: border-box;
 }
 
+.navbar-title {
+  font-family: "Playwrite GB S", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3rem;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-container button,
+.button-container span {
+  margin: 0 10px;
+}
+
+.navbar h1 {
+  margin: 0;
+  color: black;
+}
+
 .main-content {
   display: flex;
   flex-grow: 1;
   height: calc(100vh - 64px); /* Adjust based on your navbar's actual height */
   width: 100%;
-}
+} 
 
 .sidebar {
   width: 200px;
