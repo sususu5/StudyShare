@@ -36,6 +36,7 @@
   text-align: center;
   margin-bottom: 20px;
   color: var(--text-color);
+  font-size: 30px;
 }
 
 .form {
@@ -47,6 +48,7 @@
 .form-group {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .form-group label {
@@ -137,4 +139,32 @@ html, body {
   height: 100%;
   margin: 0;
   overflow: auto; /* Ensure scrolling is enabled */
+}
+
+.suggestions-list {
+    max-width: 300px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+.suggestions-item {
+    cursor: pointer;
+    background: #f0f0f0;
+    padding: 5px;
+    border-bottom: 1px solid black;
+    transition: background-color 0.3s ease;
+}
+  
+.suggestions-item:hover {
+    background: #d0d0d0;
 }
