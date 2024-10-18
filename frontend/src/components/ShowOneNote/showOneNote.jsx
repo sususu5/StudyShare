@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom'; // Import useHistory
 import './showOneNote.css'; // Import the CSS for styling
+import { ArrowBack } from '@mui/icons-material';
 
 function ShowOneNote() {
   const location = useLocation();
   const [pdfUrl, setPdfUrl] = useState('');
   const [noteDetails, setNoteDetails] = useState(null); // State to hold note details
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchNoteData = async () => {
       const noteId = location.state.noteId;
@@ -44,6 +45,12 @@ function ShowOneNote() {
 
   return (
     <div className="show-one-note">
+      <div className="top-bar">
+        <ArrowBack 
+          onClick={() => navigate(-1)} 
+          className="arrow-back-icon" 
+        />
+      </div>
       {noteDetails && (
         <div className="note-details">
           <h2>{noteDetails.title}</h2>
@@ -55,12 +62,11 @@ function ShowOneNote() {
       )}
       {pdfUrl ? (
         <div className="pdf-viewer">
-          <iframe src={pdfUrl} width="80%" height="600px" title="PDF Viewer"></iframe>
+          <iframe src={pdfUrl} width="80%" height="600px" title="PDF Viewer" className="pdf-viewer"></iframe>
         </div>
       ) : (
         <p>Loading PDF...</p>
       )}
-      <button onClick={() => window.location.href = '/'}>Go to Home</button>
     </div>
   );
 }

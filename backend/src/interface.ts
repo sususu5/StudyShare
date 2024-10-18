@@ -23,8 +23,8 @@ export interface Note {
 	upvoteArray: number[];
   upvoteCounter: number;
 	filePath: string;
-	timeCreated: string;
-	timeLastEdited: string;
+	timeCreated: number;
+	timeLastEdited: number;
 }
 
 export interface NoteDisplay {

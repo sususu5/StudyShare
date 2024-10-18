@@ -6,7 +6,7 @@
 }
 
 .back-button {
-    background-color: #FF1493;
+    background-color: #8e02e5;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -19,7 +19,7 @@
 }
 
 .back-button:hover {
-    background-color: #D1137F;
+    background-color: #7e2984;
 }
 
 .notes-header {
