@@ -1,0 +1,59 @@
+.details {
+  margin-left: 32vw;
+  margin-right: 36vw;
+  margin-top: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.details .userinput .header {
+  text-align: center;
+}
+
+.details .registerlink {
+  padding-bottom: 15px;
+  font-size: 1.3vw;
+}
+
+.details .enter {
+  background-color: #646cff;
+  border-radius: 30px;
+  width: 40%;
+  height: 2%;
+  margin: auto;
+  font-size: 1.8vw;
+}
+
+.details .userbox {
+  width: 30vw;
+  height: 3.5vw;
+  font-size: 1.5vw;
+  border-radius: 30px;
+  background-color: #bdc1ff;
+  color: #21234b;
+  padding-left: 20px;
+  
+}
+
+.details .passbox {
+  width: 30vw;
+  height: 3.5vw;
+  font-size: 1.5vw;
+  border-radius: 30px;
+  background-color: #bdc1ff;
+  color: #21234b;
+  padding-left: 20px;
+  
+}
+
+.details .userinput .username{
+  padding-bottom: 20px;
+  
+}
+
+.details .userinput .password{
+  padding-bottom: 15px;
+  
+}

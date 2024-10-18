@@ -1,0 +1,126 @@
+.details {
+  margin-left: 32vw;
+  margin-right: 36vw;
+  margin-top: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.details .userinput {
+  padding-bottom: 40px;
+}
+
+.details .userinput .header {
+  text-align: center;
+  font-size: 30px;
+}
+
+.details .enter {
+  background-color: #646cff;
+  border-radius: 30px;
+  width: 40%;
+  height: 2%;
+  font-size: 1.8vw;
+}
+
+.details .userbox {
+  width: 30vw;
+  height: 3.5vw;
+  font-size: 1.5vw;
+  border-radius: 30px;
+  background-color: #bdc1ff;
+  color: #21234b;
+  padding-left: 20px;
+  
+}
+
+.details .passbox {
+  width: 30vw;
+  height: 3.5vw;
+  font-size: 1.5vw;
+  border-radius: 30px;
+  background-color: #bdc1ff;
+  color: #21234b;
+  padding-left: 20px;
+  
+}
+
+.details .userinput .username{
+  padding-bottom: 20px;
+  
+}
+
+.details .userinput .password{
+  padding-bottom: 25px;
+  
+}
+
+.details .rec {
+  margin: auto;
+  width: 32vw;
+  height: 5vw;
+  border-radius: 30px;
+  background-color: #313131;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Push items to the ends */
+  padding: 0 1vw;
+}
+
+input[type="file"] {
+  padding: 8px 0;
+  color: var(--text-color);
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.details .rec b {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 1vw;
+  padding-right: 2vw;
+  font-size: 1.2vw;
+}
+
+.details .rec .file-name {
+  width: 10vw;
+  padding-left: 1vw;
+  padding-right: 2vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1vw;
+  color: var(--text-color);
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  flex:1;
+}
+
+.details .rec {
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+.details .rec .choose-file {
+  font-weight: 700;
+  text-align: center;
+  font-size: 1vw;
+  min-width: 5vw;
+  padding: 0.5vw 2vw;
+  cursor: pointer;
+  border: 2px solid #4148d3;
+  border-radius: 30px;
+  background-color: #4148d3;
+  color: white;
+  transition: background-color 0.3s ease;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.details .choose-file:hover {
+  background-color: #0056b3;
+}
