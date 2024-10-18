@@ -1,15 +1,15 @@
-import { StrictMode } from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './layout.jsx'
-import App from './App.jsx'
-import Login from './login.jsx'
-import UploadNotePage from './components/UploadNotePage/uploadNotePage.jsx';
+import { StrictMode } from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import App from './App.jsx';
+import Layout from './components/Layout/layout.jsx';
+import Login from './components/Login/login.jsx';
+import MyNotePage from './components/MyNotePage/myNotePage.jsx';
 import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJustUploaded.jsx';
-import ViewNotes from './components/ViewNotes/viewNotes';
 import ShowOneNote from './components/ShowOneNote/showOneNote';
-import './index.css'
-import './layout.css'
+import UploadNotePage from './components/UploadNotePage/uploadNotePage.jsx';
+import ViewNotes from './components/ViewNotes/viewNotes';
+import './index.css';
 
 export default function Main() {
   return (
@@ -23,11 +23,11 @@ export default function Main() {
             <Route path="/showNoteJustUploaded" element={<ShowNoteJustUploaded />} />
             <Route path="/showOneNote" element={<ShowOneNote />} />
             <Route path='/viewNotes/:courseCode' element={<ViewNotes />} />
-            
+            <Route path='/myNotePage' element={<MyNotePage />} />
           </Route>
         </Routes>
       </BrowserRouter>
-    </StrictMode>  
+    </StrictMode>
   )
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
