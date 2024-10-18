@@ -249,7 +249,7 @@ app.post('/api/saveNotes', upload.single('file'), async (req: Request, res: Resp
   }
 });
 
-app.put('/api/deleteNote', async (req: Request, res: Response) => {
+app.delete('/api/deleteNote', async (req: Request, res: Response) => {
   const { noteId } = req.body;
   const resBody = await deleteNote(noteId);
   if ('error' in resBody) {

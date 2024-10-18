@@ -31,10 +31,10 @@ function Layout() {
 
         <div className="navbuttons">
           <Link to="/">
-            <button className="button">Home</button>
+            <button className="home-button">Home</button>
           </Link>
           {user ? (
-            <button className='button' onClick={handleMyNote}>MyNote</button>
+            <button className='my-note-button' onClick={handleMyNote}>MyNote</button>
           ) : (
             <></>
           )}

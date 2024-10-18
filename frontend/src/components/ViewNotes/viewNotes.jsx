@@ -1,4 +1,4 @@
-import { ArrowBack } from '@material-ui/icons';
+import { ArrowBack } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import './viewNotes.css';

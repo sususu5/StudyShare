@@ -5,11 +5,12 @@
       "token": [
         "token1",
         "token2",
-        "2babca057e83fcb7e8d22ac190896fa1",
-        "357368a46a3b535d03a1be75138ffd00",
-        "02e3b6b0ff1b6f9561956b5b4b0c629f"
+        "0f04d36d8681ba790e8b6e86eff314cf",
+        "f24cfb86637e8b6e6a5da9ed3cc4a5aa",
+        "cc4629f92dffaa495d1937f4480a52e3",
+        "d85d3603dbf298d90dffdec5f149feef"
       ],
-      "username": "test",
+      "username": "Hayden",
       "avatar": "https://i.pinimg.com/736x/bf/4f/6d/bf4f6d3010d3ecdfb3eb6770f420dde9.jpg",
       "password": "937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244",
       "usedPassword": [
@@ -30,6 +31,19 @@
       "filePath": "uploads/MATH1081 Lab Test 1 - Practice.pdf",
       "timeCreated": 1729208886,
       "timeLastEdited": 1729208886
+    },
+    {
+      "noteId": 6312725790,
+      "userId": 1,
+      "title": "COMP1511 lecture",
+      "courseCode": "COMP1511",
+      "tag": "lecture slide",
+      "description": "COMP1511 lecture slide",
+      "upvoteArray": [],
+      "upvoteCounter": 0,
+      "filePath": "uploads/COMP1511_24T1_Lecture16.pdf",
+      "timeCreated": 1729243407,
+      "timeLastEdited": 1729243407
     }
   ]
 }
