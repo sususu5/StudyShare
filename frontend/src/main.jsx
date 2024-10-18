@@ -1,16 +1,15 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './layout.jsx'
+import Layout from './components/Layout/layout.jsx'
 import App from './App.jsx'
-import Login from './login.jsx'
-import Register from './register.jsx'
+import Login from './components/Login/login.jsx'
+import Register from './components/Register/register.jsx'
 import UploadNotePage from './components/UploadNotePage/uploadNotePage.jsx';
 import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJustUploaded.jsx';
 import ViewNotes from './components/ViewNotes/viewNotes';
 import ShowOneNote from './components/ShowOneNote/showOneNote';
 import './index.css'
-import './layout.css'
 
 export default function Main() {
   return (
