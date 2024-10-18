@@ -2,14 +2,7 @@
   "users": [
     {
       "userId": 1,
-      "token": [
-        "token1",
-        "token2",
-        "0f04d36d8681ba790e8b6e86eff314cf",
-        "f24cfb86637e8b6e6a5da9ed3cc4a5aa",
-        "cc4629f92dffaa495d1937f4480a52e3",
-        "d85d3603dbf298d90dffdec5f149feef"
-      ],
+      "token": [],
       "username": "Hayden",
       "avatar": "https://i.pinimg.com/736x/bf/4f/6d/bf4f6d3010d3ecdfb3eb6770f420dde9.jpg",
       "password": "937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244",
