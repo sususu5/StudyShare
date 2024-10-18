@@ -96,10 +96,12 @@ app.post('/api/register', (req: Request, res: Response) => {
 });
 
 // User login
-app.post('/api/login', (req: Request, res: Response) => {
+app.post('/api/login', async (req: Request, res: Response) => {
   const { username, password } = req.body;
-  const resBody = login(username, password);
+  const resBody = await login(username, password);
+  console.log("resbody is ", resBody);
   if ('error' in resBody) {
+    console.log("ERROR IN RESBODY\n");
     res.status(400).json({ error: resBody.error });
     return; // Ensure the function exits after sending the error response
   }

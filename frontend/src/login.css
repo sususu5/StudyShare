@@ -12,13 +12,18 @@
   text-align: center;
 }
 
+.details .registerlink {
+  padding-bottom: 15px;
+  font-size: 1.3vw;
+}
+
 .details .enter {
   background-color: #646cff;
   border-radius: 30px;
   width: 40%;
   height: 2%;
   margin: auto;
-  font-size: 20px;
+  font-size: 1.8vw;
 }
 
 .details .userbox {
@@ -49,6 +54,6 @@
 }
 
 .details .userinput .password{
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   
 }

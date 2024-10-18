@@ -11,9 +11,9 @@ function Layout() {
         <h1>StudyShare</h1>
 
         <div className="navbuttons">
-          <Link to="/">
-            <button class="button">Home</button>
-          </Link>
+          <a href="/">
+            <button className="button">Home</button>
+          </a>
           {user ? (
           <>
             <MyNoteButton />
@@ -29,9 +29,9 @@ function Layout() {
               <button>Logout</button>
             </>
           ) : (
-            <Link to="/login">
+            <a href="/login">
               <button>Login</button>
-            </Link>
+            </a>
           )}
         </div>  
       </nav>

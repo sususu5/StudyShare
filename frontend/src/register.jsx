@@ -1,25 +1,20 @@
 import { useState } from 'react';
-import './login.css';
+//import './register.css';
 
-function Login() {
+function Register() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogin = async (username, password) => {
-    console.log(typeof username, username);
-    console.log(typeof password, password);
     try {
       const response = await fetch(`/api/login`, { 
         method: 'POST', 
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({ username, password })
       });
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error);
+        setErrorMessage('Login failed.');
+        throw new Error('Login failed');
       }
 
       const data = await response.json();
@@ -27,25 +22,25 @@ function Login() {
       setErrorMessage('');
     } catch (error) {
       setErrorMessage(`${error}`);
-      console.error(error);
+      console.error('Login error: ', error);
     }
   };
 
   return (
     <div className="details">
       <div className="userinput">
-        <h1 className="header">Log in</h1>
+        <h1 class="header">Log in</h1>
         <div className="username">
-          <input className="userbox"
+          <input class="userbox"
             type="text"
-            placeholder="Username"
+            placeholder="Choose a username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         
         <div className="password">
-          <input className="passbox"
+          <input class="passbox"
             type="password"
             placeholder="Password"
             value={password}
@@ -53,14 +48,9 @@ function Login() {
           />  
         </div>
       </div>
-      <div className="registerlink">
-        Don't have an account? 
-        <a href="/register"> Register here</a>
-      </div>
-      
-      <button className="enter" onClick={(e) => handleLogin(username, password)}>Login</button>
+      <button class="enter" onClick={handleLogin}>Login</button>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   )
 }
-export default Login;
+export default Register;

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './layout.jsx'
 import App from './App.jsx'
 import Login from './login.jsx'
+import Register from './register.jsx'
 import UploadNotePage from './components/UploadNotePage/uploadNotePage.jsx';
 import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJustUploaded.jsx';
 import ViewNotes from './components/ViewNotes/viewNotes';
@@ -18,7 +19,8 @@ export default function Main() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<App />} />
-            <Route path="login" element={<Login />} />
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/uploadPage" element={<UploadNotePage />} />
             <Route path="/showNoteJustUploaded" element={<ShowNoteJustUploaded />} />
             <Route path="/showOneNote" element={<ShowOneNote />} />
