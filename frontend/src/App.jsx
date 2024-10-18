@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Route, BrowserRouter as Router, Routes, Link } from 'react-router-dom';
+import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import CourseList from './components/CourseList/courseList';
 import RecentNotes from './components/CurrentNotes/recentNotes';
+import MyNoteButton from './components/MyNoteButton/myNoteButton';
+import MyNotePage from './components/MyNotePage/myNotePage';
 import ShowNoteJustUploaded from './components/ShowNoteJustUploaded/showNoteJustUploaded';
 import ShowOneNote from './components/ShowOneNote/showOneNote';
 import Sidebar from './components/Sidebar/sidebar';
 import UploadButton from './components/UploadButton/uploadButton';
 import UploadNotePage from './components/UploadNotePage/uploadNotePage';
-import MyNoteButton from './components/MyNoteButton/myNoteButton';
 import ViewNotes from './components/ViewNotes/viewNotes';
 
 function App() {
@@ -104,7 +105,7 @@ function App() {
                 <div className="search-upload">
                   <input
                     type="text"
-                    placeholder="Search courses..."
+                    placeholder="Search courses...🔍"
                     value={searchTerm}
                     onChange={handleSearch}
                   />
@@ -120,6 +121,7 @@ function App() {
           <Route path="/showNoteJustUploaded" element={<ShowNoteJustUploaded />} />
           <Route path='/viewNotes/:courseCode' element={<ViewNotes />} />
           <Route path="/showOneNote" element={<ShowOneNote />} />
+          <Route path='/myNotePage' element={<MyNotePage />} />
         </Routes>
       </div>
     </Router>
