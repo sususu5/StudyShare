@@ -1,15 +1,20 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './uploadNotePage.css';
 
 function UploadNotePage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
   const [courseCode, setCourseCode] = useState('');
   const [tag, setTag] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const navigate = useNavigate();
+  const [suggestions, setSuggestions] = useState([]);
+
+  const { courses } = location.state || {};
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -21,6 +26,25 @@ function UploadNotePage() {
         return;
       }
     }
+  };
+
+  const handleCourseCodeChange = (e) => {
+    const value = e.target.value;
+    setCourseCode(value);
+
+    if (value && courses) {
+      const filteredCourses = courses.filter(course =>
+        course.course_code.toLowerCase().includes(value.toLowerCase())
+      );
+      setSuggestions(filteredCourses);
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setCourseCode(suggestion.course_code);
+    setSuggestions([]);
   };
 
   const handleSubmit = async (event) => {
@@ -82,7 +106,7 @@ function UploadNotePage() {
       <h2 className="title">Upload Your Note</h2>
       <form onSubmit={handleSubmit} className="form">
         <div className="form-group">
-          <label htmlFor="file" className="choose-file">Choose File</label>
+          <label htmlFor="file" className="choose-file" style={{ color: 'white' }}>Choose File</label>
           <input
             type="file"
             id="file"
@@ -91,7 +115,7 @@ function UploadNotePage() {
           />
           {fileName && <p className="file-name">Selected file: {fileName}</p>}
         </div>
-  
+
         <div className="form-group">
           <label htmlFor="courseCode">Course Code:</label>
           <input
@@ -99,10 +123,23 @@ function UploadNotePage() {
             id="courseCode"
             placeholder="Enter Course Code"
             value={courseCode}
-            onChange={(e) => setCourseCode(e.target.value)}
+            onChange={handleCourseCodeChange}
           />
+          {suggestions.length > 0 && (
+            <ul className='suggestions-list'>
+              {suggestions.map((suggestion, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleSuggestionClick(suggestion)}
+                  className='suggestions-item'
+                >
+                  {suggestion.course_code}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-  
+
         <div className="form-group">
           <label htmlFor="tag">Tag:</label>
           <input
@@ -113,7 +150,7 @@ function UploadNotePage() {
             onChange={(e) => setTag(e.target.value)}
           />
         </div>
-  
+
         <div className="form-group">
           <label htmlFor="title">Title:</label>
           <input
@@ -124,7 +161,7 @@ function UploadNotePage() {
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-  
+
         <div className="form-group">
           <label htmlFor="description">Description:</label>
           <textarea
@@ -134,7 +171,7 @@ function UploadNotePage() {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-  
+
         <button type="submit" className="submit-button">Upload</button>
       </form>
     </div>

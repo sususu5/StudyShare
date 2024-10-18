@@ -72,7 +72,7 @@ function App() {
               value={searchTerm}
               onChange={handleSearch}
             />
-            <UploadButton />
+            <UploadButton courses={courses} />
           </div>
           <h2>Recent Notes</h2>
           <RecentNotes notes={notes} />
