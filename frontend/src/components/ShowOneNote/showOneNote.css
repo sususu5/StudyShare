@@ -71,5 +71,38 @@
   background-color: #7e2984;
 }
 
+.upvote-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: 2px solid black;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  margin: 10px 0;
+  height: 50px;
+  width: 95px;
+}
 
+.upvote-button:hover {
+  background-color: darkgray;
+}
 
+.upvote-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  margin-left: 1px;
+}
+
+.note-upvotes {
+  font-size: 20px;
+  color: black;
+}
+
+.upvote-icon.upvoted {
+  filter: brightness(0) saturate(100%) invert(18%) sepia(82%) saturate(7444%) hue-rotate(329deg) brightness(89%) contrast(109%);
+}
+
+.note-upvotes.upvoted {
+  color: red;
+}

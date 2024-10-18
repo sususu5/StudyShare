@@ -13,7 +13,7 @@ function MyNotePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [upvotedNotes, setUpvotedNotes] = useState({});
-
+  console.log("userId: ", userId); // just for removing warning
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -97,6 +97,50 @@ function MyNotePage() {
     }
   };
 
+  const handleDelete = async (noteId) => {
+    const userConfirmed = window.confirm("Are you sure you want to delete this note?");
+    if (!userConfirmed) {
+      return; // Exit if the user cancels the confirmation dialog
+    }
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/deleteNote`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ noteId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete note');
+      }
+
+      const result = await response.json();
+      console.log(result.message);
+
+      // Refresh notes after deletion
+      const fetchNotes = async () => {
+        try {
+          const response = await fetch(`http://localhost:5000/api/viewNotes`);
+          if (!response.ok) {
+            throw new Error('Failed to fetch notes');
+          }
+          const data = await response.json();
+          const filteredNotes = data.notes.filter(note => note.userId === userId);
+          setNotes(filteredNotes);
+        } catch (error) {
+          setError(error.message);
+        } finally {
+          setLoading(false);
+        }
+      }
+      fetchNotes();
+    } catch (error) {
+      console.error('Error deleting note:', error);
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -113,6 +157,9 @@ function MyNotePage() {
             <button onClick={(e) => { e.stopPropagation(); handleUpvote(note.noteId); }} className='upvote-button'>
               <img src="/src/assets/upvote.svg" alt="upvoteIcon" className={`upvote-icon ${upvotedNotes[note.noteId] ? 'upvoted' : ''}`} />
               <p className={`note-upvotes ${upvotedNotes[note.noteId] ? 'upvoted' : ''}`}>{note.upvoteCounter}</p>
+            </button>
+            <button onClick={(e) => { e.stopPropagation(); handleDelete(note.noteId); }} className='delete-button'>
+              Delete
             </button>
           </div>
         ))}

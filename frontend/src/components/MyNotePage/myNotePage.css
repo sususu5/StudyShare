@@ -91,3 +91,14 @@
 .note-upvotes.upvoted {
     color: red;
 }
+
+.delete-button {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
