@@ -1,7 +1,7 @@
 .details {
   margin-left: 32vw;
   margin-right: 36vw;
-  margin-top: 5vh;
+  margin-top: 1vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +49,7 @@
 }
 
 .details .userinput .username{
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   
 }
 

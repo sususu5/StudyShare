@@ -38,13 +38,15 @@ export async function register(username: string, password: string, avatar: strin
 
 	// check for invalid password 
   if (!validPassword(password)) {
-		return {error: 'invalid password'};
+    console.log("password is ", password);
+    console.log("password is ", password.length);
+		return {error: 'Password must be at least 8 characters long and contain at least one number and 2 letters.'};
 	}
 
   // check if username already exists 
   const existingUser = data.users.find(user => user.username === username);
   if (existingUser) {
-      return { error: 'username already exists.' };
+    return { error: 'username already exists.' };
   }
 
   // if no errors occured, we can register the user

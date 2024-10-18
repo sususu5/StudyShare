@@ -1,14 +1,14 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 
 function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (username, password) => {
-    console.log(typeof username, username);
-    console.log(typeof password, password);
     try {
       const response = await fetch(`/api/login`, { 
         method: 'POST', 
@@ -25,6 +25,8 @@ function Login() {
       const data = await response.json();
       localStorage.setItem('authToken', data.token);
       setErrorMessage('');
+      navigate('/');
+      window.location.reload();
     } catch (error) {
       setErrorMessage(`${error}`);
       console.error(error);
@@ -59,7 +61,7 @@ function Login() {
       </div>
       
       <button className="enter" onClick={(e) => handleLogin(username, password)}>Login</button>
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      {errorMessage && <p style={{ color: '#ff4d88' }}>{errorMessage}</p>}
     </div>
   )
 }

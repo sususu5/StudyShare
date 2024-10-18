@@ -85,10 +85,11 @@ app.get('/api/viewNotes', (req: Request, res: Response) => {
 
 
 // User registration
-app.post('/api/register', (req: Request, res: Response) => {
+app.post('/api/register', async (req: Request, res: Response) => {
   const { username, password, avatar } = req.body;
-  const resBody = register(username, password, avatar);
+  const resBody = await register(username, password, avatar);
   if ('error' in resBody) {
+    console.log("BESBODY IS ", resBody);
     res.status(400).json({ error: resBody.error });
     return; // Ensure the function exits after sending the error response
   }
