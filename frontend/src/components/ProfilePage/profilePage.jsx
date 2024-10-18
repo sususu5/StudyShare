@@ -123,6 +123,7 @@ function ProfilePage() {
                     },
                 }}
             >
+                <span className="close" onClick={closeModal}>&times;</span>
                 <h2>Change Password</h2>
                 <input
                     type="password"
@@ -138,11 +139,8 @@ function ProfilePage() {
                     onChange={(e) => setNewPassword(e.target.value)}
                     style={{ height: '20px', borderRadius: '5px', border: '1px solid #ccc', padding: '10px', marginTop: '10px' }}
                 />
-                <button onClick={handleChangePassword} style={{ marginLeft: '2px' }}>
+                <button onClick={handleChangePassword} style={{ marginLeft: '20px' }}>
                     Submit
-                </button>
-                <button onClick={closeModal} style={{ marginLeft: '2px' }}>
-                    Close
                 </button>
             </ReactModal>
         </div>

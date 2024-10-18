@@ -78,14 +78,15 @@ app.get('/api/viewNotes', (req: Request, res: Response) => {
 
 
 // User registration
-app.post('/api/register', (req: Request, res: Response) => {
+app.post('/api/register', async (req: Request, res: Response) => {
   const { username, password, avatar } = req.body;
-  const resBody = register(username, password, avatar);
+  const resBody = await register(username, password, avatar);
   if ('error' in resBody) {
+    console.log("error in server: ", resBody.error);
     res.status(400).json({ error: resBody.error });
     return; // Ensure the function exits after sending the error response
   }
-  res.status(200).json({ message: 'User registered successfully' });
+  res.status(200).json({ message: 'User registered successfully', token: resBody.token });
 });
 
 // User login

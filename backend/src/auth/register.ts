@@ -22,16 +22,15 @@ export async function register(username: string, password: string, avatar: strin
 : Promise<{ token: string } | { error: string }> {
   
   const data = await getData();
-  // if nameFirst or nameLast contains characters other than
-  // lower/upper case letters spaces, hyphens or apostrophes --> error
+  if (!username || !password || !avatar) {
+    return { error: 'missing information' };
+  }
   if (!containsValidName(username)) {
     return {
     error: 'username contains restricted characters.'
     };
   }
 
-  // if nameFirst or nameLast is less than 2 characters or more than 20
-  // characters --> error
   if (username.length < minNameLength || username.length > maxNameLength) {
     return { error: 'username must be between 2 and 20 characters.' };
   }

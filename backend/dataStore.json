@@ -10,7 +10,8 @@
         "cc4629f92dffaa495d1937f4480a52e3",
         "d85d3603dbf298d90dffdec5f149feef",
         "0080e735da6fcf43c15f4d3b85a3c7f5",
-        "725e9a074a0ff00a40a8fc166b50f775"
+        "725e9a074a0ff00a40a8fc166b50f775",
+        "07878bc1cfafa88ed791480dab594bae"
       ],
       "username": "Hayden",
       "avatar": "https://i.pinimg.com/736x/bf/4f/6d/bf4f6d3010d3ecdfb3eb6770f420dde9.jpg",
@@ -31,8 +32,10 @@
       "courseCode": "MATH1081",
       "tag": "lab",
       "description": "21",
-      "upvoteArray": [],
-      "upvoteCounter": 0,
+      "upvoteArray": [
+        1
+      ],
+      "upvoteCounter": 1,
       "filePath": "uploads/MATH1081 Lab Test 1 - Practice.pdf",
       "timeCreated": 1729208886,
       "timeLastEdited": 1729208886
@@ -49,6 +52,21 @@
       "filePath": "uploads/COMP1511_24T1_Lecture16.pdf",
       "timeCreated": 1729243407,
       "timeLastEdited": 1729243407
+    },
+    {
+      "noteId": 2345680884,
+      "userId": 1,
+      "title": "MATH1081LabTest",
+      "courseCode": "MATH1081",
+      "tag": "LabTest",
+      "description": "MATH1081LabTest Practice",
+      "upvoteArray": [
+        1
+      ],
+      "upvoteCounter": 1,
+      "filePath": "uploads/MATH1081 Lab Test 1 - Practice copy.pdf",
+      "timeCreated": 1729264641,
+      "timeLastEdited": 1729264641
     }
   ]
 }
