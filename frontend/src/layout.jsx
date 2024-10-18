@@ -8,11 +8,13 @@ function Layout() {
   return (
     <>
       <nav className="navbar">
-        <h1>StudyShare</h1>
+        <Link to="/">
+            <h1 className="navbar-title">StudyShare</h1>
+        </Link>
 
         <div className="navbuttons">
           <Link to="/">
-            <button class="button">Home</button>
+            <button className="button">Home</button>
           </Link>
           {user ? (
           <>

@@ -7,7 +7,6 @@ import UploadButton from './components/UploadButton/uploadButton';
 
 
 function App() {
-  const [setUser] = useState(null)
   const [notes, setNotes] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -55,11 +54,6 @@ function App() {
   const handleSchoolSelect = (school) => {
     setSelectedSchool(school);
   }
-
-  const handleLogout = () => {
-    setUser(null);
-    // Add any additional logout logic here (e.g., clearing local storage, API calls)
-  };
 
   // Add this function
   const handleSearch = (e) => {

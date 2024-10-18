@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import './viewNotes.css';
+import { ArrowBack } from '@mui/icons-material';
 
 function ViewNotes() {
   const { courseCode } = useParams();
@@ -96,7 +97,7 @@ function ViewNotes() {
   return (
     <>
       <div className="top-bar">
-        <button className="back-button" onClick={() => navigate(-1)}>Back</button>
+        <ArrowBack className="back-button" onClick={() => navigate(-1)} />
         <header className="notes-header">Notes for {courseCode}</header>
       </div>
       <div className='notes-container'>
