@@ -1,4 +1,4 @@
-# Study Notes Share
+# StudyShare
 A platform where students can share their notes for courses
 
 
