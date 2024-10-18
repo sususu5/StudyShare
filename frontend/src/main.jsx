@@ -10,7 +10,7 @@ import ShowOneNote from './components/ShowOneNote/showOneNote';
 import UploadNotePage from './components/UploadNotePage/uploadNotePage.jsx';
 import ViewNotes from './components/ViewNotes/viewNotes';
 import './index.css';
-
+import ProfilePage from './components/ProfilePage/profilePage.jsx';
 export default function Main() {
   return (
     <StrictMode>
@@ -24,6 +24,7 @@ export default function Main() {
             <Route path="/showOneNote" element={<ShowOneNote />} />
             <Route path='/viewNotes/:courseCode' element={<ViewNotes />} />
             <Route path='/myNotePage' element={<MyNotePage />} />
+            <Route path='/profilePage' element={<ProfilePage />} />
           </Route>
         </Routes>
       </BrowserRouter>

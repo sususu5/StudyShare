@@ -28,6 +28,10 @@
   transition: background-color 0.3s ease;
 }
 
+.logout-button {
+  margin-bottom: 20px;
+}
+
 .home-button {
   font-family: "Roboto", sans-serif;
   background-color: #646cff;
@@ -85,4 +89,8 @@
   height: 10vh;
   box-sizing: border-box;
   overflow-y: inherit;
+}
+
+.login {
+  margin-bottom: 15px;
 }
