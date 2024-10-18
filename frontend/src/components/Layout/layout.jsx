@@ -68,8 +68,10 @@ function Layout() {
         <div className="login">
           {user ? (
             <>
-              <ProfileButton />
-              <button onClick={handleLogout}>Logout</button>
+              <div className='profile-container'>
+                <ProfileButton />
+                <button onClick={handleLogout}>Logout</button>
+              </div>
             </>
           ) : (
             <>
