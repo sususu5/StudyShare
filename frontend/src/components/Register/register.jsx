@@ -112,7 +112,7 @@ function Register() {
         </div>
         
         <div className="rec">
-          {fileName ? (<p className="file-name">Selected file: {fileName}</p>) :
+          {fileName ? (<p style={{color: 'white', fontFamily: 'Roboto', fontWeight: '300', fontStyle: 'italic', fontSize: '1.1vw'}}>Selected file: {fileName}</p>) :
             (<b className="file-name-prompt">Upload an avatar (optional): </b>)
           }
           <label htmlFor="file" className="choose-file">Choose File</label>
