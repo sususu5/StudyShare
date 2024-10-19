@@ -54,7 +54,7 @@ function ProfileButton() {
             {avatarUrl ? (
                 <img src={avatarUrl} alt="User Avatar" style={styles.avatar} />
             ) : (
-                <div style={styles.placeholder}>Loading...</div>
+                <div style={styles.placeholder}></div>
             )}
         </div>
     );

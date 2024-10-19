@@ -81,7 +81,7 @@ function Register() {
         
         <div className="rec">
           {fileName ? (<p className="file-name">Selected file: {fileName}</p>) :
-            (<b>Upload an avatar (optional): </b>)
+            (<b className="file-name-prompt">Upload an avatar (optional): </b>)
           }
           <label htmlFor="file" className="choose-file">Choose File</label>
           <input
@@ -92,7 +92,7 @@ function Register() {
           />
         </div>
       </div>
-      <button className="enter" onClick={(e) => handleRegister(username, password, file)}>Register</button>
+      <button className="enter" onClick={() => handleRegister(username, password, file)}>Register</button>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   )
