@@ -54,6 +54,38 @@ function Register() {
         setFile(null);
         return;
       }
+      const fileUrl = URL.createObjectURL(selectedFile); // Create a URL for the file
+      setFile(fileUrl); // Set the file URL instead of the file object
+
+      // Display the thumbnail
+      const img = new Image();
+      img.src = fileUrl;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const maxWidth = 100; // Set the desired thumbnail width
+        const maxHeight = 100; // Set the desired thumbnail height
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+        const thumbnailUrl = canvas.toDataURL('image/png'); // Convert canvas to a data URL
+        console.log('Thumbnail URL:', thumbnailUrl);
+        setFile(thumbnailUrl); // Set the thumbnail URL
+      };
     }
   };
 
