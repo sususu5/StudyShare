@@ -77,6 +77,30 @@ input[type="file"] {
   cursor: pointer;
 }
 
+:root {
+  --file-name-prompt-color-light: #000; /* Default color for light mode */
+  --file-name-prompt-color-dark: #fff;  /* Default color for dark mode */
+}
+
+@media (prefers-color-scheme: dark) {
+  .file-name-prompt {
+    color: var(--file-name-prompt-color-dark);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .file-name-prompt {
+    color: var(--file-name-prompt-color-light);
+  }
+}
+
+.file-name-prompt {
+  padding-left: 1vw;
+  padding-right: 2vw;
+  font-size: 1.2vw;
+  color: var(--file-name-prompt-color-dark); /* Default to light mode color */
+}
+
 .details .rec b {
   display: flex;
   justify-content: flex-start;

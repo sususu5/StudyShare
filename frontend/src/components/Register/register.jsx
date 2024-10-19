@@ -54,6 +54,38 @@ function Register() {
         setFile(null);
         return;
       }
+      const fileUrl = URL.createObjectURL(selectedFile); // Create a URL for the file
+      setFile(fileUrl); // Set the file URL instead of the file object
+
+      // Display the thumbnail
+      const img = new Image();
+      img.src = fileUrl;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const maxWidth = 100; // Set the desired thumbnail width
+        const maxHeight = 100; // Set the desired thumbnail height
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+        const thumbnailUrl = canvas.toDataURL('image/png'); // Convert canvas to a data URL
+        console.log('Thumbnail URL:', thumbnailUrl);
+        setFile(thumbnailUrl); // Set the thumbnail URL
+      };
     }
   };
 
@@ -81,7 +113,7 @@ function Register() {
         
         <div className="rec">
           {fileName ? (<p className="file-name">Selected file: {fileName}</p>) :
-            (<b>Upload an avatar (optional): </b>)
+            (<b className="file-name-prompt">Upload an avatar (optional): </b>)
           }
           <label htmlFor="file" className="choose-file">Choose File</label>
           <input
@@ -92,7 +124,7 @@ function Register() {
           />
         </div>
       </div>
-      <button className="enter" onClick={(e) => handleRegister(username, password, file)}>Register</button>
+      <button className="enter" onClick={() => handleRegister(username, password, file)}>Register</button>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   )
