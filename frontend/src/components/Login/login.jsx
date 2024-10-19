@@ -56,11 +56,11 @@ function Login() {
         </div>
       </div>
       <div className="registerlink">
-        Don't have an account? 
+        Don&apos;t have an account? 
         <a href="/register"> Register here</a>
       </div>
       
-      <button className="enter" onClick={(e) => handleLogin(username, password)}>Login</button>
+      <button className="enter" onClick={() => handleLogin(username, password)}>Login</button>
       {errorMessage && <p style={{ color: '#ff4d88' }}>{errorMessage}</p>}
     </div>
   )
