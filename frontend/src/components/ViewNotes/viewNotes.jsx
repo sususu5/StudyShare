@@ -34,6 +34,11 @@ function ViewNotes() {
   const handleUpvote = async (noteId) => {
     try {
       const token = localStorage.getItem('authToken');// TODO: This should work after login
+      // if user is not found warn the user by alert
+      if (!token) {
+        alert('You need to login to upvote a note');
+        return;
+      }
       const dataResponse = await fetch('http://localhost:5000/api/data');
       if (!dataResponse.ok) {
         console.error('Failed to fetch data');
